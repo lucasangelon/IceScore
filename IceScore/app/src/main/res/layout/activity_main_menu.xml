@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="30dp"
+        android:text="Ice Score"
+        android:id="@+id/txtTitle"
+        android:textSize="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="450dp"
+        android:layout_height="95dp"
+        android:text="Game Setup"
+        android:id="@+id/btnGameSetup"
+        android:textSize="42dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/txtTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp" />
+
+    <Button
+        android:layout_width="450dp"
+        android:layout_height="95dp"
+        android:text="Manage Teams"
+        android:id="@+id/btnManageTeams"
+        android:textSize="42dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btnGameSetup"
+        android:layout_alignLeft="@+id/btnGameSetup"
+        android:layout_alignStart="@+id/btnGameSetup" />
+
+    <Button
+        android:layout_width="450dp"
+        android:layout_height="95dp"
+        android:text="Review Game"
+        android:id="@+id/btnReviewGame"
+        android:textSize="42dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btnManageTeams"
+        android:layout_alignLeft="@+id/btnManageTeams"
+        android:layout_alignStart="@+id/btnManageTeams" />
+
+    <Button
+        android:layout_width="450dp"
+        android:layout_height="95dp"
+        android:text="Synchronize"
+        android:id="@+id/btnSynchronize"
+        android:textSize="42dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btnReviewGame"
+        android:layout_alignLeft="@+id/btnReviewGame"
+        android:layout_alignStart="@+id/btnReviewGame" />
+
+    <Button
+        android:layout_width="450dp"
+        android:layout_height="95dp"
+        android:text="Development Team"
+        android:id="@+id/btnDevelopmentTeam"
+        android:textSize="42dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btnSynchronize"
+        android:layout_alignLeft="@+id/btnSynchronize"
+        android:layout_alignStart="@+id/btnSynchronize" />
+
+    <ImageView
+        android:layout_width="550dp"
+        android:layout_height="410dp"
+        android:id="@+id/imgLogo"
+        android:background="#ff0000ff"
+        android:layout_alignBottom="@+id/btnDevelopmentTeam"
+        android:layout_toRightOf="@+id/btnGameSetup"
+        android:layout_toEndOf="@+id/btnGameSetup"
+        android:layout_marginLeft="85dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginBottom="47dp"/>
+</RelativeLayout>

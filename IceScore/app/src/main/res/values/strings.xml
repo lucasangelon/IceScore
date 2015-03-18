@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">IceScore</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="referee">Referee</string>
+    <string name="linesmanA">Linesman</string>
+    <string name="linesmanB">Linesman</string>
+    <string name="venue">Venue</string>
+    <string name="period">20:00</string>
+
+    <!-- ActionBarActivity buttons -->
+    <!-- Confirm Game Screen -->
+    <string name="menu_confirm">Confirm Game</string>
+</resources>

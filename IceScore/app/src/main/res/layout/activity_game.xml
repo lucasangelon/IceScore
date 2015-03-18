@@ -1,0 +1,245 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:screenOrientation="landscape"
+    tools:context=".MainScreen">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Team A"
+        android:id="@+id/txtTeamA"
+        android:textSize="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Team B"
+        android:id="@+id/txtTeamB"
+        android:textSize="72dp"
+        android:layout_above="@+id/btnShotA"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T/O"
+        android:textSize="32dp"
+        android:id="@+id/btnTimeoutA"
+        android:layout_alignBottom="@+id/txtTeamA"
+        android:layout_toRightOf="@+id/txtTeamA"
+        android:layout_toEndOf="@+id/txtTeamA"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T/O"
+        android:textSize="32dp"
+        android:id="@+id/btnTimeoutB"
+        android:layout_alignBottom="@+id/txtTeamB"
+        android:layout_toLeftOf="@+id/txtTeamB"
+        android:layout_toStartOf="@+id/txtTeamB"
+        android:layout_marginRight="51dp"
+        android:layout_marginEnd="51dp" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Shot"
+        android:id="@+id/btnShotA"
+        android:textSize="42dp"
+        android:layout_below="@+id/txtTeamA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Shot"
+        android:id="@+id/btnShotB"
+        android:textSize="42dp"
+        android:layout_alignTop="@+id/btnShotA"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Goal"
+        android:id="@+id/btnGoalA"
+        android:textSize="42dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btnShotA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Goal"
+        android:id="@+id/btnGoalB"
+        android:textSize="42dp"
+        android:layout_alignTop="@+id/btnGoalA"
+        android:layout_alignRight="@+id/btnShotB"
+        android:layout_alignEnd="@+id/btnShotB" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Penalty"
+        android:id="@+id/btnPenaltyA"
+        android:textSize="42dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btnGoalA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Penalty"
+        android:id="@+id/btnPenaltyB"
+        android:textSize="42dp"
+        android:layout_alignTop="@+id/btnPenaltyA"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lstGameLog"
+        android:layout_below="@+id/btnPenaltyA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Period 3"
+        android:id="@+id/txtPeriod"
+        android:textSize="72dp"
+        android:layout_above="@+id/btnGoalB"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="20:00"
+        android:id="@+id/txtTime"
+        android:textSize="72dp"
+        android:layout_above="@+id/btnPenaltyA"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff00ff00" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="95dp"
+        android:text="Others"
+        android:id="@+id/btnOthers"
+        android:textSize="42dp"
+        android:layout_alignTop="@+id/btnPenaltyB"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="8"
+        android:textSize="48dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/txtShotA"
+        android:layout_alignTop="@+id/txtPeriod"
+        android:layout_toRightOf="@+id/btnShotA"
+        android:layout_toEndOf="@+id/btnShotA" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="12"
+        android:textSize="48dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/txtShotB"
+        android:layout_alignTop="@+id/txtShotA"
+        android:layout_toLeftOf="@+id/btnShotB"
+        android:layout_toStartOf="@+id/btnShotB" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1"
+        android:textSize="48dp"
+        android:id="@+id/txtGoalA"
+        android:layout_marginBottom="15dp"
+        android:layout_alignBottom="@+id/btnGoalA"
+        android:layout_alignLeft="@+id/txtShotA"
+        android:layout_alignStart="@+id/txtShotA" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:textSize="48dp"
+        android:id="@+id/txtGoalB"
+        android:layout_alignTop="@+id/txtGoalA"
+        android:layout_alignBottom="@+id/btnGoalB"
+        android:layout_alignRight="@+id/txtShotB"
+        android:layout_alignEnd="@+id/txtShotB" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:textColor="#ffff0000"
+        android:textSize="32dp"
+        android:id="@+id/txtPenaltyA"
+        android:layout_marginBottom="15dp"
+        android:layout_alignBottom="@+id/btnPenaltyA"
+        android:layout_alignLeft="@+id/txtShotA"
+        android:layout_alignStart="@+id/txtShotA" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="#7 1:38"
+        android:textColor="#ffff0000"
+        android:textSize="32dp"
+        android:id="@+id/txtPenaltyB"
+        android:layout_marginBottom="15dp"
+        android:layout_alignBottom="@+id/btnPenaltyB"
+        android:layout_alignRight="@+id/txtShotB"
+        android:layout_alignEnd="@+id/txtShotB" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Recent Game Log"
+        android:textSize="32dp"
+        android:id="@+id/txtGameLog"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnOthers"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
