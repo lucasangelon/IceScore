@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.charizard.ice_score.gameResults"
+    android:background="#ff000000">
+
+    <TextView
+        android:text="Game Results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffffff"
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:text="Overtime"
+        android:textSize="40dp"
+        android:id="@+id/overtimeBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:text="End Game"
+        android:textSize="40dp"
+        android:id="@+id/endGameBtn"
+        android:layout_alignTop="@+id/overtimeBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <ListView
+        android:layout_width="750dp"
+        android:layout_height="300dp"
+        android:id="@+id/gameResultsListView"
+        android:visibility="visible"
+        android:background="#ffffffff"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Referee Sign Off"
+        android:id="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:textSize="60dp"
+        android:layout_below="@+id/gameResultsListView"
+        android:layout_marginTop="52dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="15dp" />
+
+    <SurfaceView
+        android:layout_width="600dp"
+        android:layout_height="100dp"
+        android:id="@+id/surfaceView"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:text="Shootout"
+        android:textSize="40dp"
+        android:id="@+id/shootoutBtn"
+        android:layout_alignTop="@+id/overtimeBtn"
+        android:layout_toRightOf="@+id/overtimeBtn"
+        android:layout_toLeftOf="@+id/surfaceView"
+        android:layout_toStartOf="@+id/surfaceView" />
+
+</RelativeLayout>

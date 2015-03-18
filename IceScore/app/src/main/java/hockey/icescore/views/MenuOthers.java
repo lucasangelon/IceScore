@@ -1,6 +1,5 @@
 package hockey.icescore.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -9,24 +8,23 @@ import android.view.MenuItem;
 import hockey.icescore.R;
 
 /**
- * Created by Lucas Angelon on 13-Mar-15.
+ * Created by Lucas Angelon on 18-Mar-15.
  */
-public class Confirmation extends ActionBarActivity
+public class MenuOthers extends ActionBarActivity
 {
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
+        setContentView(R.layout.activity_menu_others);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_general, menu);
         return true;
     }
 
@@ -36,14 +34,6 @@ public class Confirmation extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_confirm)
-        {
-            Intent gameScreen = new Intent(this, Game.class);
-            startActivity(gameScreen);
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

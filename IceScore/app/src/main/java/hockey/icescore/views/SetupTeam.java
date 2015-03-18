@@ -9,24 +9,23 @@ import android.view.MenuItem;
 import hockey.icescore.R;
 
 /**
- * Created by Lucas Angelon on 13-Mar-15.
+ * Created by Lucas Angelon on 18-Mar-15.
  */
-public class Confirmation extends ActionBarActivity
+public class SetupTeam extends ActionBarActivity
 {
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
+        setContentView(R.layout.activity_setup_team);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_setup_team, menu);
         return true;
     }
 
@@ -38,10 +37,10 @@ public class Confirmation extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_confirm)
+        if (id == R.id.action_next)
         {
-            Intent gameScreen = new Intent(this, Game.class);
-            startActivity(gameScreen);
+            Intent confirmationScreen = new Intent(this, Confirmation.class);
+            startActivity(confirmationScreen);
             return true;
         }
 

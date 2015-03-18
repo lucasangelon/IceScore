@@ -12,4 +12,7 @@
     <!-- ActionBarActivity buttons -->
     <!-- Confirm Game Screen -->
     <string name="menu_confirm">Confirm Game</string>
+
+    <!-- Setup Team Screen -->
+    <string name="menu_next">Next</string>
 </resources>
