@@ -30,6 +30,8 @@ public class MenuOthers extends ActionBarActivity implements View.OnClickListene
         btnEditTeams.setOnClickListener(this);
         Button btnEditLog = (Button) findViewById(R.id.editGameLogBtn);
         btnEditLog.setOnClickListener(this);
+        Button btnInjury =  (Button) findViewById(R.id.injuriesBtn);
+        btnInjury.setOnClickListener(this);
     }
 
 
@@ -73,6 +75,11 @@ public class MenuOthers extends ActionBarActivity implements View.OnClickListene
             case R.id.editGameLogBtn:
             {
                 startIntent(GameLog.class);
+                break;
+            }
+            case R.id.injuriesBtn:
+            {
+                startIntent(Injury.class);
                 break;
             }
         }
