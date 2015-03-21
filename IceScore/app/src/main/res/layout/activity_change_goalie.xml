@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/mainlayout">
+
+    <TextView android:text="Change Golie" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtChgGl"
+        android:textSize="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change"
+        android:id="@+id/button3"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="350dp"
+        android:id="@+id/relativeLayout"
+        android:layout_alignTop="@+id/listView2"
+        android:layout_alignParentEnd="true">
+
+        <RelativeLayout
+            android:layout_width="500dp"
+            android:layout_height="350dp"
+            android:id="@+id/relativeLayout2"
+            android:layout_above="@+id/button3"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="100dp">
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Team A"
+        android:id="@+id/textView"
+        android:textSize="40dp"
+        android:layout_below="@+id/txtChgGl"
+        android:layout_alignStart="@+id/button2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Team B"
+        android:id="@+id/textView2"
+        android:textSize="40dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginStart="78dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toEndOf="@+id/txtChgGl" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change"
+        android:id="@+id/button2"
+        android:layout_marginStart="147dp"
+        android:layout_below="@+id/listView"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:id="@+id/listView2"
+        android:entries="@array/teamB"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/relativeLayout" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:entries="@array/teamB"
+        android:layout_alignTop="@+id/listView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/listView2" />
+
+</RelativeLayout>

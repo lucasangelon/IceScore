@@ -24,7 +24,7 @@
         <activity
             android:name=".views.SetupTeam"
             android:label="Setup Team"
-            android:parentActivityName=".views.MenuMain">
+            android:parentActivityName=".views.GameSelect">
         </activity>
 
         <activity
@@ -40,6 +40,19 @@
 
         <activity
             android:name=".views.Result">
+        </activity>
+
+        <activity
+            android:name=".views.ChangeGoalie">
+        </activity>
+
+        <activity
+            android:name=".views.GameLog">
+        </activity>
+        
+        <activity
+            android:name=".views.GameSelect"
+            android:parentActivityName="views.MenuMain">
         </activity>
 
     </application>

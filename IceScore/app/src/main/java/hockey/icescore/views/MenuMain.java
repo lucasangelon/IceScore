@@ -28,7 +28,7 @@ public class MenuMain extends Activity
             public void onClick (View v)
             {
                 // Create an intent to send the user to the confirmation view.
-                Intent setupTeamScreen = new Intent(MenuMain.this, SetupTeam.class);
+                Intent setupTeamScreen = new Intent(MenuMain.this, GameSelect.class);
                 startActivity(setupTeamScreen);
             }
         });

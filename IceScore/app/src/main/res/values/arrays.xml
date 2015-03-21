@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arraySpinner1">Tripping,Fighting,Stabbing,Biting,Icing</string-array>
+
+    <string-array name="arrayTeam">
+        <item>Team A</item>
+        <item>Team B</item>
+        <item>Team C</item>
+        <item>Team D</item>
+        <item>Team E</item>
+        <item>Team F</item>
+        <item>Team G</item>
+        <item>Team H</item>
+        <item>Team I</item>
+    </string-array>
+
+    <string-array name="teamA">
+        <item>Team A</item>
+        <item>Team B</item>
+        <item>Team C</item>
+        <item>Team D</item>
+        <item>Team E</item>
+        <item>Team F</item>
+        <item>Team G</item>
+        <item>Team H</item>
+        <item>Team I</item>
+    </string-array>
+
+    <string-array name="teamB">
+        <item>Team A</item>
+        <item>Team B</item>
+        <item>Team C</item>
+        <item>Team D</item>
+        <item>Team E</item>
+        <item>Team F</item>
+        <item>Team G</item>
+        <item>Team H</item>
+        <item>Team I</item>
+    </string-array>
+
+    <string-array name="list">
+        <item>Goal Scored: Team A;By Player #34; Assists #12;No Assist;Period 2,00:36</item>
+        <item>Shot : Team A ; Period 3; 19:55</item>
+        <item>Notes: Ice Was softer than usual today; Period 3 ; 19:30</item>
+        <item>Injury: Team B;Player #67;Leg Broken;Period3: 18:45</item>
+    </string-array>
+</resources>

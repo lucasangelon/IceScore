@@ -9,6 +9,14 @@
     <string name="venue">Venue</string>
     <string name="period">20:00</string>
 
+    <string name="title_penaltyview_list">Items</string>
+    <string name="title_penaltyview_detail">penaltyview Detail</string>
+    <string name="title_activity_select_game">SelectGame</string>
+
+    <!-- Activity Titles -->
+    <string name="title_change_goalie">Change Goalie</string>
+    <string name="title_game_log">Game Log</string>
+
     <!-- ActionBarActivity buttons -->
     <!-- Confirm Game Screen -->
     <string name="menu_confirm">Confirm Game</string>
