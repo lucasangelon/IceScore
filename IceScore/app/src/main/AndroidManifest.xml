@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".views.MenuMain" >
+            android:name=".activities.MenuMain" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,45 +18,45 @@
         </activity>
 
         <activity
-            android:name=".views.Game">
+            android:name=".activities.Game">
         </activity>
 
         <activity
-            android:name=".views.SetupTeam"
+            android:name=".activities.SetupTeam"
             android:label="Setup Team"
-            android:parentActivityName=".views.GameSelect">
+            android:parentActivityName=".activities.GameSelect">
         </activity>
 
         <activity
-            android:name=".views.Confirmation"
+            android:name=".activities.Confirmation"
             android:label="Sign Off / Confirm Game"
-            android:parentActivityName=".views.SetupTeam">
+            android:parentActivityName=".activities.SetupTeam">
         </activity>
 
         <activity
-            android:name=".views.MenuOthers"
-            android:parentActivityName=".views.Game">
+            android:name=".activities.MenuOthers"
+            android:parentActivityName=".activities.Game">
         </activity>
 
         <activity
-            android:name=".views.Result">
+            android:name=".activities.Result">
         </activity>
 
         <activity
-            android:name=".views.ChangeGoalie">
+            android:name=".activities.ChangeGoalie">
         </activity>
 
         <activity
-            android:name=".views.GameLog">
+            android:name=".activities.GameLog">
         </activity>
 
         <activity
-            android:name=".views.Injury">
+            android:name=".activities.Injury">
         </activity>
         
         <activity
-            android:name=".views.GameSelect"
-            android:parentActivityName="views.MenuMain">
+            android:name=".activities.GameSelect"
+            android:parentActivityName="activities.MenuMain">
         </activity>
 
     </application>
