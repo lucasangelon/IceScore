@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.charizard.ice_score.gameResults"
+    tools:context="com.hockey.icescore.charizard.ice_score.gameResults"
     android:background="#ff000000">
 
     <TextView

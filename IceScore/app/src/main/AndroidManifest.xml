@@ -59,5 +59,9 @@
             android:parentActivityName="activities.MenuMain">
         </activity>
 
+        <activity
+            android:name=".fragments.PlayerList">
+            </activity>
+
     </application>
 </manifest>
