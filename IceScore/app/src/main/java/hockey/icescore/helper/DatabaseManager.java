@@ -30,6 +30,8 @@ public class DatabaseManager extends SQLiteOpenHelper
         super(con, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
     }
 
+    // Once you create the database, the following statements run and generate the database tables.
+    // - Lucas
     @Override
     public void onCreate(SQLiteDatabase sqlDb)
     {
@@ -48,8 +50,17 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_TEAM_GOALIE);
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_SIGN_OFF);
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_TIMEOUT);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_INJURY);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_CATEGORY);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_PENALTY);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_ACTION);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_PERSON_ACTION);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_PERSON_ACTION_EXTENDED);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_TEAM_PERSON);
     }
 
+    // Once you upgrade the database, the following statements check and drop the tables if they
+    // exist. - Lucas
     @Override
     public void onUpgrade(SQLiteDatabase sqlDb, int oldVersion, int newVersion)
     {
@@ -68,6 +79,13 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_TEAM_GOALIE);
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_SIGN_OFF);
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_TIMEOUT);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_INJURY);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_CATEGORY);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_PENALTY);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_ACTION);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_PERSON_ACTION);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_PERSON_ACTION_EXTENDED);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_TEAM_PERSON);
 
     }
 }

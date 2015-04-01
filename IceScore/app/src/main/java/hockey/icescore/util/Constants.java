@@ -280,7 +280,7 @@ public class Constants
                 + "REFERENCES " + TABLE_CATEGORY + "(" + FIELD_ID + ")" +
                 ")";
 
-        public static final String CREATE_GAME_PERSON_ACTION_EXTENDED = "CREATE TABLE" +
+        public static final String CREATE_TABLE_GAME_PERSON_ACTION_EXTENDED = "CREATE TABLE" +
                 TABLE_GAME_PERSON_ACTION_EXTENDED +
                 "("
                 + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -297,13 +297,13 @@ public class Constants
                 ")";
 
         //Green Database Section Josh
-        public static final String CREATE_ACTION = "CREATE TABLE" + TABLE_ACTION +
+        public static final String CREATE_TABLE_ACTION = "CREATE TABLE" + TABLE_ACTION +
                 "("
                 + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + FIELD_NAME + " TEXT NOT NULL" +
                 ")";
 
-        public static final String CREATE_GAME_PERSON_ACTION = "CREATE TABLE" +
+        public static final String CREATE_TABLE_GAME_PERSON_ACTION = "CREATE TABLE" +
                 TABLE_GAME_PERSON_ACTION +
                 "("
                 + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -326,7 +326,7 @@ public class Constants
                 ")";
 
         //Magenta Database Section Josh
-        public static final String CREATE_GAME_TEAM_PERSON = "CREATE TABLE" +
+        public static final String CREATE_TABLE_GAME_TEAM_PERSON = "CREATE TABLE" +
                 TABLE_GAME_TEAM_PERSON +
                 "("
                 + FIELD_ID + " INTEGER PRIMARY KEY, "
