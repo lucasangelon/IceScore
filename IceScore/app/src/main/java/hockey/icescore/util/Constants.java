@@ -25,6 +25,13 @@ public class Constants
     public static final String TABLE_GAME_PERIOD = "GAME_PERIOD";
     public static final String TABLE_SIGN_OFF = "SIGN_OFF";
     public static final String TABLE_GAME_NOTE = "GAME_NOTE";
+    public static final String TABLE_INJURY = "INJURY";
+    public static final String TABLE_CATEGORY = "CATEGORY";
+    public static final String TABLE_PENALTY = "PENALTY";
+    public static final String TABLE_GAME_PERSON_ACTION_EXTENDED = "GAME_PERSON_ACTION_EXTENDED";
+    public static final String TABLE_ACTION = "ACTION";
+    public static final String TABLE_GAME_PERSON_ACTION = "GAME_PERSON_ACTION";
+    public static final String TABLE_GAME_TEAM_PERSON = "GAME_TEAM_PERSON";
 
     // Field Titles.
     public static final String FIELD_ID = "ID";
@@ -40,6 +47,7 @@ public class Constants
     public static final String FIELD_COUNTRY = "COUNTRY";
     public static final String FIELD_SIGNATURE = "SIGNATURE";
     public static final String FIELD_NOTES = "NOTES";
+    public static final String FIELD_DEFAULT_TIME = "DEFAULT_TIME";
 
     // Foreign Key Titles.
     public static final String FK_IDENTIFIER_ID = "IDENTIFIER_ID";
@@ -58,6 +66,11 @@ public class Constants
     public static final String FK_LINESMAN2_ID = "LINESMAN2_ID";
     public static final String FK_SCOREKEEPER_ID = "SCOREKEEPER_ID";
     public static final String FK_PERIOD_ID = "PERIOD_ID";
+    public static final String FK_CATEGORY_ID = "CATEGORY_ID";
+    public static final String FK_GAME_PERSON_ACTION_ID = "GAME_PERSON_ACTION_ID";
+    public static final String FK_PENALTY_ID = "PENALTY_ID";
+    public static final String FK_INJURY_ID = " INJURY_ID";
+    public static final String FK_ACTION_ID = " ACTION_ID";
 
     // The DatabaseGenerator class contains the SQL statements required to create the Database.
     public static class DatabaseGenerator
@@ -239,7 +252,95 @@ public class Constants
                         + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + ")" +
                 ")";
 
-        // TODO Red and Green Database Sections***
+        //Red Database Section Josh
+        public static final String CREATE_TABLE_INJURY = "CREATE TABLE" + TABLE_INJURY +
+                "("
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FIELD_NAME + " TEXT NOT NULL, "
+                    + FIELD_NOTES + " TEXT NOT NULL" +
+                ")";
+
+        public static final String CREATE_TABLE_CATEGORY = "CREATE TABLE" + TABLE_CATEGORY +
+                "("
+                    + FIELD_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FIELD_NAME + " TEXT NOT NULL, "
+                    + FIELD_DEFAULT_TIME + " TEXT NOT NULL" +
+                ")";
+
+        public static final String CREATE_TABLE_PENALTY = "CREATE TABLE" + TABLE_PENALTY +
+                "("
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FK_CATEGORY_ID + " INTEGER NOT NULL, "
+                    + FIELD_NAME + " TEXT NOT NULL, "
+                    + FIELD_NOTES + " TEXT, "
+                        + "FOREIGN KEY (" + FK_CATEGORY_ID + ") "
+                        + "REFERENCES " + TABLE_CATEGORY + "(" + FIELD_ID + ")" +
+                ")";
+
+        public static final String CREATE_GAME_PERSON_ACTION_EXTENDED = "CREATE TABLE" +
+        TABLE_GAME_PERSON_ACTION_EXTENDED +
+                "("
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FK_GAME_PERSON_ACTION_ID + " INTEGER NOT NULL, "
+                    + FK_PENALTY_ID + " INTEGER, "
+                    + FK_INJURY_ID + " INTEGER, "
+                    + FIELD_NOTES + " TEXT, "
+                        + "FOREIGN KEY (" + FK_GAME_PERSON_ACTION_ID + ") "
+                        + "REFERENCES " + TABLE_GAME_PERSON_ACTION + "(" + FIELD_ID + ") "
+                        + "FOREIGN KEY (" + FK_PENALTY_ID + ") "
+                        + "REFERENCES " + TABLE_PENALTY + "(" + FIELD_ID + ") "
+                        + "FOREIGN KEY (" + FK_INJURY_ID + ") "
+                        + "REFERENCES " + TABLE_INJURY + "(" + FIELD_ID + ")" +
+                ")";
+
+        //Green Database Section Josh
+        public static final String CREATE_ACTION = "CREATE TABLE" + TABLE_ACTION +
+                "("
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FIELD_NAME + " TEXT NOT NULL" +
+                ")";
+
+            public static final String CREATE_GAME_PERSON_ACTION = "CREATE TABLE" +
+            TABLE_GAME_PERSON_ACTION +
+                    "("
+                        + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + FK_PERSON_ID + " INTEGER NOT NULL, "
+                        + FK_ACTION_ID + " INTEGER NOT NULL, "
+                        + FK_TEAM_ID + " INTEGER NOT NULL, "
+                        + FK_PERIOD_ID + " INTEGER NOT NULL, "
+                        + FK_GAME_ID + " INTEGER NOT NULL, "
+                        + FIELD_TIMESTAMP + " TEXT NOT NULL, "
+                            + "FOREIGN KEY (" + FK_PERSON_ID + ") "
+                            + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_ACTION_ID + ") "
+                            + "REFERENCES " + TABLE_ACTION + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_TEAM_ID + ") "
+                            + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_PERIOD_ID + ") "
+                            + "REFERENCES " + TABLE_PERIOD + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_GAME_ID + ") "
+                            + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + ")" +
+                    ")";
+
+        //Magenta Database Section Josh
+        public static final String CREATE_GAME_TEAM_PERSON = "CREATE TABLE" +
+        TABLE_GAME_TEAM_PERSON +
+                    "("
+                        + FIELD_ID + " INTEGER PRIMARY KEY, "
+                        + FK_GAME_ID + " INTEGER NOT NULL, "
+                        + FK_TEAM_ID + " INTEGER, "
+                        + FK_PERSON_ID + " INTEGER NOT NULL, "
+                        + FK_ROLE_ID + " INTEGER NOT NULL, "
+                            + "FOREIGN KEY (" + FK_GAME_ID + ") "
+                            + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_TEAM_ID + ") "
+                            + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_PERSON_ID + ") "
+                            + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + ") "
+                            + "FOREIGN KEY (" + FK_ROLE_ID + ") "
+                            + "REFERENCES " + TABLE_ROLE + "(" + FIELD_ID + ") " +
+                    ")";
+
     }
 
     public static class DatabaseInteractor
