@@ -27,6 +27,7 @@ public class Action
     // Method to insert Shots, Goals and Assists - Lucas
     public String action(GamePersonAction gpa, int playerNumber, String actionTitle, String teamName)
     {
+        long returnId = -1;
         // Retrieve the writable database and start a transaction.
         SQLiteDatabase sqlDb = dbManager.getWritableDatabase();
         sqlDb.beginTransaction();
@@ -44,7 +45,7 @@ public class Action
             values.put(Constants.FIELD_TIMESTAMP, gpa.getTimestamp());
 
             // Inserting the data into the table.
-            sqlDb.insert(Constants.TABLE_GAME_PERSON_ACTION, null, values);
+            returnId = sqlDb.insert(Constants.TABLE_GAME_PERSON_ACTION, null, values);
 
             // Finalizing the transaction.
             sqlDb.setTransactionSuccessful();

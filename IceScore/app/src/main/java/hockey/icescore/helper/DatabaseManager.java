@@ -57,6 +57,7 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_PERSON_ACTION);
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_PERSON_ACTION_EXTENDED);
         sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_TEAM_PERSON);
+        sqlDb.execSQL(Constants.DatabaseGenerator.CREATE_TABLE_GAME_PERSON_ACTION_GOAL);
     }
 
     // Once you upgrade the database, the following statements check and drop the tables if they
@@ -86,6 +87,7 @@ public class DatabaseManager extends SQLiteOpenHelper
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_PERSON_ACTION);
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_PERSON_ACTION_EXTENDED);
         sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_TEAM_PERSON);
+        sqlDb.execSQL(Constants.RECREATE_TABLE + Constants.TABLE_GAME_PERSON_ACTION_GOAL);
 
     }
 }
