@@ -15,6 +15,13 @@ public class Log
         protected String timestamp;
         protected String dbTable;
 
+        // multiple constructors needed for:
+        // Shot/Save = 1
+        // Goal = 2    ****
+        // Assist = 3
+        // Penalty = 4 ****
+        // Injury = 5  ****
+
         public Action (long id, String pNum, String t, String a, String ts, String dbt)
         {
             this.id = id;
@@ -27,9 +34,16 @@ public class Log
 
         // Method for extracting the content for the game log. Returns:
         // Actions, Extended Actions.
-        public String extract()
+        public String  /* herbal */ extract()
         {
             return "Time: " + timestamp + ", Action: " + action + ", Team: " + team + ", Player: " + playerNumber + ".";
         }
     }
+
+    protected class Timeouts
+    {
+
+    }
+
+
 }
