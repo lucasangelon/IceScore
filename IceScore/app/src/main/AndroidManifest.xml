@@ -7,61 +7,47 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <activity
-            android:name=".activities.MenuMain" >
-
+        <activity android:name=".activities.MenuMain" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activities.Game">
+        <activity android:name=".activities.Game" >
         </activity>
-
         <activity
             android:name=".activities.SetupTeam"
             android:label="Setup Team"
-            android:parentActivityName=".activities.GameSelect">
+            android:parentActivityName=".activities.GameSelect" >
         </activity>
-
         <activity
             android:name=".activities.Confirmation"
             android:label="Sign Off / Confirm Game"
-            android:parentActivityName=".activities.SetupTeam">
+            android:parentActivityName=".activities.SetupTeam" >
         </activity>
-
         <activity
             android:name=".activities.MenuOthers"
-            android:parentActivityName=".activities.Game">
+            android:parentActivityName=".activities.Game" >
         </activity>
-
-        <activity
-            android:name=".activities.Result">
+        <activity android:name=".activities.Result" >
         </activity>
-
-        <activity
-            android:name=".activities.ChangeGoalie">
+        <activity android:name=".activities.ChangeGoalie" >
         </activity>
-
-        <activity
-            android:name=".activities.GameLog">
+        <activity android:name=".activities.GameLog" >
         </activity>
-
-        <activity
-            android:name=".activities.Injury">
+        <activity android:name=".activities.Injury" >
         </activity>
-        
         <activity
             android:name=".activities.GameSelect"
-            android:parentActivityName="activities.MenuMain">
+            android:parentActivityName="activities.MenuMain" >
         </activity>
-
+        <activity android:name=".fragments.PlayerList" >
+        </activity>
         <activity
-            android:name=".fragments.PlayerList">
-            </activity>
-
+            android:name=".activities.Penalty"
+            android:label="@string/title_activity_penalty" >
+        </activity>
     </application>
+
 </manifest>

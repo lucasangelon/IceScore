@@ -131,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Period 3"
+        android:text="Period 1"
         android:id="@+id/txtPeriod"
         android:textSize="72dp"
         android:layout_above="@+id/btnGoalB"

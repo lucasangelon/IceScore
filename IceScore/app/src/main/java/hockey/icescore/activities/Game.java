@@ -2,6 +2,7 @@ package hockey.icescore.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,8 +22,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
+import hockey.icescore.OldClasses.Goal;
 import hockey.icescore.R;
 
+// everything done by jack
 
 public class Game extends ActionBarActivity implements View.OnClickListener
 {
@@ -31,6 +34,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener
     static Timer t;
     boolean ticking = false;
     TextView txtTime;
+    TextView txtPeriod;
     private int homeshot,awayshot = 0;
     TextView hometxt;
     TextView awaytxt;
@@ -39,13 +43,17 @@ public class Game extends ActionBarActivity implements View.OnClickListener
     private int playernum=0;
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
-        Toast toast = Toast.makeText(this, num, Toast.LENGTH_SHORT);
+       Goal goal = new Goal(0, period+"", playernum, -1, -1,false);
+        //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+        Toast toast = Toast.makeText(this, goal.playerID+", Period: "+goal.period+", no ass", Toast.LENGTH_SHORT);
         toast.show();
 
     }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
 
 
         super.onCreate(savedInstanceState);
@@ -68,6 +76,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener
 
         awaytxt = (TextView)findViewById(R.id.txtShotB);
         hometxt = (TextView)findViewById(R.id.txtShotA);
+        txtPeriod = (TextView)findViewById(R.id.txtPeriod);
 
         txtTime = (TextView) findViewById(R.id.txtTime);
         txtTime.setOnClickListener(new View.OnClickListener()
@@ -88,11 +97,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener
                 {
                     t.stop();
                     ticking = false;
+                    txtTime.setTextColor(Color.parseColor("#FF0000"));
                 }
                 else
                 {
                     t.start();
                     ticking = true;
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    setPeriod();
                 }
 
 
@@ -124,10 +136,15 @@ public class Game extends ActionBarActivity implements View.OnClickListener
                 t.reset();
                 period++;
                 ticking = false;
+                setTextColor();
+
             }
-            if(period==3)
+            if(period==4)
             {
                 txt="End Game";
+                period--;
+
+
             }
 
             setText();
@@ -182,15 +199,41 @@ public class Game extends ActionBarActivity implements View.OnClickListener
         }
     }
 
+    protected void setPeriod(){
+        updatePeriod.obtainMessage(1987).sendToTarget();
+    }
+    protected final Handler updatePeriod = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            if(msg.what == 1987){
+                txtPeriod.setText("Period "+period);
+
+            }
+        }
+    };
     protected void setText(){
-        updateTextView.obtainMessage(1987).sendToTarget();
+        updateTextView.obtainMessage(1988).sendToTarget();
     }
     protected final Handler updateTextView = new Handler(){
         @Override
         public void handleMessage(Message msg)
         {
-            if(msg.what == 1987){
+            if(msg.what == 1988){
                 txtTime.setText(txt);
+
+            }
+        }
+    };
+    protected void setTextColor(){
+        updateTextViewColor.obtainMessage(1989).sendToTarget();
+    }
+    protected final Handler updateTextViewColor = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            if(msg.what == 1989){
+                txtTime.setTextColor(Color.parseColor("#FF0000"));
 
             }
         }
