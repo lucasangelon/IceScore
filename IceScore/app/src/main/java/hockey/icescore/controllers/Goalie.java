@@ -28,7 +28,7 @@ public class Goalie
 
         //TODO insert Game_Team_Goalie stuff
 // will we need player number as well?
-    public String changeGoalie(String player, String teamName, int playerNumber)
+    public String changeGoalie(GoalieChange gc, String player, String teamName, int playerNumber)
     {
        long returnId = -1;
         // Retrieve the writable database and start a transaction.
@@ -40,10 +40,10 @@ public class Goalie
         {
           // Adding the values from the Goalie object
             ContentValues values = new ContentValues();
-            values.put(Constants.FK_PERSON_ID, GoalieChange.getPersonId());
-            values.put(Constants.FK_GAME_ID, GoalieChange.getGameId());
-            values.put(Constants.FK_TEAM_ID, GoalieChange.getTeamId());
-            values.put(Constants.FIELD_TIMESTAMP, GoalieChange.getTimestamp());
+            values.put(Constants.FK_PERSON_ID, gc.getPersonId());
+            values.put(Constants.FK_GAME_ID, gc.getGameId());
+            values.put(Constants.FK_TEAM_ID, gc.getTeamId());
+            values.put(Constants.FIELD_TIMESTAMP, gc.getTimestamp());
 
             //Inserting the data into the table
             returnId = sqlDb.insert(Constants.TABLE_GAME_TEAM_GOALIE, null, values);
@@ -55,7 +55,7 @@ public class Goalie
         {
             // Error message.
             sqlException.printStackTrace();
-            return "ERROR 3: Unable to insert Goalie into database.";
+            return "ERROR 3: Unable to insert Goalie Change into database.";
         }
         finally
         {
@@ -64,10 +64,10 @@ public class Goalie
             sqlDb.close();
         }
 
-        // Succesfully inserted notice
-        return  player + " " + playerNumber + " became goalie on " + teamName + Game.gameTimer.formatNice();
+        // Successfully inserted notice
+        return gc.getTimestamp() + " " +  player + " " + playerNumber + " became goalie on " + teamName;
 
-        // Errors Abound, getters and setters from model GoalieChange can't be found
+
 
     }
 

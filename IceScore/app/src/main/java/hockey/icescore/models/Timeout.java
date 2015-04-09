@@ -8,17 +8,17 @@ public class Timeout {
     protected long id;
     protected long teamId;
     protected long gameId;
-    protected String timeStamp;
+    protected String timestamp;
 
     public Timeout()
     {
     }
 
-    public Timeout(long tId, long gId, String timeStamp)
+    public Timeout(long tId, long gId, String timestamp)
     {
         this.teamId = tId;
         this.gameId = gId;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     public long getId() { return id; }
@@ -33,7 +33,7 @@ public class Timeout {
 
     public void setGameId(long gameId) { this.gameId = gameId; }
 
-    public String getTimeStamp() { return timeStamp; }
+    public String getTimestamp() { return timestamp; }
 
-    public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
 }

@@ -37,9 +37,9 @@ public class Timer {
         {
             //Adding the values from the Timeout object
             ContentValues values = new ContentValues();
-            values.put(Constants.FK_TEAM_ID, Timeout.getTeamId());
-            values.put(Constants.FK_GAME_ID, Timeout.getGameId());
-            values.put(Constants.FIELD_TIMESTAMP, Timeout.getTimeStamp());
+            values.put(Constants.FK_TEAM_ID, to.getTeamId());
+            values.put(Constants.FK_GAME_ID, to.getGameId());
+            values.put(Constants.FIELD_TIMESTAMP, to.getTimestamp());
 
             //Inserting the data into the table
             returnId = sqlDb.insert(Constants.TABLE_TIMEOUT, null, values);
@@ -60,15 +60,50 @@ public class Timer {
             sqlDb.close();
         }
 
-        //TODO insert Game_Period table, also do models
-        return null;
+        //Succesfully inserted notice
+        return to.getTimestamp() + " Timeout called by " + teamName;
     }
 
 
 
-    public String period(GamePeriod gp){
-        //TODO insert Timeout Table, also do models
-        return null;
+    public String period(GamePeriod gp)
+    {
+        long returnId = -1;
+        // Retrieve the writable database and start a transaction.
+        SQLiteDatabase sqlDb = dbManager.getWritableDatabase();
+        sqlDb.beginTransaction();
+
+        // Error Handler
+        try
+        {
+           //Adding the values from the GamePeriod object
+            ContentValues values = new ContentValues();
+            values.put(Constants.FK_GAME_ID, gp.getGameId());
+            values.put(Constants.FK_PERIOD_ID, gp.getPeriodId());
+            values.put(Constants.FIELD_TIMESTAMP, gp.getTimestamp());
+            values.put(Constants.FIELD_DEFAULT_TIME, gp.getPeriodLength());
+
+            //Inserting the data into the table
+            returnId = sqlDb.insert(Constants.TABLE_GAME_PERIOD, null, values);
+
+            //Finalizing the transaction
+            sqlDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException sqlException)
+        {
+            // Error message.
+            sqlException.printStackTrace();
+            return "ERROR 5: Unable to insert Period length into database.";
+        }
+        finally
+        {
+            // Close the object.
+            sqlDb.endTransaction();
+            sqlDb.close();
+        }
+
+        //Successfully inserted notice
+        return "Period length is " + gp.getPeriodLength();
     }
 
 }
