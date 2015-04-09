@@ -69,12 +69,10 @@ public class ActionController
     }
 
     // Method to insert Penalties and Injuries - Lucas
-    public synchronized Log insertPenaltyInjury(GamePersonAction gpa, int playerNumber,
-                                                String teamName, int specificId,
-                                                String specificName, String notes)
+    public synchronized Log insertPenaltyInjury(GamePersonAction gpa, GamePersonActionExtended gpae,
+                                                int playerNumber, String teamName,
+                                                String specificName)
     {
-        int penaltyId = 0;
-        int injuryId = 0;
         long returnId = -1;
         boolean isPenalty = false;
 
@@ -88,12 +86,7 @@ public class ActionController
             // Check if the action is a penalty or an injury.
             if (gpa.getActionId() == Constants.ACTION_PENALTY_ID)
             {
-                penaltyId = specificId;
                 isPenalty = true;
-            }
-            else
-            {
-                injuryId = specificId;
             }
 
             // Adding the values from the GPA object.
@@ -111,9 +104,9 @@ public class ActionController
             // Adding the extra action values.
             values = new ContentValues();
             values.put(Constants.FK_GAME_PERSON_ACTION_ID, returnId);
-            values.put(Constants.FK_PENALTY_ID, penaltyId);
-            values.put(Constants.FK_INJURY_ID, injuryId);
-            values.put(Constants.FIELD_NOTES, notes);
+            values.put(Constants.FK_PENALTY_ID, gpae.getPenaltyId());
+            values.put(Constants.FK_INJURY_ID, gpae.getInjuryId());
+            values.put(Constants.FIELD_NOTES, gpae.getNotes());
 
             // Inserting the extra action into the database.
             sqlDb.insert(Constants.TABLE_GAME_PERSON_ACTION_EXTENDED, null, values);
@@ -134,19 +127,16 @@ public class ActionController
             sqlDb.close();
         }
 
-        Log.Penalty lp;
-        Log.Injury li;
-
         // Create a penalty/injury log object for the game log.
         if (isPenalty)
         {
-            lp = new Log(). new Penalty(returnId, Integer.toString(playerNumber), teamName,
+            Log.Penalty lp = new Log(). new Penalty(returnId, Integer.toString(playerNumber), teamName,
                     gpa.getTimestamp(), specificName);
             return lp;
         }
         else
         {
-            li = new Log(). new Injury(returnId, Integer.toString(playerNumber), teamName,
+            Log.Injury li = new Log(). new Injury(returnId, Integer.toString(playerNumber), teamName,
                     gpa.getTimestamp(), specificName);
             return li;
         }

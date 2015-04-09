@@ -98,8 +98,65 @@ public class Log
         }
     }
 
-    protected class Timeouts
+    // Log object for timeouts.
+    public class Timeout
     {
+        protected long id;
+        protected String teamName;
+        protected String timestamp;
 
+        // Timeout Log Constructor
+        public Timeout(long id, String teamName, String timestamp)
+        {
+            this.id = id;
+            this.teamName = teamName;
+            this.timestamp = timestamp;
+        }
+
+        private String extract()
+        {
+            return timestamp + " Timeout requested by: " + teamName + ".";
+        }
+    }
+
+    // Log object for change of goalies in-game.
+    public class ChangeGoalie
+    {
+        protected long id;
+        protected String playerNumber;
+        protected String teamName;
+        protected String timestamp;
+
+        // Change Goalie Log Constructor.
+        public ChangeGoalie(long id, String playerNumber, String teamName, String timestamp)
+        {
+            this.id = id;
+            this.playerNumber = playerNumber;
+            this.teamName = teamName;
+            this.timestamp = timestamp;
+        }
+
+        private String extract()
+        {
+            return timestamp + " Goalie changed for team: " + teamName + ", Player: " +
+                    playerNumber + ".";
+        }
+    }
+
+    // Log object for game periods.
+    public class GamePeriod
+    {
+        protected long id;
+
+        // Game Period Log Constructor
+        public GamePeriod(long id)
+        {
+            this.id = id;
+        }
+
+        private long extract()
+        {
+            return id;
+        }
     }
 }
