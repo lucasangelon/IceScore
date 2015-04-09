@@ -13,13 +13,13 @@ import hockey.icescore.util.Constants;
 /**
  * Created by Josh on 7/04/2015.
  */
-public class Timer {
+public class TimerController {
 
     private DatabaseManager dbManager;
     private Context context;
 
     // Constructor
-    public Timer(Context context)
+    public TimerController(Context context)
     {
         this.context = context;
         dbManager = DatabaseManager.getInstance(context);

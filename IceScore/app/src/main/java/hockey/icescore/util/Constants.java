@@ -9,6 +9,12 @@ public class Constants
     public static final String DATABASE_NAME = "ICE_SCORE_DATABASE";
     public static final int DATABASE_VERSION = 1;
 
+    // Application Database Definitions.
+    public static final int ACTION_SHOTSAVE_ID = 1;
+    public static final int ACTION_GOAL_ID = 2;
+    public static final int ACTION_PENALTY_ID = 3;
+    public static final int ACTION_INJURY_ID = 4;
+
     // Table Titles.
     public static final String TABLE_PERSON = "PERSON";
     public static final String TABLE_IDENTIFIER = "IDENTIFIER";
@@ -233,6 +239,7 @@ public class Constants
                     + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                     + FK_GAME_ID + " INTEGER NOT NULL, "
                     + FK_PERIOD_ID + " INTEGER NOT NULL, "
+                    + FIELD_DEFAULT_TIME + " TEXT NOT NULL, "
                         + "FOREIGN KEY (" + FK_GAME_ID + ") "
                         + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + "), "
                         + "FOREIGN KEY (" + FK_PERIOD_ID + ") "
@@ -294,9 +301,9 @@ public class Constants
                 + FK_INJURY_ID + " INTEGER, "
                 + FIELD_NOTES + " TEXT, "
                 + "FOREIGN KEY (" + FK_GAME_PERSON_ACTION_ID + ") "
-                + "REFERENCES " + TABLE_GAME_PERSON_ACTION + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_GAME_PERSON_ACTION + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_PENALTY_ID + ") "
-                + "REFERENCES " + TABLE_PENALTY + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_PENALTY + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_INJURY_ID + ") "
                 + "REFERENCES " + TABLE_INJURY + "(" + FIELD_ID + ")" +
                 ")";
@@ -319,13 +326,13 @@ public class Constants
                 + FK_GAME_ID + " INTEGER NOT NULL, "
                 + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                 + "FOREIGN KEY (" + FK_PERSON_ID + ") "
-                + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_ACTION_ID + ") "
-                + "REFERENCES " + TABLE_ACTION + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_ACTION + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_TEAM_ID + ") "
-                + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_PERIOD_ID + ") "
-                + "REFERENCES " + TABLE_PERIOD + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_PERIOD + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_GAME_ID + ") "
                 + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + ")" +
                 ")";
@@ -338,7 +345,15 @@ public class Constants
                     + FK_GAME_PERSON_ACTION_ID + " INTEGER NOT NULL, "
                     + FK_GOALIE_ID + " INTEGER NOT NULL, "
                     + FK_ASSIST_ID + " INTEGER, "
-                    + FK_ASSIST2_ID + " INTEGER" +
+                    + FK_ASSIST2_ID + " INTEGER, "
+                        + "FOREIGN KEY (" + FK_GAME_PERSON_ACTION_ID + ") "
+                        + "REFERENCES " + TABLE_GAME_PERSON_ACTION + "(" + FIELD_ID + "), "
+                        + "FOREIGN KEY (" + FK_GOALIE_ID + ") "
+                        + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + "), "
+                        + "FOREIGN KEY (" + FK_ASSIST_ID + ") "
+                        + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + "), "
+                        + "FOREIGN KEY (" + FK_ASSIST2_ID + ") "
+                        + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + ")" +
                 ")";
 
         //Magenta Database Section Josh
@@ -351,13 +366,13 @@ public class Constants
                 + FK_PERSON_ID + " INTEGER NOT NULL, "
                 + FK_ROLE_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY (" + FK_GAME_ID + ") "
-                + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_TEAM_ID + ") "
-                + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_TEAM + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_PERSON_ID + ") "
-                + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + ") "
+                + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + "), "
                 + "FOREIGN KEY (" + FK_ROLE_ID + ") "
-                + "REFERENCES " + TABLE_ROLE + "(" + FIELD_ID + ") " +
+                + "REFERENCES " + TABLE_ROLE + "(" + FIELD_ID + ")" +
                 ")";
     }
 }

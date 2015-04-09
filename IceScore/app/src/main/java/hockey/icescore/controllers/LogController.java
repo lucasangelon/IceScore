@@ -7,12 +7,12 @@ import hockey.icescore.helper.DatabaseManager;
 /**
  * Created by Lucas Angelon on 07-Apr-15.
  */
-public class Log
+public class LogController
 {
     private DatabaseManager dbManager;
     private Context context;
 
-    public Log (Context context)
+    public LogController(Context context)
     {
         this.context = context;
         dbManager = dbManager.getInstance(context);

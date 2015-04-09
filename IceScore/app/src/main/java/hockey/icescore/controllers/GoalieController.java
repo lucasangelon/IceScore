@@ -14,13 +14,13 @@ import hockey.icescore.util.Constants;
 /**
  * Created by Josh on 7/04/2015.
  */
-public class Goalie
+public class GoalieController
 {
     private DatabaseManager dbManager;
     private Context context;
 
         // Constructor
-        public Goalie(Context context)
+        public GoalieController(Context context)
         {
             this.context = context;
             dbManager = DatabaseManager.getInstance(context);
