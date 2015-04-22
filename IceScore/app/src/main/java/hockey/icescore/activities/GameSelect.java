@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.helper.MyCustomBaseAdapter;
 import hockey.icescore.R;
 import hockey.icescore.helper.SearchResults;
@@ -69,6 +69,17 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         spinner4.setAdapter(adapter3);
         spinner4.setOnItemSelectedListener(this);
         spinner4.setSelection(getIndex(spinner4, String.valueOf(year)));
+
+   //jack
+        //this is temporary
+        Game.setHomeTeam(1,"Hawks",5,"John doe");
+        Game.homeTeam.addPlayer(1,"Jack kitchener",69);
+        Game.homeTeam.addPlayer(2,"Josh Loyd",13);
+        Game.homeTeam.addPlayer(3,"Nickola Kerr",22);
+        Game.homeTeam.addPlayer(5,"no one",42);
+        Game.setAwayTeam(2,"Sharks",3,"uncle sam");
+        Game.awayTeam.addPlayer(1,"lucas",13);
+        Game.awayTeam.addPlayer(1,"test data",7);
 
 
         //List view adapter form loding the games

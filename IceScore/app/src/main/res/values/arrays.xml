@@ -30,6 +30,15 @@
         <item>Adam Primmer</item>
     </string-array>
 
+
+    <string-array name="Periods">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
+
+
     <string-array name="teamB">
         <item>Rob Hachey</item>
         <item>Rod Westerveld</item>

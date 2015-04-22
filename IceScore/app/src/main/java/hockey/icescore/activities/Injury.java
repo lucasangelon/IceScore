@@ -4,20 +4,54 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import hockey.icescore.OldClasses.Player;
+import hockey.icescore.OldClasses.Team;
 import hockey.icescore.R;
+import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.util.Fragment_Listener;
+import hockey.icescore.OldClasses.Game;
 
 /**
  * Created by Lucas Angelon on 21-Mar-15.
  */
-public class Injury extends ActionBarActivity
-{
+public class Injury extends ActionBarActivity implements Fragment_Listener, View.OnClickListener {
+    Team currentTeam;
+    TextView playerNum;
+    TextView playerName;
+    TextView desc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_injury);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        playerNum = (TextView) findViewById(R.id.PlayerNum);
+        playerName = (TextView) findViewById(R.id.Player_name);
+        desc = (EditText) findViewById(R.id.descText);
+
+        Button teamA = (Button) findViewById(R.id.teamA);
+        teamA.setOnClickListener(this);
+
+        Button teamB = (Button) findViewById(R.id.teamB);
+        teamB.setOnClickListener(this);
+
+    }
+
+    public void addFragment(Team team){
+        PlayerListRight p = new PlayerListRight();
+        p.setListener(this);
+        p.setTeam(team);
+        android.app.FragmentManager manager=getFragmentManager();
+        android.app.FragmentTransaction transaction=manager.beginTransaction();
+        transaction.add(R.id.container, p, "");
+        transaction.commit();
+
     }
 
 
@@ -36,5 +70,35 @@ public class Injury extends ActionBarActivity
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
+    public void buttonClicked(String val) {
+        Toast toast = Toast.makeText(this, "what "+val, Toast.LENGTH_SHORT);
+        toast.show();
+        Player player = currentTeam.getPlayerByNumber(Integer.parseInt(val));
+        System.out.println(player.name);
+        String name = player.name;
+        playerNum.setText(val);
+        playerName.setText(name);
+        //InsertIntoDb(new Injury(currentTeam, Game.currentPeriod, name, desc.gtText()));
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.teamA:
+                addFragment(Game.homeTeam);
+                currentTeam=Game.homeTeam;
+
+                break;
+            case R.id.teamB:
+                addFragment(Game.awayTeam);
+                currentTeam=Game.awayTeam;
+                break;
+        }
     }
 }
