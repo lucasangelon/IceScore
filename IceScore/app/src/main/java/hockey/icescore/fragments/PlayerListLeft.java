@@ -34,10 +34,18 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
     private Button b13;
     private Button b14;
     private Button b15;
+    private Button b16;
     Team team;
+    private boolean assist = false;
 
     public void setListener(Fragment_Listener game) {
         g=game;
+    }
+
+    public void isAssist(boolean assist){
+        if(assist) {
+          this.assist = assist;
+        }
     }
 
     public PlayerListLeft() {
@@ -64,6 +72,9 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
         b13 = (Button) rootView.findViewById(R.id.b13);
         b14 = (Button) rootView.findViewById(R.id.b14);
         b15 = (Button) rootView.findViewById(R.id.b15);
+        b16 = (Button) rootView.findViewById(R.id.b16);
+        if(!assist)
+        b16.setVisibility(Button.INVISIBLE);
 
 
         Button[] buttons = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15};
@@ -83,6 +94,8 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
         rootView.findViewById(R.id.b13).setOnClickListener(this);
         rootView.findViewById(R.id.b14).setOnClickListener(this);
         rootView.findViewById(R.id.b15).setOnClickListener(this);
+        rootView.findViewById(R.id.b16).setOnClickListener(this);
+
         v = rootView;
 
 
@@ -179,7 +192,10 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
                 g.buttonClicked(getNum(R.id.b15));
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
-
+            case R.id.b16:
+                g.buttonClicked("-1");
+                getActivity().getFragmentManager().beginTransaction().remove(this).commit();
+                break;
         }
     }
 }

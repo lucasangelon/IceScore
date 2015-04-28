@@ -159,4 +159,15 @@
         android:layout_alignEnd="@+id/b3"
         android:textColor="#FFFFFF"
         android:textSize="46dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:text="No assist"
+        android:id="@+id/b16"
+        android:layout_below="@+id/b13"
+        android:layout_alignLeft="@+id/b13"
+        android:layout_alignStart="@+id/b13"
+        android:layout_alignRight="@+id/b15"
+        android:layout_alignEnd="@+id/b15" />
 </RelativeLayout>

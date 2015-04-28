@@ -6,14 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +24,7 @@ import hockey.icescore.fragments.PlayerListRight;
 import hockey.icescore.util.Fragment_Listener;
 
 // everything done by jack
-
+//dont edit
 public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener
 {
      Context gameContext = this;
@@ -43,12 +39,47 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
     int period = 1;
     private int playernum=0;
+
+    int awayasscount=0;
+    int homeasscount=0;
+    String awayAssists = "";
+    int goalPlayerNum=0;
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
-       Goal goal = new Goal(0, period+"", playernum, -1, -1,false);
-        //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
-        Toast toast = Toast.makeText(this, goal.playerID+", Period: "+goal.period+", no ass", Toast.LENGTH_SHORT);
-        toast.show();
+        if(playernum == -1) {
+            awayasscount=2;
+            awayAssists+="No Assist";
+        }
+
+
+
+        if(awayasscount<2){
+            PlayerListLeft p1 = new PlayerListLeft();
+            p1.setListener(this);
+            p1.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
+
+            android.app.FragmentManager manager1=getFragmentManager();
+            android.app.FragmentTransaction transaction1=manager1.beginTransaction();
+            transaction1.add(android.R.id.content, p1, "right frag");
+
+            transaction1.commit();
+            p1.isAssist(true);
+            if(awayasscount>0){
+                awayAssists+=""+playernum+", ";
+
+            } else {
+                goalPlayerNum=playernum;
+            }
+
+            awayasscount++;
+        }else{
+            Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
+            //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+            Toast toast = Toast.makeText(this, playernum+", Period: "+goal.period+", assisted by "+awayAssists, Toast.LENGTH_SHORT);
+            toast.show();
+            awayasscount=0;
+            awayAssists="";
+        }
 
     }
     @Override
@@ -81,6 +112,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         txtPeriod = (TextView)findViewById(R.id.txtPeriod);
 
         txtTime = (TextView) findViewById(R.id.txtTime);
+        int hours = matchTime / 3600, remainder = matchTime % 3600, minutes = remainder / 60, seconds = remainder % 60;
+        txt = format(minutes) + ":" + format(seconds);
+        txtTime.setText(txt);
         txtTime.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -155,16 +189,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
             setText();
         }
-        private String format(int tt){
-            DecimalFormat df = new DecimalFormat("00");
-            return df.format(tt);
-        }
+
         @Override
         public void run() {
 
         }
     }
-
+    private String format(int tt){
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(tt);
+    }
     @Override
     public void onClick(View v)
     {
@@ -191,6 +225,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 android.app.FragmentTransaction transaction=manager.beginTransaction();
                 transaction.add(android.R.id.content, p, "left frag");
                 transaction.commit();
+                homeasscount++;
                 break;
             case R.id.btnGoalB:
                 PlayerListRight p1 = new PlayerListRight();
@@ -201,7 +236,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 transaction1.add(android.R.id.content, p1, "right frag");
 
                 transaction1.commit();
-
+                awayasscount++;
                 break;
         }
     }
