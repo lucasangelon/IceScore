@@ -10,10 +10,18 @@ public class Constants
     public static final int DATABASE_VERSION = 1;
 
     // Application Database Definitions.
+    // Action IDs
     public static final int ACTION_SHOTSAVE_ID = 1;
     public static final int ACTION_GOAL_ID = 2;
     public static final int ACTION_PENALTY_ID = 3;
     public static final int ACTION_INJURY_ID = 4;
+
+    // Role IDs
+    public static final int ROLE_PLAYER_ID = 1;
+    public static final int ROLE_MANAGER_ID = 2;
+    public static final int ROLE_REFEREE_ID = 3;
+    public static final int ROLE_LINESMAN_ID = 4;
+    public static final int ROLE_SCOREKEEPER_ID = 5;
 
     // Table Titles.
     public static final String TABLE_PERSON = "PERSON";
@@ -203,7 +211,6 @@ public class Constants
         public static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME +
                 "("
                     + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                     + FK_VENUE_ID + " INTEGER NOT NULL, "
                     + FK_HOME_TEAM_ID + " INTEGER NOT NULL, "
                     + FK_AWAY_TEAM_ID + " INTEGER NOT NULL, "
@@ -213,6 +220,7 @@ public class Constants
                     + FK_LINESMAN_ID + " INTEGER NOT NULL, "
                     + FK_LINESMAN2_ID + " INTEGER NOT NULL, "
                     + FK_SCOREKEEPER_ID + " INTEGER NOT NULL, "
+                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                         + "FOREIGN KEY (" + FK_VENUE_ID + ") "
                         + "REFERENCES " + TABLE_VENUE + "(" + FIELD_ID + "), "
                         + "FOREIGN KEY (" + FK_HOME_TEAM_ID + ") "

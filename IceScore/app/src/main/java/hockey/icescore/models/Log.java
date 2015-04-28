@@ -9,6 +9,34 @@ public class Log
     public Log()
     {    }
 
+    // Log object for saves.
+    public class Save extends Log
+    {
+        protected long id;
+        protected String goalieNumber;
+        protected String shotTeam;
+        protected String timestamp;
+
+        // Empty Constructor
+        public Save ()
+        {   }
+
+        // Save Log Constructor
+        public Save(long id, String gn, String st, String t)
+        {
+            this.id = id;
+            this.goalieNumber = gn;
+            this.shotTeam = st;
+            this.timestamp = t;
+        }
+
+        // Method for extracting the content for the game log.
+        private String extract()
+        {
+            return timestamp + " Shot by team: " + shotTeam + ", Saved by goalie: " + goalieNumber + ".";
+        }
+    }
+
     // Log object for goals.
     public class Goal extends Log
     {
