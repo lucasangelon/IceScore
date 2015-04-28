@@ -11,7 +11,11 @@ import java.lang.reflect.Method;
 
 import hockey.icescore.R;
 
-public class GameLog extends ActionBarActivity implements View.OnClickListener{
+
+/**
+ * Created by Suruchi 22-Apr-15.
+ */
+public class GameLog extends ActionBarActivity {
 
     private static final String TAG ="GameLog" ;
     // Declaring our tabs and the corresponding fragments.
@@ -20,6 +24,8 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
     android.support.v7.app.ActionBar.Tab p2Tab;
     android.support.v7.app.ActionBar.Tab p3Tab;
     android.support.v7.app.ActionBar.Tab overallTab;
+    android.support.v7.app.ActionBar.Tab noteTab;
+
 
 
     android.support.v4.app.Fragment allFragmentTab = new AllFragmentTab();
@@ -31,6 +37,8 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
     android.support.v4.app.Fragment p3FragmentTab = new AllFragmentTab();
     //allFragmentTab.setLog(4);
     android.support.v4.app.Fragment overallFragmentTab = new AllFragmentTab();
+    //allFragmentTab.setLog(5);
+    android.support.v4.app.Fragment noteFragmentTab = new AllFragmentTab();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +70,7 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
         p2Tab = getSupportActionBar().newTab().setText("Period 2");
         p3Tab = getSupportActionBar().newTab().setText("Period 3");
         overallTab = getSupportActionBar().newTab().setText("Overall");
+        noteTab = getSupportActionBar().newTab().setText("Notes");
 
         
 
@@ -71,6 +80,7 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
         p2Tab.setTabListener(new TabListener(p2FragmentTab));
         p3Tab.setTabListener(new TabListener(p3FragmentTab));
         overallTab.setTabListener(new TabListener(overallFragmentTab));
+        noteTab.setTabListener(new TabListener(noteFragmentTab));
 
         // Adding tabs to the ActionBar.
         getSupportActionBar().addTab(allTab);
@@ -78,6 +88,7 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
         getSupportActionBar().addTab(p2Tab);
         getSupportActionBar().addTab(p3Tab);
         getSupportActionBar().addTab(overallTab);
+        getSupportActionBar().addTab(noteTab);
 
         forceStackedTabs(); // Force tabs when activity starts.
 	}
@@ -95,23 +106,8 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
     }
     private void forceStackedTabs() {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
-       // if ( ab instanceof ActionBarImpl ) {
-            // Pre-ICS
-            disableEmbeddedTabs( ab );
-        /*} else if ( ab instanceof ActionBarWrapper ) {
-            // ICS
-            try {
-                Field abField = ab.getClass().getDeclaredField( "mActionBar" );
-                abField.setAccessible( true );
-                disableEmbeddedTabs( abField.get( ab ) );
-            } catch (NoSuchFieldException e) {
-                Log.e( TAG, "Error disabling actionbar embedded", e );
-            } catch (IllegalArgumentException e) {
-                Log.e( TAG, "Error disabling actionbar embedded", e );
-            } catch (IllegalAccessException e) {
-                Log.e( TAG, "Error disabling actionbar embedded", e );
-            }
-        }*/
+        disableEmbeddedTabs( ab );
+
     }
     private void disableEmbeddedTabs(Object ab) {
         try {
@@ -128,9 +124,5 @@ public class GameLog extends ActionBarActivity implements View.OnClickListener{
         forceStackedTabs(); // Handle orientation changes.
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }
 
