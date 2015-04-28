@@ -94,12 +94,12 @@ public class Log
         private String extract()
         {
             return timestamp + " Injury, Team: " + teamName + ", Player: " + playerNumber + ", " +
-                    "Penalty Name: " + injuryName + ".";
+                    "Injury Name: " + injuryName + ".";
         }
     }
 
     // Log object for timeouts.
-    public class Timeout
+    public class Timeout extends Log
     {
         protected long id;
         protected String teamName;
@@ -120,7 +120,7 @@ public class Log
     }
 
     // Log object for change of goalies in-game.
-    public class ChangeGoalie
+    public class ChangeGoalie extends Log
     {
         protected long id;
         protected String playerNumber;
@@ -144,7 +144,7 @@ public class Log
     }
 
     // Log object for game periods.
-    public class GamePeriod
+    public class GamePeriod extends Log
     {
         protected long id;
 
@@ -157,6 +157,25 @@ public class Log
         private long extract()
         {
             return id;
+        }
+    }
+
+    // Log object for game notes.
+    public class GameNote extends Log
+    {
+        protected long id;
+        protected String notes;
+
+        // GameNote Log Constructor
+        public GameNote(long id, String notes)
+        {
+            this.id = id;
+            this.notes = notes;
+        }
+
+        private String extract()
+        {
+            return notes;
         }
     }
 }
