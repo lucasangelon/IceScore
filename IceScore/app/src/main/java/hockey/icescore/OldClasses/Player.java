@@ -16,5 +16,15 @@ public class Player
         goals = 0;
         assists = 0;
     }
-}
 
+    
+
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getID() {
+        return playerID;
+    }
+}

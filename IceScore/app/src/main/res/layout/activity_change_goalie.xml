@@ -22,70 +22,63 @@
         android:layout_alignRight="@+id/textView2"
         android:layout_alignEnd="@+id/textView2" />
 
-    <RelativeLayout
-        android:layout_width="500dp"
-        android:layout_height="350dp"
-        android:id="@+id/relativeLayout"
-        android:layout_alignTop="@+id/listView2"
-        android:layout_alignParentEnd="true">
-
-        <RelativeLayout
-            android:layout_width="500dp"
-            android:layout_height="350dp"
-            android:id="@+id/relativeLayout2"
-            android:layout_above="@+id/button3"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="100dp">
-
-        </RelativeLayout>
-    </RelativeLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Team A"
+        android:text="HOME"
         android:id="@+id/textView"
         android:textSize="40dp"
         android:layout_below="@+id/txtChgGl"
-        android:layout_alignStart="@+id/button2" />
+        android:layout_alignStart="@+id/button2"
+        android:layout_alignLeft="@+id/button2"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Team B"
+        android:text="AWAY"
         android:id="@+id/textView2"
         android:textSize="40dp"
         android:layout_marginLeft="77dp"
         android:layout_marginStart="78dp"
         android:layout_alignTop="@+id/textView"
-        android:layout_toEndOf="@+id/txtChgGl" />
+        android:layout_toEndOf="@+id/txtChgGl"
+        android:layout_toRightOf="@+id/txtChgGl"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change"
         android:id="@+id/button2"
-        android:layout_marginStart="147dp"
-        android:layout_below="@+id/listView"
-        android:layout_alignParentStart="true" />
+        android:layout_marginRight="123dp"
+        android:layout_marginEnd="123dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/txtChgGl"
+        android:layout_toStartOf="@+id/txtChgGl" />
 
     <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="350dp"
+        android:layout_width="550dp"
+        android:layout_height="450dp"
         android:id="@+id/listView2"
-        android:entries="@array/teamB"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/relativeLayout" />
+        android:entries="@array/teamA"
+        android:background="@drawable/border"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"/>
 
     <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="550dp"
+        android:layout_height="450dp"
         android:id="@+id/listView"
         android:entries="@array/teamB"
+        android:background="@drawable/border"
         android:layout_alignTop="@+id/listView2"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/listView2" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"/>
 
 </RelativeLayout>

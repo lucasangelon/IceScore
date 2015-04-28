@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 import hockey.icescore.R;
 
@@ -13,12 +14,14 @@ import hockey.icescore.R;
  */
 public class Confirmation extends ActionBarActivity
 {
+
+    Spinner periodlen ;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
-
+        periodlen= (Spinner)findViewById(R.id.spnPeriodLength);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -40,6 +43,7 @@ public class Confirmation extends ActionBarActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_confirm)
         {
+            hockey.icescore.OldClasses.Game.periodLength=Integer.parseInt(periodlen.getSelectedItem().toString());
             Intent gameScreen = new Intent(this, Game.class);
             startActivity(gameScreen);
             return true;
