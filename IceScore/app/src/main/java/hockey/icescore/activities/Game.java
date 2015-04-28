@@ -6,14 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,13 +17,15 @@ import android.widget.Toast;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
-
 import hockey.icescore.OldClasses.Goal;
 import hockey.icescore.R;
+import hockey.icescore.fragments.PlayerListLeft;
+import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.util.Fragment_Listener;
 
 // everything done by jack
-
-public class Game extends ActionBarActivity implements View.OnClickListener
+//dont edit
+public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener
 {
      Context gameContext = this;
     String txt = "whoop whoop";
@@ -38,15 +36,50 @@ public class Game extends ActionBarActivity implements View.OnClickListener
     private int homeshot,awayshot = 0;
     TextView hometxt;
     TextView awaytxt;
-    int matchTime = 10;
+    int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
     int period = 1;
     private int playernum=0;
+
+    int awayasscount=0;
+    int homeasscount=0;
+    String awayAssists = "";
+    int goalPlayerNum=0;
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
-       Goal goal = new Goal(0, period+"", playernum, -1, -1,false);
-        //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
-        Toast toast = Toast.makeText(this, goal.playerID+", Period: "+goal.period+", no ass", Toast.LENGTH_SHORT);
-        toast.show();
+        if(playernum == -1) {
+            awayasscount=2;
+            awayAssists+="No Assist";
+        }
+
+
+
+        if(awayasscount<2){
+            PlayerListLeft p1 = new PlayerListLeft();
+            p1.setListener(this);
+            p1.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
+
+            android.app.FragmentManager manager1=getFragmentManager();
+            android.app.FragmentTransaction transaction1=manager1.beginTransaction();
+            transaction1.add(android.R.id.content, p1, "right frag");
+
+            transaction1.commit();
+            p1.isAssist(true);
+            if(awayasscount>0){
+                awayAssists+=""+playernum+", ";
+
+            } else {
+                goalPlayerNum=playernum;
+            }
+
+            awayasscount++;
+        }else{
+            Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
+            //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+            Toast toast = Toast.makeText(this, playernum+", Period: "+goal.period+", assisted by "+awayAssists, Toast.LENGTH_SHORT);
+            toast.show();
+            awayasscount=0;
+            awayAssists="";
+        }
 
     }
     @Override
@@ -79,6 +112,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener
         txtPeriod = (TextView)findViewById(R.id.txtPeriod);
 
         txtTime = (TextView) findViewById(R.id.txtTime);
+        int hours = matchTime / 3600, remainder = matchTime % 3600, minutes = remainder / 60, seconds = remainder % 60;
+        txt = format(minutes) + ":" + format(seconds);
+        txtTime.setText(txt);
         txtTime.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -117,6 +153,10 @@ public class Game extends ActionBarActivity implements View.OnClickListener
 
     }
 
+    @Override
+    public void buttonClicked(String val) {
+        setCurPlayer(val);
+    }
 
 
     private class workAround implements PropertyChangeListener, Runnable { //Jack
@@ -149,16 +189,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener
 
             setText();
         }
-        private String format(int tt){
-            DecimalFormat df = new DecimalFormat("00");
-            return df.format(tt);
-        }
+
         @Override
         public void run() {
 
         }
     }
-
+    private String format(int tt){
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(tt);
+    }
     @Override
     public void onClick(View v)
     {
@@ -178,23 +218,25 @@ public class Game extends ActionBarActivity implements View.OnClickListener
                 awaytxt.setText(""+awayshot);
                 break;
             case R.id.btnGoalA:
-                PlaceholderFragment p = new PlaceholderFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, p )
-                        .commit();
-                p.setGame(this);
-
+                PlayerListLeft p = new PlayerListLeft();
+                p.setListener(this);
+                p.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
+                android.app.FragmentManager manager=getFragmentManager();
+                android.app.FragmentTransaction transaction=manager.beginTransaction();
+                transaction.add(android.R.id.content, p, "left frag");
+                transaction.commit();
+                homeasscount++;
                 break;
             case R.id.btnGoalB:
-                PlaceholderFragmentRight p1 = new PlaceholderFragmentRight();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, p1 )
-                        .commit();
-                p1.setGame(this);
-                DisplayMetrics displaymetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-                int width = displaymetrics.widthPixels;
+                PlayerListRight p1 = new PlayerListRight();
+                p1.setListener(this);
+                p1.setTeam(hockey.icescore.OldClasses.Game.awayTeam);
+                android.app.FragmentManager manager1=getFragmentManager();
+                android.app.FragmentTransaction transaction1=manager1.beginTransaction();
+                transaction1.add(android.R.id.content, p1, "right frag");
 
+                transaction1.commit();
+                awayasscount++;
                 break;
         }
     }
@@ -264,219 +306,4 @@ public class Game extends ActionBarActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-        Game g;
-        View v;
-        public void setGame(Game game) {
-            g=game;
-        }
-
-        public PlaceholderFragment() {
-
-        }
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView = inflater.inflate(R.layout.fragment_player_list_left, container, false);
-            rootView.findViewById(R.id.b1).setOnClickListener(this);
-            rootView.findViewById(R.id.b2).setOnClickListener(this);
-            rootView.findViewById(R.id.b3).setOnClickListener(this);
-            rootView.findViewById(R.id.b4).setOnClickListener(this);
-            rootView.findViewById(R.id.b5).setOnClickListener(this);
-            rootView.findViewById(R.id.b6).setOnClickListener(this);
-            rootView.findViewById(R.id.b7).setOnClickListener(this);
-            rootView.findViewById(R.id.b8).setOnClickListener(this);
-            rootView.findViewById(R.id.b9).setOnClickListener(this);
-            rootView.findViewById(R.id.b10).setOnClickListener(this);
-            rootView.findViewById(R.id.b11).setOnClickListener(this);
-            rootView.findViewById(R.id.b12).setOnClickListener(this);
-            rootView.findViewById(R.id.b13).setOnClickListener(this);
-            rootView.findViewById(R.id.b14).setOnClickListener(this);
-            rootView.findViewById(R.id.b15).setOnClickListener(this);
-            v = rootView;
-            return rootView;
-
-        }
-
-        private String getNum(int id){
-          TextView returnVal = (TextView) v.findViewById(id);
-            return returnVal.getText().toString();
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()){
-                case R.id.b1:
-                    g.setCurPlayer(getNum(R.id.b1));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                break;
-                case R.id.b2:
-                    g.setCurPlayer(getNum(R.id.b2));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b3:
-                    g.setCurPlayer(getNum(R.id.b3));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b4:
-                    g.setCurPlayer(getNum(R.id.b4));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b5:
-                    g.setCurPlayer(getNum(R.id.b5));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b6:
-                    g.setCurPlayer(getNum(R.id.b6));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b7:
-                    g.setCurPlayer(getNum(R.id.b7));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b8:
-                    g.setCurPlayer(getNum(R.id.b8));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b9:
-                    g.setCurPlayer(getNum(R.id.b9));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b10:
-                    g.setCurPlayer(getNum(R.id.b10));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b11:
-                    g.setCurPlayer(getNum(R.id.b11));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b12:
-                    g.setCurPlayer(getNum(R.id.b12));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b13:
-                    g.setCurPlayer(getNum(R.id.b13));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b14:
-                    g.setCurPlayer(getNum(R.id.b14));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b15:
-                    g.setCurPlayer(getNum(R.id.b15));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-
-            }
-        }
-    }
-
-    public static class PlaceholderFragmentRight extends Fragment implements View.OnClickListener {
-        Game g;
-        View v;
-        public void setGame(Game game) {
-            g=game;
-        }
-
-        public PlaceholderFragmentRight() {
-
-        }
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView = inflater.inflate(R.layout.fragment_player_list_right, container, false);
-            rootView.findViewById(R.id.b1).setOnClickListener(this);
-            rootView.findViewById(R.id.b2).setOnClickListener(this);
-            rootView.findViewById(R.id.b3).setOnClickListener(this);
-            rootView.findViewById(R.id.b4).setOnClickListener(this);
-            rootView.findViewById(R.id.b5).setOnClickListener(this);
-            rootView.findViewById(R.id.b6).setOnClickListener(this);
-            rootView.findViewById(R.id.b7).setOnClickListener(this);
-            rootView.findViewById(R.id.b8).setOnClickListener(this);
-            rootView.findViewById(R.id.b9).setOnClickListener(this);
-            rootView.findViewById(R.id.b10).setOnClickListener(this);
-            rootView.findViewById(R.id.b11).setOnClickListener(this);
-            rootView.findViewById(R.id.b12).setOnClickListener(this);
-            rootView.findViewById(R.id.b13).setOnClickListener(this);
-            rootView.findViewById(R.id.b14).setOnClickListener(this);
-            rootView.findViewById(R.id.b15).setOnClickListener(this);
-            v = rootView;
-            return rootView;
-
-        }
-
-        private String getNum(int id){
-            TextView returnVal = (TextView) v.findViewById(id);
-            return returnVal.getText().toString();
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()){
-                case R.id.b1:
-                    g.setCurPlayer(getNum(R.id.b1));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b2:
-                    g.setCurPlayer(getNum(R.id.b2));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b3:
-                    g.setCurPlayer(getNum(R.id.b3));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b4:
-                    g.setCurPlayer(getNum(R.id.b4));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b5:
-                    g.setCurPlayer(getNum(R.id.b5));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b6:
-                    g.setCurPlayer(getNum(R.id.b6));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b7:
-                    g.setCurPlayer(getNum(R.id.b7));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b8:
-                    g.setCurPlayer(getNum(R.id.b8));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b9:
-                    g.setCurPlayer(getNum(R.id.b9));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b10:
-                    g.setCurPlayer(getNum(R.id.b10));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b11:
-                    g.setCurPlayer(getNum(R.id.b11));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b12:
-                    g.setCurPlayer(getNum(R.id.b12));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b13:
-                    g.setCurPlayer(getNum(R.id.b13));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b14:
-                    g.setCurPlayer(getNum(R.id.b14));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-                case R.id.b15:
-                    g.setCurPlayer(getNum(R.id.b15));
-                    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-                    break;
-
-            }
-        }
-    }
 }

@@ -15,30 +15,82 @@
     </string-array>
 
     <string-array name="teamA">
-        <item>Team A</item>
-        <item>Team B</item>
-        <item>Team C</item>
-        <item>Team D</item>
-        <item>Team E</item>
-        <item>Team F</item>
-        <item>Team G</item>
-        <item>Team H</item>
-        <item>Team I</item>
+        <item>Bruce McAleese</item>
+        <item>Reyne Leeson</item>
+        <item>Ruth Sutton</item>
+        <item>Brian Spence</item>
+        <item>Marc Vaillancourt</item>
+        <item>Jayne Raine</item>
+        <item>Jim Bremner</item>
+        <item>Mike Brown</item>
+        <item>Cathie Raine</item>
+        <item>Joe Dwyer</item>
+        <item>Pat Sweeney</item>
+        <item>Phil Tennant</item>
+        <item>Adam Primmer</item>
     </string-array>
 
+
+    <string-array name="Periods">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
+
+
     <string-array name="teamB">
-        <item>Team A</item>
-        <item>Team B</item>
-        <item>Team C</item>
-        <item>Team D</item>
-        <item>Team E</item>
-        <item>Team F</item>
-        <item>Team G</item>
-        <item>Team H</item>
-        <item>Team I</item>
+        <item>Rob Hachey</item>
+        <item>Rod Westerveld</item>
+        <item>Nicky Barr</item>
+        <item>Lisa Watkins</item>
+        <item>Joe Dwyer</item>
+        <item>Pat Sweeney</item>
+        <item>Phil Tennant</item>
+        <item>Adam Primmer</item>
+        <item>Dave Lelek</item>
+        <item>Brian Spence</item>
+        <item>Marc Vaillancourt</item>
+        <item>Jayne Raine</item>
+        <item>Jim Bremner</item>
+    </string-array>
+
+    <string-array name="DatePickerMonth">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="DatePickerYear">
+        <item>2011</item>
+        <item>2012</item>
+        <item>2013</item>
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
     </string-array>
 
     <string-array name="list">
+        <item>Goal Scored: Team A;By Player #34; Assists #12;No Assist;Period 2,00:36</item>
+        <item>Shot : Team A ; Period 3; 19:55</item>
+        <item>Notes: Ice Was softer than usual today; Period 3 ; 19:30</item>
+        <item>Injury: Team B;Player #67;Leg Broken;Period3: 18:45</item>
+        <item>Goal Scored: Team A;By Player #34; Assists #12;No Assist;Period 2,00:36</item>
+        <item>Shot : Team A ; Period 3; 19:55</item>
+        <item>Notes: Ice Was softer than usual today; Period 3 ; 19:30</item>
+        <item>Injury: Team B;Player #67;Leg Broken;Period3: 18:45</item>
+        <item>Goal Scored: Team A;By Player #34; Assists #12;No Assist;Period 2,00:36</item>
+        <item>Shot : Team A ; Period 3; 19:55</item>
+        <item>Notes: Ice Was softer than usual today; Period 3 ; 19:30</item>
+        <item>Injury: Team B;Player #67;Leg Broken;Period3: 18:45</item>
         <item>Goal Scored: Team A;By Player #34; Assists #12;No Assist;Period 2,00:36</item>
         <item>Shot : Team A ; Period 3; 19:55</item>
         <item>Notes: Ice Was softer than usual today; Period 3 ; 19:30</item>

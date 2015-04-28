@@ -102,6 +102,18 @@ public class Team {
         return managerSignedOff;
     }
 
+    public boolean hasNextPlayer(int index)
+    {
+        if(players.size()>index)
+            return true;
+        else
+            return false;
+    }
+    public Player getPlayer(int index){
+        return players.get(index);
+    }
+
+
     //public Goalie getCurrentGoalie()
     //{
     //    return currentGoalie;
@@ -126,20 +138,32 @@ public class Team {
     //    return foundPlayer;
     //}
 
-    //public PlayerNumber getPlayerByNumber(int number)
-    //{
-    //    Player foundPlayer = null;
+    public Player getPlayerByNumber(int number)
+    {
+        Player foundPlayer = null;
 
-    //    for (int i = 0; i < players.count; i++)
-    //    {
-    //        if (players[i].getNumber() == number)
-    //        {
-    //            foundPlayer = players[i];
-    //        }
-    //    }
-    //    return foundPlayer;
-    //}
+        for (int i = 0; i < players.size(); i++)
+        {
+            if (players.get(i).getNumber() == number)
+            {
+                foundPlayer = players.get(i);
+            }
+        }
+        return foundPlayer;
+    }
+    public Player getPlayerByID(int number)
+    {
+        Player foundPlayer = null;
 
+        for (int i = 0; i < players.size(); i++)
+        {
+            if (players.get(i).getID() == number)
+            {
+                foundPlayer = players.get(i);
+            }
+        }
+        return foundPlayer;
+    }
 
 
 
