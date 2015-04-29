@@ -42,6 +42,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     String homeAssist2 = "";
     String awayAssist = "";
     String awayAssist2 = "";
+    String homeGoalieNumber = "";
+    String awayGoalieNumber = "";
 
     boolean ticking = false;
 
@@ -169,6 +171,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
 
     }
+
+    // Code that is run as soon as the activity starts.
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -294,9 +298,20 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
+
+            // When the home team (left side of the screen) makes a shot, run the following:
             case R.id.btnShotA:
+
+                // Increment the shot counter.
                 homeshot++;
 
+                // Insert a save into the database and create a log object for it if a change is
+                // ever needed.
+                insertShot(awayGoalieId, hockey.icescore.OldClasses.Game.awayTeam.getTeamID(), period,
+                        gameId, txtTime.getText().toString(), awayGoalieNumber,
+                        hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
+
+                // Update the text field with the new number.
                 hometxt.setText(""+homeshot);
                 break;
             case R.id.btnShotB:
@@ -390,6 +405,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Method utilized to insert the shots/saves into the database.
+    public void insertShot(int goalieId, int defenseTeamId, int periodId, int gameId,
+                           String timestamp, String goalieNumber, String shotTeam)
+    {
+        GamePersonAction gpa = new GamePersonAction(goalieId, Constants.ACTION_SHOTSAVE_ID,
+                defenseTeamId, periodId, gameId, timestamp);
+
+        actionController.insertShotSave(gpa, goalieNumber, shotTeam);
     }
 
 }
