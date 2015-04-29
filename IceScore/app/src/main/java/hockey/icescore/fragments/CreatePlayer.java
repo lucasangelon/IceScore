@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hockey.icescore.R;
+import hockey.icescore.util.Fragment_Listener;
 
 /**
  * Created by Lucas Angelon on 21-Mar-15.
@@ -87,6 +88,8 @@ public class CreatePlayer extends Fragment
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

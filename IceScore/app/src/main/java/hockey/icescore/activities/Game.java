@@ -40,46 +40,98 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     int period = 1;
     private int playernum=0;
 
+    private enum Selected  {HOME,AWAY};
+    Selected selected = Selected.HOME;
     int awayasscount=0;
     int homeasscount=0;
     String awayAssists = "";
+    String homeAssists = "";
     int goalPlayerNum=0;
+
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
-        if(playernum == -1) {
-            awayasscount=2;
-            awayAssists+="No Assist";
-        }
+
+        switch(selected){
+            case HOME:
+                if(playernum == -1) {
+                    homeasscount=2;
+                    homeAssists+="No Assist";
+                }
 
 
 
-        if(awayasscount<2){
-            PlayerListLeft p1 = new PlayerListLeft();
-            p1.setListener(this);
-            p1.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
+                if(homeasscount<=2){
+                    if(homeasscount<2) {
+                        PlayerListLeft p1 = new PlayerListLeft();
+                        p1.setListener(this);
+                        p1.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
 
-            android.app.FragmentManager manager1=getFragmentManager();
-            android.app.FragmentTransaction transaction1=manager1.beginTransaction();
-            transaction1.add(android.R.id.content, p1, "right frag");
+                        android.app.FragmentManager manager1 = getFragmentManager();
+                        android.app.FragmentTransaction transaction1 = manager1.beginTransaction();
+                        transaction1.add(android.R.id.content, p1, "left frag");
 
-            transaction1.commit();
-            p1.isAssist(true);
-            if(awayasscount>0){
-                awayAssists+=""+playernum+", ";
+                        transaction1.commit();
+                        p1.isAssist(true);
+                    }
+                    if(homeasscount>0){
+                        homeAssists+=""+playernum+", ";
 
-            } else {
-                goalPlayerNum=playernum;
+                    } else {
+                        goalPlayerNum=playernum;
+                    }
+
+                    homeasscount++;
+                } if(homeasscount==3){
+                Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
+                //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
+                toast.show();
+                homeasscount=0;
+                homeAssists="";
             }
+                break;
+            case AWAY:
+                if(playernum == -1) {
+                    awayasscount=2;
+                    awayAssists+="No Assist";
+                }
 
-            awayasscount++;
-        }else{
-            Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
-            //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
-            Toast toast = Toast.makeText(this, playernum+", Period: "+goal.period+", assisted by "+awayAssists, Toast.LENGTH_SHORT);
-            toast.show();
-            awayasscount=0;
-            awayAssists="";
+
+
+                if(awayasscount<=2){
+                    if(awayasscount<2) {
+                        PlayerListRight p1 = new PlayerListRight();
+                        p1.setListener(this);
+                        p1.setTeam(hockey.icescore.OldClasses.Game.awayTeam);
+
+                        android.app.FragmentManager manager1 = getFragmentManager();
+                        android.app.FragmentTransaction transaction1 = manager1.beginTransaction();
+                        transaction1.add(android.R.id.content, p1, "right frag");
+
+                        transaction1.commit();
+                        p1.isAssist(true);
+                    }
+                    if(awayasscount>0){
+                        awayAssists+=""+playernum+", ";
+
+                    } else {
+                        goalPlayerNum=playernum;
+                    }
+
+                    awayasscount++;
+                } if(awayasscount==3){
+                Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
+                //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+awayAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
+                toast.show();
+                awayasscount=0;
+                awayAssists="";
+            }
+                break;
+
         }
+
+
 
     }
     @Override
@@ -225,7 +277,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 android.app.FragmentTransaction transaction=manager.beginTransaction();
                 transaction.add(android.R.id.content, p, "left frag");
                 transaction.commit();
-                homeasscount++;
+                selected = Selected.HOME;
                 break;
             case R.id.btnGoalB:
                 PlayerListRight p1 = new PlayerListRight();
@@ -236,7 +288,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 transaction1.add(android.R.id.content, p1, "right frag");
 
                 transaction1.commit();
-                awayasscount++;
+                selected = Selected.AWAY;
                 break;
         }
     }

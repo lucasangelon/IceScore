@@ -6,11 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import hockey.icescore.R;
+import hockey.icescore.util.Fragment_Listener;
 
 /**
  * Created by Lucas Angelon on 21-Mar-15.
  */
-public class AddTeam extends ActionBarActivity
+public class AddTeam extends ActionBarActivity implements Fragment_Listener
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +37,10 @@ public class AddTeam extends ActionBarActivity
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void buttonClicked(String val) {
+
     }
 }

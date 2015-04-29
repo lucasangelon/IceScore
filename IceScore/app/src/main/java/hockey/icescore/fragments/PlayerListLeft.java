@@ -73,9 +73,9 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
         b14 = (Button) rootView.findViewById(R.id.b14);
         b15 = (Button) rootView.findViewById(R.id.b15);
         b16 = (Button) rootView.findViewById(R.id.b16);
-        if(!assist)
-        b16.setVisibility(Button.INVISIBLE);
-
+        if(!assist) {
+            b16.setVisibility(Button.INVISIBLE);
+        }
 
         Button[] buttons = {b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15};
 
@@ -117,11 +117,9 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
 
     }
 
-    public void setTeam(Team t){
-
-        team = t;
-
-
+    public void setTeam(Team t)
+    {
+        this.team = t;
     }
 
     private String getNum(int id){
