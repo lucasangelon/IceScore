@@ -146,7 +146,7 @@ public class ActionController
         }
     }
 
-    // Method to insert Penalties and Injuries - Lucas
+    // Method to insert Goals - Lucas
     public synchronized Log insertGoal(GamePersonAction gpa, GamePersonActionGoal gpag,
                                        int playerNumber, String teamName, String assistNumber,
                                        String assist2Number)

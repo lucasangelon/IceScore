@@ -17,36 +17,56 @@ import android.widget.Toast;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
-import hockey.icescore.OldClasses.Goal;
+import hockey.icescore.OldClasses.*;
 import hockey.icescore.R;
+import hockey.icescore.controllers.ActionController;
 import hockey.icescore.fragments.PlayerListLeft;
 import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.models.GamePersonAction;
+import hockey.icescore.models.GamePersonActionGoal;
+import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 
 // everything done by jack
 //dont edit
 public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener
 {
-     Context gameContext = this;
-    String txt = "whoop whoop";
+    Context gameContext = this;
+    ActionController actionController;
     static Timer t;
+
+    String txt = "whoop whoop";
+    String awayAssists = "";
+    String homeAssists = "";
+    String homeAssist = "";
+    String homeAssist2 = "";
+    String awayAssist = "";
+    String awayAssist2 = "";
+
     boolean ticking = false;
+
     TextView txtTime;
     TextView txtPeriod;
-    private int homeshot,awayshot = 0;
     TextView hometxt;
     TextView awaytxt;
+
+    private int homeshot,awayshot = 0;
+    private int playernum=0;
     int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
     int period = 1;
-    private int playernum=0;
+    int awayasscount=0;
+    int homeasscount=0;
+    int goalPlayerNum=0;
+    int gameId = 1;
+    int homeGoalieId = 0;
+    int awayGoalieId = 0;
+    int homeAssistId = 0;
+    int homeAssistId2 = 0;
+    int awayAssistId = 0;
+    int awayAssistId2 = 0;
 
     private enum Selected  {HOME,AWAY};
     Selected selected = Selected.HOME;
-    int awayasscount=0;
-    int homeasscount=0;
-    String awayAssists = "";
-    String homeAssists = "";
-    int goalPlayerNum=0;
 
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
@@ -83,7 +103,22 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     homeasscount++;
                 } if(homeasscount==3){
                 Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
-                //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+
+                // Creating the GamePersonAction and GamePersonActionGoal model instances
+                // to send the data properly to the controller to add the rows into the database
+                // Lucas
+                GamePersonAction gpa = new GamePersonAction(
+                        hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
+                        Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
+                        period, hockey.icescore.OldClasses.Game.gameID, txtTime.getText().toString());
+
+                GamePersonActionGoal gpag = new GamePersonActionGoal(awayGoalieId, homeAssistId,
+                        homeAssistId2);
+
+                actionController.insertGoal(gpa, gpag, playernum,
+                        hockey.icescore.OldClasses.Game.homeTeam.getTeamName(), homeAssist,
+                        homeAssist2);
+
                 Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
                 toast.show();
                 homeasscount=0;
@@ -137,12 +172,11 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Initializing the controller for the database interaction.
+        actionController = new ActionController(gameContext);
 
         Button btnMenuOthers = (Button) findViewById(R.id.btnOthers);
         btnMenuOthers.setOnClickListener(this);
