@@ -10,10 +10,10 @@ public class Team {
     protected String image;
     protected long divisionId;
 
-   public Team()
-   {
+    public Team()
+    {
 
-   }
+    }
 
     public Team(String name, String image, long dId)
     {
