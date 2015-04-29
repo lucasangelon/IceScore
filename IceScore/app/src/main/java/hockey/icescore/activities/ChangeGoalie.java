@@ -12,7 +12,7 @@ import android.widget.ListView;
 import hockey.icescore.R;
 
 /**
- * Created by Lucas Angelon on 20-Mar-15.
+ * Created by Suruchi 22-Mar-15.
  */
 public class ChangeGoalie extends ActionBarActivity
 {
