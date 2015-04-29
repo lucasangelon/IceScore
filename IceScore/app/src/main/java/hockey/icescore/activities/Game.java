@@ -70,14 +70,23 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     private enum Selected  {HOME,AWAY};
     Selected selected = Selected.HOME;
 
+
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
 
         switch(selected){
             case HOME:
-                if(playernum == -1) {
+                if(playernum == 0) {
+                    switch(homeasscount){
+                        case(1):
+                            homeAssist="No Assist";
+                            homeAssist2="";
+                            break;
+                        case(2):
+                            homeAssist2="No Assist";
+                            break;
+                    }
                     homeasscount=2;
-                    homeAssists+="No Assist";
                 }
 
 
@@ -96,7 +105,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                         p1.isAssist(true);
                     }
                     if(homeasscount>0){
-                        homeAssists+=""+playernum+", ";
+                        switch(homeasscount){
+                            case(1):
+                                homeAssist=""+playernum;
+                                break;
+                            case(2):
+                                homeAssist2=""+playernum;
+                                break;
+                        }
 
                     } else {
                         goalPlayerNum=playernum;
@@ -109,6 +125,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 // Creating the GamePersonAction and GamePersonActionGoal model instances
                 // to send the data properly to the controller to add the rows into the database
                 // Lucas
+
+                /*
                 GamePersonAction gpa = new GamePersonAction(
                         hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
                         Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
@@ -120,17 +138,25 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 actionController.insertGoal(gpa, gpag, playernum,
                         hockey.icescore.OldClasses.Game.homeTeam.getTeamName(), homeAssist,
                         homeAssist2);
-
-                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
+*/
+                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssist+", "+homeAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 homeasscount=0;
                 homeAssists="";
             }
                 break;
             case AWAY:
-                if(playernum == -1) {
+                if(playernum == 0) {
+                    switch(awayasscount){
+                        case(1):
+                            awayAssist="No Assist";
+                            awayAssist2="";
+                            break;
+                        case(2):
+                            awayAssist2="No Assist";
+                            break;
+                    }
                     awayasscount=2;
-                    awayAssists+="No Assist";
                 }
 
 
@@ -149,7 +175,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                         p1.isAssist(true);
                     }
                     if(awayasscount>0){
-                        awayAssists+=""+playernum+", ";
+                        switch(awayasscount){
+                            case(1):
+                                awayAssist=""+playernum;
+                                break;
+                            case(2):
+                                awayAssist2=""+playernum;
+                                break;
+                        }
 
                     } else {
                         goalPlayerNum=playernum;

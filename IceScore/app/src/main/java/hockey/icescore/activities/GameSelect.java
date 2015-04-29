@@ -74,14 +74,17 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
 
    //jack
         //this is temporary
+        Game.setGameID(1);
         Game.setHomeTeam(1,"Hawks",5,"John doe");
         Game.homeTeam.addPlayer(1,"Jack kitchener",69);
         Game.homeTeam.addPlayer(2,"Josh Loyd",13);
         Game.homeTeam.addPlayer(3,"Nickola Kerr",22);
         Game.homeTeam.addPlayer(5,"no one",42);
+        Game.homeTeam.addPlayer(0,"No Assist",0);
         Game.setAwayTeam(2,"Sharks",3,"uncle sam");
         Game.awayTeam.addPlayer(1,"lucas",13);
         Game.awayTeam.addPlayer(1,"test data",7);
+        Game.awayTeam.addPlayer(0,"No Assist",0);
 
 
         //List view adapter form loding the games
