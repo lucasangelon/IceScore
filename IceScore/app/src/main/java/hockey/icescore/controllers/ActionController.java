@@ -25,7 +25,8 @@ public class ActionController
     }
 
     // Method to insert Shots/Saves - Lucas
-    public synchronized String insertShotSave(GamePersonAction gpa)
+    public synchronized Log insertShotSave(GamePersonAction gpa, String playerNumber,
+                                           String shotTeam)
     {
         long returnId = -1;
 
@@ -55,7 +56,7 @@ public class ActionController
         {
             // Return an error string.
             sqlException.printStackTrace();
-            return "ERROR 1: Unable to insert shot into database.";
+            return new Log();
         }
         finally
         {
@@ -64,8 +65,11 @@ public class ActionController
             sqlDb.close();
         }
 
-        // Successfully inserted notice.
-        return "Shot successfully saved!";
+        // Generate a Log containing the information about the action for the game log.
+        Log.Save l = new Log(). new Save(returnId, playerNumber, shotTeam, gpa.getTimestamp());
+
+        // Return the Save Log object.
+        return l;
     }
 
     // Method to insert Penalties and Injuries - Lucas

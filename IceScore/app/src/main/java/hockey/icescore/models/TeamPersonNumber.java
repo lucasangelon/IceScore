@@ -10,12 +10,12 @@ public class TeamPersonNumber {
     protected long personId;
     protected String number;
 
-    TeamPersonNumber()
+    public TeamPersonNumber()
     {
 
     }
 
-    TeamPersonNumber(long tId, long pId, String number)
+    public TeamPersonNumber(long tId, long pId, String number)
     {
         this.teamId = tId;
         this.personId = pId;
