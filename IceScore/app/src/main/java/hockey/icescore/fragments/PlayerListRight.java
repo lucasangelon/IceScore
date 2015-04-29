@@ -191,7 +191,8 @@ public void onClick(View v) {
         getActivity().getFragmentManager().beginTransaction().remove(this).commit();
         break;
             case R.id.b16:
-
+                g.buttonClicked("-1");
+                getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
 
         }

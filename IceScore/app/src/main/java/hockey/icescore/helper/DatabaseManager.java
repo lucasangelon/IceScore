@@ -25,7 +25,7 @@ public class DatabaseManager extends SQLiteOpenHelper
         return dbManager;
     }
 
-    private DatabaseManager (Context con)
+    public DatabaseManager (Context con)
     {
         super(con, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
     }

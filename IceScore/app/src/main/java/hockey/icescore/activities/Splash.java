@@ -1,9 +1,16 @@
 package hockey.icescore.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import hockey.icescore.R;
+import hockey.icescore.helper.DatabaseManager;
+import hockey.icescore.util.Constants;
 
 import hockey.icescore.R;
 
@@ -14,11 +21,16 @@ public class Splash extends Activity
 {
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
+	Context co;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        co = getApplicationContext();
+        Thread t = new Thread(new UIHack());
+        t.start();
 
         new Handler().postDelayed(new Runnable() {
 
@@ -38,5 +50,17 @@ public class Splash extends Activity
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+
+    private class UIHack implements Runnable{
+
+
+
+
+        @Override
+        public void run() {
+            DatabaseManager db = new DatabaseManager(co);
+        }
     }
 }

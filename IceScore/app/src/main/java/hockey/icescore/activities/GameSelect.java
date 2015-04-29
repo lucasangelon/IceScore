@@ -22,7 +22,9 @@ import hockey.icescore.helper.MyCustomBaseAdapter;
 import hockey.icescore.R;
 import hockey.icescore.helper.SearchResults;
 
-
+/**
+ * Created by Suruchi 28-Mar-15.
+ */
 public class GameSelect extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     /** Called when the activity is first created. */
