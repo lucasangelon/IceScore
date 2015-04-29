@@ -554,4 +554,241 @@ public class DatabaseSeeder
 
         return "Successfully seeded Games!";
     }
+
+    public String seedGamePeriod()
+    {
+        List<GamePeriod> gPeriods = new ArrayList<>();
+
+        gPeriods.add(new GamePeriod(1, 1, "06-MAY-2015 14:00:00", "20"));
+        gPeriods.add(new GamePeriod(1, 2, "06-MAY-2015 14:25:00", "20"));
+        gPeriods.add(new GamePeriod(1, 3, "06-MAY-2015 14:50:00", "20"));
+        gPeriods.add(new GamePeriod(1, 4, "06-MAY-2015 15:10:00", "10"));
+        gPeriods.add(new GamePeriod(1, 5, "06-MAY-2015 15:30:00", "20"));
+        gPeriods.add(new GamePeriod(2, 1, "18-MAY-2015 14:00:00", "20"));
+        gPeriods.add(new GamePeriod(2, 2, "18-MAY-2015 14:25:00", "20"));
+        gPeriods.add(new GamePeriod(2, 3, "18-MAY-2015 14:50:00", "20"));
+        gPeriods.add(new GamePeriod(2, 4, "18-MAY-2015 15:10:00", "10"));
+        gPeriods.add(new GamePeriod(2, 5, "18-MAY-2015 15:30:00", "20"));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (GamePeriod gp : gPeriods)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FK_GAME_ID, gp.getGameId());
+                values.put(Constants.FK_PERIOD_ID, gp.getPeriodId());
+                values.put(Constants.FIELD_TIMESTAMP, gp.getTimestamp());
+                values.put(Constants.FIELD_PERIOD_LENGTH, gp.getPeriodLength());
+
+                writeDb.insert(Constants.TABLE_GAME_PERIOD, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 16: Unable to seed Game Period.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Game Periods!";
+    }
+
+    public String seedGameTeamGoalie()
+    {
+        List<GameTeamGoalie> gtgs = new ArrayList<>();
+
+        gtgs.add(new GameTeamGoalie(1, 1, 3, "06-MAY-2015 14:00:00"));
+        gtgs.add(new GameTeamGoalie(4, 1, 1, "06-MAY-2015 14:00:00"));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (GameTeamGoalie gtg : gtgs)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FK_PERSON_ID, gtg.getPersonId());
+                values.put(Constants.FK_GAME_ID, gtg.getGameId());
+                values.put(Constants.FK_TEAM_ID, gtg.getTeamId());
+                values.put(Constants.FIELD_TIMESTAMP, gtg.getTimestamp());
+
+                writeDb.insert(Constants.TABLE_GAME_TEAM_GOALIE, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 17: Unable to seed Game Team Goalie.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Game Team Goalies!";
+    }
+
+    public String seedAction()
+    {
+        List<Action> actions = new ArrayList<>();
+
+        actions.add(new Action("Save"));
+        actions.add(new Action("Goal"));
+        actions.add(new Action("Penalty"));
+        actions.add(new Action("Injury"));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (Action action : actions)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FIELD_NAME, action.getName());
+
+                writeDb.insert(Constants.TABLE_ACTION, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 18: Unable to seed Action.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Actions!";
+    }
+
+    public String seedCategory()
+    {
+        List<Category> categories = new ArrayList<>();
+
+        categories.add(new Category("Minor", "2"));
+        categories.add(new Category("Double Minor", "4"));
+        categories.add(new Category("Major", "5"));
+        categories.add(new Category("Misconduct", "10"));
+        categories.add(new Category("Game Misconduct", "5"));
+        categories.add(new Category("Match", "5"));
+        categories.add(new Category("Penalty Shot", "0"));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (Category cat : categories)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FIELD_NAME, cat.getName());
+                values.put(Constants.FIELD_DEFAULT_TIME, cat.getDefaultTime());
+
+                writeDb.insert(Constants.TABLE_CATEGORY, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 19: Unable to seed Category.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Categories.";
+    }
+
+    public String seedPenalty()
+    {
+        List<Penalty> penalties = new ArrayList<>();
+
+        penalties.add(new Penalty(1, "Tripping", ""));
+        penalties.add(new Penalty(3, "Spearing", ""));
+        penalties.add(new Penalty(3, "Butt-Ending", ""));
+        penalties.add(new Penalty(3, "Fighting", ""));
+        penalties.add(new Penalty(4, "Swearing", ""));
+        penalties.add(new Penalty(5, "Intentional Boarding", ""));
+        penalties.add(new Penalty(6, "Deliberate Injury", ""));
+        penalties.add(new Penalty(7, "Missed Score Opportunity", ""));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (Penalty p : penalties)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FK_CATEGORY_ID, p.getCategoryId());
+                values.put(Constants.FIELD_NAME, p.getName());
+                values.put(Constants.FIELD_NOTES, p.getNotes());
+
+                writeDb.insert(Constants.TABLE_PENALTY, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 20: Unable to seed Penalty.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Penalties.";
+    }
+
+    public String seedInjury()
+    {
+        List<Injury> injuries = new ArrayList<>();
+
+        injuries.add(new Injury("Laceration", ""));
+        injuries.add(new Injury("Concussion", ""));
+        injuries.add(new Injury("Broken Bone", ""));
+        injuries.add(new Injury("Hyperextension", ""));
+
+        SQLiteDatabase writeDb = dbManager.getWritableDatabase();
+        writeDb.beginTransaction();
+
+        try
+        {
+            for (Injury i : injuries)
+            {
+                ContentValues values = new ContentValues();
+                values.put(Constants.FIELD_NAME, i.getName());
+                values.put(Constants.FIELD_NOTES, i.getNotes());
+
+                writeDb.insert(Constants.TABLE_INJURY, null, values);
+            }
+
+            writeDb.setTransactionSuccessful();
+        }
+        catch (SQLiteException e)
+        {
+            return "ERROR 21: Unable to seed Injury.";
+        }
+        finally
+        {
+            writeDb.endTransaction();
+        }
+
+        return "Successfully seeded Injuries.";
+    }
 }

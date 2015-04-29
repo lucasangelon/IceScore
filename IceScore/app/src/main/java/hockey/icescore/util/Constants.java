@@ -63,6 +63,7 @@ public class Constants
     public static final String FIELD_SIGNATURE = "SIGNATURE";
     public static final String FIELD_NOTES = "NOTES";
     public static final String FIELD_DEFAULT_TIME = "DEFAULT_TIME";
+    public static final String FIELD_PERIOD_LENGTH = "PERIOD_LENGTH";
 
     // Foreign Key Titles.
     public static final String FK_IDENTIFIER_ID = "IDENTIFIER_ID";
@@ -177,10 +178,10 @@ public class Constants
                 TABLE_GAME_TEAM_GOALIE +
                 "("
                     + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                     + FK_PERSON_ID + " INTEGER NOT NULL, "
                     + FK_GAME_ID + " INTEGER NOT NULL, "
                     + FK_TEAM_ID + " INTEGER NOT NULL, "
+                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                         + "FOREIGN KEY (" + FK_PERSON_ID + ") "
                         + "REFERENCES " + TABLE_PERSON + "(" + FIELD_ID + "), "
                         + "FOREIGN KEY (" + FK_GAME_ID + ") "
@@ -244,10 +245,10 @@ public class Constants
         public static final String CREATE_TABLE_GAME_PERIOD = "CREATE TABLE " + TABLE_GAME_PERIOD +
                 "("
                     + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
                     + FK_GAME_ID + " INTEGER NOT NULL, "
                     + FK_PERIOD_ID + " INTEGER NOT NULL, "
-                    + FIELD_DEFAULT_TIME + " TEXT NOT NULL, "
+                    + FIELD_TIMESTAMP + " TEXT NOT NULL, "
+                    + FIELD_PERIOD_LENGTH + " TEXT NOT NULL, "
                         + "FOREIGN KEY (" + FK_GAME_ID + ") "
                         + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + "), "
                         + "FOREIGN KEY (" + FK_PERIOD_ID + ") "
