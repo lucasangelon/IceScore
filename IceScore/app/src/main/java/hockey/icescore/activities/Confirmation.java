@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import hockey.icescore.R;
 
 /**
  * Created by Lucas Angelon on 13-Mar-15.
  */
-public class Confirmation extends ActionBarActivity
+public class Confirmation extends ActionBarActivity implements View.OnClickListener
 {
 
     Spinner periodlen ;
@@ -23,6 +25,8 @@ public class Confirmation extends ActionBarActivity
         setContentView(R.layout.activity_confirmation);
         periodlen= (Spinner)findViewById(R.id.spnPeriodLength);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        findViewById(R.id.btnManagerSignA).setOnClickListener(this);
+        findViewById(R.id.btnManagerSignB).setOnClickListener(this);
     }
 
     @Override
@@ -50,5 +54,12 @@ public class Confirmation extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(this,"Check it",Toast.LENGTH_SHORT);
+        Intent intent = new Intent(this, CaptureSignature.class);
+        startActivityForResult(intent, 1);
     }
 }

@@ -25,4 +25,11 @@
     <string name="menu_next">Next</string>
     <string name="title_activity_penalty">Penalty</string>
 
+    <!-- Signature capture Junk -->
+    <string name="hello">Hello World, CaptureSignatureActivity!</string>
+    <string name="getSig">CaptureSignature</string>
+    <string name="external_dir">GetSignature</string>
+    <string name="action_settings1">Action Settings</string>
+    <string name="title_activity_capture_signature">CaptureSignature</string>
+
 </resources>
