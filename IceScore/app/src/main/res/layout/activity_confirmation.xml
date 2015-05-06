@@ -5,22 +5,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="50dp"
-        android:text="Sign Off / Confirm Game"
-        android:id="@+id/txtTitle"
-        android:textSize="72dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Team A"
         android:textSize="32dp"
         android:id="@+id/txtTeamA"
-        android:layout_below="@+id/txtTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
@@ -35,7 +23,6 @@
         android:id="@+id/btnManagerSignA"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/txtTitle"
         android:layout_toRightOf="@+id/txtTeamA"
         android:layout_toEndOf="@+id/txtTeamA" />
 
@@ -48,7 +35,8 @@
         android:layout_alignStart="@+id/txtTeamA"
         android:layout_alignRight="@+id/btnManagerSignA"
         android:layout_alignEnd="@+id/btnManagerSignA"
-        android:layout_below="@+id/btnManagerSignA" />
+        android:layout_below="@+id/btnManagerSignA"
+        android:entries="@array/teamA" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,18 +73,19 @@
         android:layout_alignStart="@+id/txtTeamB"
         android:layout_alignRight="@+id/btnManagerSignB"
         android:layout_alignEnd="@+id/btnManagerSignB"
-        android:layout_below="@+id/btnManagerSignB" />
+        android:layout_below="@+id/btnManagerSignB"
+        android:entries="@array/teamB" />
 
     <Spinner
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:id="@+id/spnReferee"
         android:prompt="@string/referee"
-        android:layout_alignTop="@+id/btnManagerSignA"
-        android:layout_marginTop="40dp"
         android:spinnerMode="dropdown"
-        android:layout_alignRight="@+id/txtTitle"
-        android:layout_alignEnd="@+id/txtTitle" />
+        android:layout_below="@+id/txtTeamA"
+        android:layout_alignLeft="@+id/spnLinesmanA"
+        android:layout_alignStart="@+id/spnLinesmanA"
+        android:entries="@array/teamA" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,22 +94,22 @@
         android:text="Referee"
         android:textSize="32dp"
         android:id="@+id/txtReferee"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignTop="@+id/txtTeamA"
-        android:layout_toLeftOf="@+id/spnReferee"
-        android:layout_toStartOf="@+id/spnReferee" />
+        android:layout_below="@+id/btnManagerSignA"
+        android:layout_alignLeft="@+id/txtPeriodLength"
+        android:layout_alignStart="@+id/txtPeriodLength" />
 
     <Spinner
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:id="@+id/spnLinesmanA"
         android:prompt="@string/linesmanA"
-        android:layout_below="@+id/spnReferee"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="20dp"
-        android:layout_alignRight="@+id/txtTitle"
-        android:layout_alignEnd="@+id/txtTitle" />
+        android:layout_marginRight="144dp"
+        android:layout_marginEnd="144dp"
+        android:layout_above="@+id/spnLinesmanB"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:entries="@array/teamA" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -129,22 +118,19 @@
         android:text="Linesman"
         android:textSize="32dp"
         android:id="@+id/txtLinesmanA"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:layout_alignTop="@+id/spnLinesmanA"
-        android:layout_toLeftOf="@+id/spnLinesmanA"
-        android:layout_toStartOf="@+id/spnLinesmanA" />
+        android:layout_alignLeft="@+id/txtReferee"
+        android:layout_alignStart="@+id/txtReferee" />
 
     <Spinner
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:id="@+id/spnLinesmanB"
         android:prompt="@string/linesmanB"
-        android:layout_below="@+id/spnLinesmanA"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="20dp"
-        android:layout_alignRight="@+id/txtTitle"
-        android:layout_alignEnd="@+id/txtTitle" />
+        android:layout_alignBottom="@+id/lstTeamA"
+        android:layout_alignLeft="@+id/spnLinesmanA"
+        android:layout_alignStart="@+id/spnLinesmanA" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -153,22 +139,19 @@
         android:text="Linesman"
         android:textSize="32dp"
         android:id="@+id/txtLinesmanB"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:layout_alignTop="@+id/spnLinesmanB"
-        android:layout_toLeftOf="@+id/spnLinesmanB"
-        android:layout_toStartOf="@+id/spnLinesmanB" />
+        android:layout_alignLeft="@+id/txtLinesmanA"
+        android:layout_alignStart="@+id/txtLinesmanA" />
 
     <Spinner
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:id="@+id/spnVenue"
-        android:prompt="@string/venue"
-        android:layout_below="@+id/spnLinesmanB"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="20dp"
-        android:layout_alignRight="@+id/txtTitle"
-        android:layout_alignEnd="@+id/txtTitle" />
+        android:layout_below="@+id/spnLinesmanB"
+        android:layout_alignLeft="@+id/spnLinesmanB"
+        android:layout_alignStart="@+id/spnLinesmanB"
+        android:entries="@string/venue" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -177,24 +160,21 @@
         android:text="Location"
         android:textSize="32dp"
         android:id="@+id/txtVenue"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignTop="@+id/spnVenue"
-        android:layout_toLeftOf="@+id/spnVenue"
-        android:layout_toStartOf="@+id/spnVenue" />
+        android:layout_alignTop="@+id/txtTeamB"
+        android:layout_alignLeft="@+id/txtLinesmanB"
+        android:layout_alignStart="@+id/txtLinesmanB" />
 
     <Spinner
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:id="@+id/spnPeriodLength"
         android:prompt="@string/period"
-        android:layout_below="@+id/spnVenue"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="20dp"
-        android:layout_alignRight="@+id/txtTitle"
-        android:layout_alignEnd="@+id/txtTitle"
         android:focusable="false"
-        android:entries="@array/Periods" />
+        android:entries="@array/Periods"
+        android:layout_alignTop="@+id/lstTeamB"
+        android:layout_alignLeft="@+id/spnVenue"
+        android:layout_alignStart="@+id/spnVenue" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -203,8 +183,6 @@
         android:text="Period Length"
         android:textSize="32dp"
         android:id="@+id/txtPeriodLength"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:layout_alignTop="@+id/spnPeriodLength"
         android:layout_toLeftOf="@+id/spnPeriodLength"
         android:layout_toStartOf="@+id/spnPeriodLength" />

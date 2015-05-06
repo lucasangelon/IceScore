@@ -35,13 +35,14 @@
         </activity>
         <activity
             android:name=".activities.MenuOthers"
-            android:parentActivityName=".activities.Game" >
+            android:parentActivityName=".activities.Game"
+            android:label="@string/app_name">
         </activity>
         <activity android:name=".activities.Result" >
         </activity>
-        <activity android:name=".activities.ChangeGoalie" >
+        <activity android:name=".activities.ChangeGoalie">
         </activity>
-        <activity android:name=".activities.GameLog" >
+        <activity android:name=".activities.GameLog">
         </activity>
         <activity android:name=".activities.Injury" >
         </activity>
