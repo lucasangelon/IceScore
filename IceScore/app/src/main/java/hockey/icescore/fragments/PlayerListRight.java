@@ -103,9 +103,11 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         if(!team.hasNextPlayer(counter)){
             break;
         }
-        String s = team.getPlayer(counter).getNumber()+"";
+        if(team.getPlayer(counter).getNumber()!=0) {
+            String s = team.getPlayer(counter).getNumber() + "";
 
-        b.setText(s);
+            b.setText(s);
+        }
         counter++;
     }
 
@@ -191,7 +193,7 @@ public void onClick(View v) {
         getActivity().getFragmentManager().beginTransaction().remove(this).commit();
         break;
             case R.id.b16:
-                g.buttonClicked("-1");
+                g.buttonClicked("0");
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
 

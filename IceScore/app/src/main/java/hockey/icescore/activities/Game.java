@@ -17,45 +17,76 @@ import android.widget.Toast;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
-import hockey.icescore.OldClasses.Goal;
+import hockey.icescore.OldClasses.*;
 import hockey.icescore.R;
+import hockey.icescore.controllers.ActionController;
 import hockey.icescore.fragments.PlayerListLeft;
 import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.models.GamePersonAction;
+import hockey.icescore.models.GamePersonActionGoal;
+import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 
 // everything done by jack
 //dont edit
 public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener
 {
-     Context gameContext = this;
-    String txt = "whoop whoop";
+    Context gameContext = this;
+    ActionController actionController;
     static Timer t;
+
+    String txt = "whoop whoop";
+    String awayAssists = "";
+    String homeAssists = "";
+    String homeAssist = "";
+    String homeAssist2 = "";
+    String awayAssist = "";
+    String awayAssist2 = "";
+    String homeGoalieNumber = "";
+    String awayGoalieNumber = "";
+
     boolean ticking = false;
+
     TextView txtTime;
     TextView txtPeriod;
-    private int homeshot,awayshot = 0;
     TextView hometxt;
     TextView awaytxt;
+
+    private int homeshot,awayshot = 0;
+    private int playernum=0;
     int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
     int period = 1;
-    private int playernum=0;
+    int awayasscount=0;
+    int homeasscount=0;
+    int goalPlayerNum=0;
+    int gameId = 1;
+    int homeGoalieId = 0;
+    int awayGoalieId = 0;
+    int homeAssistId = 0;
+    int homeAssistId2 = 0;
+    int awayAssistId = 0;
+    int awayAssistId2 = 0;
 
     private enum Selected  {HOME,AWAY};
     Selected selected = Selected.HOME;
-    int awayasscount=0;
-    int homeasscount=0;
-    String awayAssists = "";
-    String homeAssists = "";
-    int goalPlayerNum=0;
+
 
     public void setCurPlayer(String num){
         playernum=Integer.parseInt(num);
 
         switch(selected){
             case HOME:
-                if(playernum == -1) {
+                if(playernum == 0) {
+                    switch(homeasscount){
+                        case(1):
+                            homeAssist="No Assist";
+                            homeAssist2="";
+                            break;
+                        case(2):
+                            homeAssist2="No Assist";
+                            break;
+                    }
                     homeasscount=2;
-                    homeAssists+="No Assist";
                 }
 
 
@@ -74,7 +105,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                         p1.isAssist(true);
                     }
                     if(homeasscount>0){
-                        homeAssists+=""+playernum+", ";
+                        switch(homeasscount){
+                            case(1):
+                                homeAssist=""+playernum;
+                                break;
+                            case(2):
+                                homeAssist2=""+playernum;
+                                break;
+                        }
 
                     } else {
                         goalPlayerNum=playernum;
@@ -83,17 +121,42 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     homeasscount++;
                 } if(homeasscount==3){
                 Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
-                //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
-                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
+
+                // Creating the GamePersonAction and GamePersonActionGoal model instances
+                // to send the data properly to the controller to add the rows into the database
+                // Lucas
+
+                /*
+                GamePersonAction gpa = new GamePersonAction(
+                        hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
+                        Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
+                        period, hockey.icescore.OldClasses.Game.gameID, txtTime.getText().toString());
+
+                GamePersonActionGoal gpag = new GamePersonActionGoal(awayGoalieId, homeAssistId,
+                        homeAssistId2);
+
+                actionController.insertGoal(gpa, gpag, playernum,
+                        hockey.icescore.OldClasses.Game.homeTeam.getTeamName(), homeAssist,
+                        homeAssist2);
+*/
+                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssist+", "+homeAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 homeasscount=0;
                 homeAssists="";
             }
                 break;
             case AWAY:
-                if(playernum == -1) {
+                if(playernum == 0) {
+                    switch(awayasscount){
+                        case(1):
+                            awayAssist="No Assist";
+                            awayAssist2="";
+                            break;
+                        case(2):
+                            awayAssist2="No Assist";
+                            break;
+                    }
                     awayasscount=2;
-                    awayAssists+="No Assist";
                 }
 
 
@@ -112,7 +175,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                         p1.isAssist(true);
                     }
                     if(awayasscount>0){
-                        awayAssists+=""+playernum+", ";
+                        switch(awayasscount){
+                            case(1):
+                                awayAssist=""+playernum;
+                                break;
+                            case(2):
+                                awayAssist2=""+playernum;
+                                break;
+                        }
 
                     } else {
                         goalPlayerNum=playernum;
@@ -134,15 +204,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
 
     }
+
+    // Code that is run as soon as the activity starts.
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Initializing the controller for the database interaction.
+        actionController = new ActionController(gameContext);
 
         Button btnMenuOthers = (Button) findViewById(R.id.btnOthers);
         btnMenuOthers.setOnClickListener(this);
@@ -260,9 +331,20 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
+
+            // When the home team (left side of the screen) makes a shot, run the following:
             case R.id.btnShotA:
+
+                // Increment the shot counter.
                 homeshot++;
 
+                // Insert a save into the database and create a log object for it if a change is
+                // ever needed.
+                insertShot(awayGoalieId, hockey.icescore.OldClasses.Game.awayTeam.getTeamID(), period,
+                        gameId, txtTime.getText().toString(), awayGoalieNumber,
+                        hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
+
+                // Update the text field with the new number.
                 hometxt.setText(""+homeshot);
                 break;
             case R.id.btnShotB:
@@ -356,6 +438,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Method utilized to insert the shots/saves into the database.
+    public void insertShot(int goalieId, int defenseTeamId, int periodId, int gameId,
+                           String timestamp, String goalieNumber, String shotTeam)
+    {
+        GamePersonAction gpa = new GamePersonAction(goalieId, Constants.ACTION_SHOTSAVE_ID,
+                defenseTeamId, periodId, gameId, timestamp);
+
+        actionController.insertShotSave(gpa, goalieNumber, shotTeam);
     }
 
 }

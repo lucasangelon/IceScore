@@ -187,7 +187,7 @@ public class Constants
                         + "FOREIGN KEY (" + FK_GAME_ID + ") "
                         + "REFERENCES " + TABLE_GAME + "(" + FIELD_ID + "), "
                         + "FOREIGN KEY (" + FK_TEAM_ID + ") "
-                        + "REFERENCES " + TABLE_TEAM + ")" +
+                        + "REFERENCES " + TABLE_TEAM  +
                 ")";
 
         // Pink Database Section - Lucas
@@ -286,7 +286,7 @@ public class Constants
 
         public static final String CREATE_TABLE_CATEGORY = "CREATE TABLE " + TABLE_CATEGORY +
                 "("
-                + FIELD_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + FIELD_NAME + " TEXT NOT NULL, "
                 + FIELD_DEFAULT_TIME + " TEXT NOT NULL" +
                 ")";

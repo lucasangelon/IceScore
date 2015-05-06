@@ -35,15 +35,24 @@ public class SetupTeam extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_next)
+        switch (id)
         {
-            Intent confirmationScreen = new Intent(this, Confirmation.class);
-            startActivity(confirmationScreen);
-            return true;
+            case R.id.home:
+                this.finish();
+                return true;
+
+            case R.id.action_next:
+                Intent confirmationScreen = new Intent(this, Confirmation.class);
+                startActivity(confirmationScreen);
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);
+    }
+   @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
