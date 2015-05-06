@@ -20,10 +20,12 @@ import java.text.DecimalFormat;
 import hockey.icescore.OldClasses.*;
 import hockey.icescore.R;
 import hockey.icescore.controllers.ActionController;
+import hockey.icescore.controllers.TimerController;
 import hockey.icescore.fragments.PlayerListLeft;
 import hockey.icescore.fragments.PlayerListRight;
 import hockey.icescore.models.GamePersonAction;
 import hockey.icescore.models.GamePersonActionGoal;
+import hockey.icescore.models.Timeout;
 import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 
@@ -33,6 +35,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 {
     Context gameContext = this;
     ActionController actionController;
+    TimerController timerController;
     static Timer t;
 
     String txt = "whoop whoop";
@@ -46,6 +49,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     String awayGoalieNumber = "";
 
     boolean ticking = false;
+    boolean homeTicking = false;
+    boolean awayTicking = false;
 
     TextView txtTime;
     TextView txtPeriod;
@@ -214,6 +219,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
         // Initializing the controller for the database interaction.
         actionController = new ActionController(gameContext);
+        timerController = new TimerController(gameContext);
 
         Button btnMenuOthers = (Button) findViewById(R.id.btnOthers);
         btnMenuOthers.setOnClickListener(this);
@@ -229,6 +235,12 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
         Button btnShotB = (Button) findViewById(R.id.btnShotB);
         btnShotB.setOnClickListener(this);
+
+        Button btnTimeoutA = (Button) findViewById(R.id.btnTimeoutA);
+        btnTimeoutA.setOnClickListener(this);
+
+        Button btnTimeoutB = (Button) findViewById(R.id.btnTimeoutB);
+        btnTimeoutB.setOnClickListener(this);
 
         awaytxt = (TextView)findViewById(R.id.txtShotB);
         hometxt = (TextView)findViewById(R.id.txtShotA);
@@ -311,6 +323,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
             }
 
             setText();
+            //hockey.icescore.OldClasses.Game.gameTime = txt;
         }
 
         @Override
@@ -327,10 +340,13 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     {
         switch (v.getId()) //Jack
         {
+            // When the button others is clicked, send the user to the others menu activity.
             case R.id.btnOthers:
+
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
+
 
             // When the home team (left side of the screen) makes a shot, run the following:
             case R.id.btnShotA:
@@ -345,36 +361,117 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                         hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
 
                 // Update the text field with the new number.
-                hometxt.setText(""+homeshot);
+                hometxt.setText("" + homeshot);
                 break;
+
+
+            // When the away team (right side of the screen) makes a shot, run the following:
             case R.id.btnShotB:
+
+                // Increment the shot counter.
                 awayshot++;
-                awaytxt.setText(""+awayshot);
+
+                // Insert a save into the database and create a log object for it if a change is
+                // ever needed.
+                insertShot(homeGoalieId, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(), period,
+                        gameId, txtTime.getText().toString(), homeGoalieNumber,
+                        hockey.icescore.OldClasses.Game.homeTeam.getTeamName());
+
+                // Update the text field with the new number.
+                awaytxt.setText("" + awayshot);
                 break;
+
+
+            // When the home team scores a goal, run the following:
             case R.id.btnGoalA:
+
                 PlayerListLeft p = new PlayerListLeft();
                 p.setListener(this);
                 p.setTeam(hockey.icescore.OldClasses.Game.homeTeam);
-                android.app.FragmentManager manager=getFragmentManager();
-                android.app.FragmentTransaction transaction=manager.beginTransaction();
+                android.app.FragmentManager manager = getFragmentManager();
+                android.app.FragmentTransaction transaction = manager.beginTransaction();
                 transaction.add(android.R.id.content, p, "left frag");
                 transaction.commit();
                 selected = Selected.HOME;
                 break;
+
+
+            // When the away team scores a goal, run the following:
             case R.id.btnGoalB:
+
                 PlayerListRight p1 = new PlayerListRight();
                 p1.setListener(this);
                 p1.setTeam(hockey.icescore.OldClasses.Game.awayTeam);
-                android.app.FragmentManager manager1=getFragmentManager();
-                android.app.FragmentTransaction transaction1=manager1.beginTransaction();
+                android.app.FragmentManager manager1 = getFragmentManager();
+                android.app.FragmentTransaction transaction1 = manager1.beginTransaction();
                 transaction1.add(android.R.id.content, p1, "right frag");
 
                 transaction1.commit();
                 selected = Selected.AWAY;
                 break;
+
+
+            // When the home team requires a timeout, run the following:
+            case R.id.btnTimeoutA:
+
+                // If a timeout has already started, restart the usual timer and finish the timeout.
+                if (homeTicking & !awayTicking)
+                {
+                    t.start();
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    homeTicking = false;
+                }
+
+                // Check if there are no other timeouts running.
+                else if (!awayTicking & !homeTicking)
+                {
+
+                    // Stop the timer and change the color to red for the user to see it has stopped.
+                    t.stop();
+                    setTextColor();
+                    homeTicking = true;
+
+                    // Insert a timeout into the database.
+                    insertTimeout(hockey.icescore.OldClasses.Game.homeTeam.getTeamID(), gameId,
+                            txtTime.getText().toString(),
+                            hockey.icescore.OldClasses.Game.homeTeam.getTeamName());
+                }
+
+                break;
+
+
+            // When the home team requires a timeout, run the following:
+            case R.id.btnTimeoutB:
+
+                // If a timeout has already started, restart the usual timer and finish the timeout.
+                if (awayTicking & !homeTicking)
+                {
+                    t.start();
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    awayTicking = false;
+                }
+
+                // Check if there are no other timeouts running.
+                else if (!awayTicking & !homeTicking)
+                {
+
+                    // Stop the timer and change the color to red for the user to see it has stopped.
+                    t.stop();
+                    setTextColor();
+                    awayTicking = true;
+
+                    // Insert a timeout into the database.
+                    insertTimeout(hockey.icescore.OldClasses.Game.awayTeam.getTeamID(), gameId,
+                            txtTime.getText().toString(),
+                            hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
+                }
+
+                break;
+
         }
     }
 
+    // Properties for the timer section (periods, text and color).
     protected void setPeriod(){
         updatePeriod.obtainMessage(1987).sendToTarget();
     }
@@ -450,4 +547,11 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         actionController.insertShotSave(gpa, goalieNumber, shotTeam);
     }
 
+    // Method utilized to insert timeouts into the database.
+    public void insertTimeout(int teamId, int gameId, String timestamp, String teamName)
+    {
+        Timeout t = new Timeout(teamId, gameId, timestamp);
+
+        timerController.timeout(t, teamName);
+    }
 }

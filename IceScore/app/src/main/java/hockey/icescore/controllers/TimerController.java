@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 
 import hockey.icescore.helper.DatabaseManager;
 import hockey.icescore.models.GamePeriod;
+import hockey.icescore.models.Log;
 import hockey.icescore.models.Timeout;
 import hockey.icescore.util.Constants;
 
@@ -24,10 +25,12 @@ public class TimerController {
         this.context = context;
         dbManager = DatabaseManager.getInstance(context);
     }
+
     // method to insert a Timeout
-    public String timeout(Timeout to, String teamName)
+    public Log timeout(Timeout to, String teamName)
     {
         long returnId = -1;
+
         // Retrieve the writable database and start a transaction.
         SQLiteDatabase sqlDb = dbManager.getWritableDatabase();
         sqlDb.beginTransaction();
@@ -51,7 +54,7 @@ public class TimerController {
         {
             // Error message.
             sqlException.printStackTrace();
-            return "ERROR 4: Unable to insert Timeout into database.";
+            return new Log();
         }
         finally
         {
@@ -61,7 +64,8 @@ public class TimerController {
         }
 
         //Succesfully inserted notice
-        return to.getTimestamp() + " Timeout called by " + teamName;
+        Log.Timeout l = new Log(). new Timeout(returnId, teamName, to.getTimestamp());
+        return l;
     }
 
 

@@ -1,6 +1,5 @@
 package hockey.icescore.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -36,14 +35,7 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        switch (id)
-        {
-            case android.R.id.home:
-                this.finish();
-                return true;
 
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -51,5 +43,4 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener
     public void buttonClicked(String val) {
 
     }
-
 }

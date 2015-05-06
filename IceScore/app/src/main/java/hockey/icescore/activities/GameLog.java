@@ -2,12 +2,9 @@ package hockey.icescore.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import java.lang.reflect.Method;
@@ -47,16 +44,25 @@ public class GameLog extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gamelog);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+		
+		// Asking for the default ActionBar element that our platform supports.
+
+		 
+        // Screen handling while hiding ActionBar icon.
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+ 
+        // Screen handling while hiding Actionbar title.
+        //getSupportActionBar().setDisplayShowTitleEnabled(true);
  
         // Creating ActionBar tabs.
         getSupportActionBar().setNavigationMode(getSupportActionBar().NAVIGATION_MODE_TABS);
         getSupportActionBar().setDisplayOptions(getSupportActionBar().DISPLAY_SHOW_CUSTOM | getSupportActionBar().DISPLAY_SHOW_HOME);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Screen handling show Actionbar title.
-        getSupportActionBar().setTitle("Game Log");
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         // Setting custom tab icons.
         allTab = getSupportActionBar().newTab().setText("All");
@@ -89,18 +95,8 @@ public class GameLog extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_general, menu);
+        //getMenuInflater().inflate(R.menu.menu_general, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
