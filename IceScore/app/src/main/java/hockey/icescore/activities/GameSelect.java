@@ -34,6 +34,8 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_select);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Screen handling show Actionbar title.
+        getSupportActionBar().setTitle("Select Game");
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         Calendar cal = Calendar.getInstance();
@@ -211,11 +213,16 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_next)
+        switch (id)
         {
-            Intent setupTeamScreen = new Intent(this, SetupTeam.class);
-            startActivity(setupTeamScreen);
-            return true;
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.action_next:
+                Intent setupTeamScreen = new Intent(this, SetupTeam.class);
+                startActivity(setupTeamScreen);
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);

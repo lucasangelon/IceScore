@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import hockey.icescore.R;
@@ -22,6 +23,18 @@ public class Confirmation extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
         periodlen= (Spinner)findViewById(R.id.spnPeriodLength);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Periods, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        // Apply the adapter to the spinner
+        periodlen.setAdapter(adapter);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

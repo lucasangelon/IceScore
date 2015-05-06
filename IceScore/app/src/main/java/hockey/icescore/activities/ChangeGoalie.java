@@ -24,6 +24,8 @@ public class ChangeGoalie extends ActionBarActivity
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Screen handling show Actionbar title.
+        getSupportActionBar().setTitle("Change Goalie");
     }
 
     @Override
@@ -41,6 +43,11 @@ public class ChangeGoalie extends ActionBarActivity
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 
