@@ -1,24 +1,37 @@
 package hockey.icescore.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import hockey.icescore.R;
 
 /**
  * Created by Lucas Angelon on 18-Mar-15.
  */
-public class SetupTeam extends ActionBarActivity
+public class SetupTeam extends ActionBarActivity implements View.OnClickListener
 {
+
+
+    Button editATeam;
+    Button editBTeam;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_team);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editATeam =(Button) findViewById(R.id.editTeamABtn);
+        editBTeam =(Button) findViewById(R.id.editTeamBtn);
+        editATeam.setOnClickListener(this);
+        editBTeam.setOnClickListener(this);
+
+
     }
 
 
@@ -35,24 +48,36 @@ public class SetupTeam extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch (id)
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_next)
         {
-            case R.id.home:
-                this.finish();
-                return true;
-
-            case R.id.action_next:
-                Intent confirmationScreen = new Intent(this, Confirmation.class);
-                startActivity(confirmationScreen);
-                return true;
-
+            Intent confirmationScreen = new Intent(this, Confirmation.class);
+            startActivity(confirmationScreen);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-   @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
+
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId())
+        {
+            case R.id.editTeamABtn:
+                Intent navigation = new Intent(this, AddTeam.class);
+                //navigation.
+                startActivity(navigation);
+                break;
+
+            case R.id.editTeamBtn:
+                Intent navigation1 = new Intent(this, AddTeam.class);
+                startActivity(navigation1);
+                break;
+        }
+
     }
 }
