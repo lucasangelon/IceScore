@@ -23,7 +23,7 @@
         android:inputType="textPersonName"
         android:text="First name"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/fName"
         android:layout_below="@+id/textView3"
         android:layout_alignLeft="@+id/textView3"
         android:layout_alignStart="@+id/textView3"
@@ -36,11 +36,11 @@
         android:inputType="textPersonName"
         android:text="Last name"
         android:ems="10"
-        android:id="@+id/editText5"
+        android:id="@+id/lName"
         android:textColor="#ffffffff"
-        android:layout_below="@+id/editText4"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4" />
+        android:layout_below="@+id/fName"
+        android:layout_alignLeft="@+id/fName"
+        android:layout_alignStart="@+id/fName" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -48,17 +48,17 @@
         android:inputType="textPersonName"
         android:text="Role"
         android:ems="10"
-        android:id="@+id/editText6"
+        android:id="@+id/role"
         android:textColor="#ffffffff"
-        android:layout_below="@+id/editText5"
-        android:layout_alignLeft="@+id/editText5"
-        android:layout_alignStart="@+id/editText5" />
+        android:layout_below="@+id/lName"
+        android:layout_alignLeft="@+id/lName"
+        android:layout_alignStart="@+id/lName" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/button_confirm"
+        android:id="@+id/cancel"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView3"
         android:layout_alignEnd="@+id/textView3"
@@ -68,8 +68,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm"
-        android:id="@+id/b1"
-        android:layout_alignTop="@+id/button_confirm"
-        android:layout_alignLeft="@+id/editText6"
-        android:layout_alignStart="@+id/editText6" />
+        android:id="@+id/conf"
+        android:layout_alignTop="@+id/cancel"
+        android:layout_alignLeft="@+id/role"
+        android:layout_alignStart="@+id/role" />
 </RelativeLayout>

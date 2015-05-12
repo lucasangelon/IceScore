@@ -53,27 +53,28 @@
         android:background="#DDFFDD"
         android:layout_above="@+id/addplayerbutton"
         android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView" />
+        android:layout_toStartOf="@+id/textView"
+        android:clickable="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
         android:id="@+id/addplayerbutton"
-        android:layout_alignBaseline="@+id/deleteplayerbutton"
-        android:layout_alignBottom="@+id/deleteplayerbutton"
-        android:layout_alignLeft="@+id/currentPlayersList"
-        android:layout_alignStart="@+id/currentPlayersList" />
+        android:layout_alignTop="@+id/createPlayerButton"
+        android:layout_alignLeft="@+id/searchList"
+        android:layout_alignStart="@+id/searchList"
+        android:layout_toLeftOf="@+id/createPlayerButton"
+        android:layout_toStartOf="@+id/createPlayerButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/deleteplayerbutton"
-        android:layout_alignBaseline="@+id/createPlayerButton"
-        android:layout_alignBottom="@+id/createPlayerButton"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignTop="@+id/addplayerbutton"
+        android:layout_alignRight="@+id/currentPlayersList"
+        android:layout_alignEnd="@+id/currentPlayersList" />
 
     <TextView
         android:layout_width="wrap_content"
