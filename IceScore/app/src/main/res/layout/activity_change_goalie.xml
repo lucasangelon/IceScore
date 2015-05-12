@@ -19,8 +19,8 @@
         android:text="Change"
         android:id="@+id/button3"
         android:layout_alignBottom="@+id/button2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_alignRight="@+id/signBelowText"
+        android:layout_alignEnd="@+id/signBelowText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="AWAY"
-        android:id="@+id/textView2"
+        android:id="@+id/signBelowText"
         android:textSize="40dp"
         android:layout_marginLeft="77dp"
         android:layout_marginStart="78dp"

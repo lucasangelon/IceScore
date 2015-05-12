@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ADD TEAMS"
+        android:text="Edit TEAMS"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -26,8 +26,8 @@
         android:textColor="#ffffffff"
         android:text="Joe Bloggs"
         android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/listView"
-        android:layout_alignStart="@+id/listView" />
+        android:layout_alignLeft="@+id/currentPlayersList"
+        android:layout_alignStart="@+id/currentPlayersList" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -37,57 +37,50 @@
         android:textColor="#FFFFFF"
         android:textSize="46dp"
         android:layout_alignTop="@+id/editText"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView" />
+        android:layout_alignRight="@+id/currentPlayersList"
+        android:layout_alignEnd="@+id/currentPlayersList" />
 
 
     <ListView
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:id="@+id/listView"
+        android:id="@+id/currentPlayersList"
         android:layout_marginLeft="80dp"
         android:layout_marginStart="80dp"
         android:layout_below="@+id/textView"
         android:layout_marginTop="80dp"
         android:divider="@android:drawable/divider_horizontal_textfield"
-        android:background="#DDFFDD" />
+        android:background="#DDFFDD"
+        android:layout_above="@+id/addplayerbutton"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
-        android:id="@+id/button"
-        android:layout_below="@+id/listView"
-        android:layout_alignLeft="@+id/listView"
-        android:layout_alignStart="@+id/listView"
-        android:layout_marginTop="43dp" />
+        android:id="@+id/addplayerbutton"
+        android:layout_alignBaseline="@+id/deleteplayerbutton"
+        android:layout_alignBottom="@+id/deleteplayerbutton"
+        android:layout_alignLeft="@+id/currentPlayersList"
+        android:layout_alignStart="@+id/currentPlayersList" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView" />
-
-    <ListView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:id="@+id/listView2"
-        android:layout_marginTop="49dp"
-        android:divider="@android:drawable/divider_horizontal_textfield"
-        android:background="#DDFFDD"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:id="@+id/deleteplayerbutton"
+        android:layout_alignBaseline="@+id/createPlayerButton"
+        android:layout_alignBottom="@+id/createPlayerButton"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Player search"
-        android:id="@+id/signBelowText"
+        android:id="@+id/textView2"
         android:layout_alignBottom="@+id/editText2"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
@@ -100,30 +93,34 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_alignTop="@+id/listView"
-        android:layout_alignLeft="@+id/signBelowText"
-        android:layout_alignStart="@+id/signBelowText"
-        android:layout_alignRight="@+id/signBelowText"
-        android:layout_alignEnd="@+id/signBelowText"
+        android:id="@+id/playersearch"
+        android:layout_alignTop="@+id/currentPlayersList"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
         android:textColor="#ffffffff" />
 
     <ListView
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:id="@+id/listView3"
+        android:id="@+id/searchList"
         android:divider="@android:drawable/divider_horizontal_textfield"
         android:background="#DDFFDD"
-        android:layout_below="@+id/editText3"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        android:layout_below="@+id/playersearch"
+        android:layout_alignLeft="@+id/playersearch"
+        android:layout_alignStart="@+id/playersearch"
+        android:layout_alignBottom="@+id/currentPlayersList"
+        android:layout_alignRight="@+id/playersearch"
+        android:layout_alignEnd="@+id/playersearch" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create player"
-        android:id="@+id/button3"
+        android:id="@+id/createPlayerButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/listView3"
-        android:layout_alignEnd="@+id/listView3" />
+        android:layout_alignRight="@+id/searchList"
+        android:layout_alignEnd="@+id/searchList"
+        android:layout_marginBottom="37dp" />
 </RelativeLayout>
