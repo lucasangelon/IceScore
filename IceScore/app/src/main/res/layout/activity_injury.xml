@@ -73,7 +73,7 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:text="Back"
-        android:id="@+id/button3"
+        android:id="@+id/createPlayerButton"
         android:layout_below="@+id/listView4"
         android:layout_alignLeft="@+id/listView4"
         android:layout_alignStart="@+id/listView4"
@@ -83,8 +83,8 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:text="Confirm"
-        android:id="@+id/b2"
-        android:layout_alignTop="@+id/button3"
+        android:id="@+id/button_confirm"
+        android:layout_alignTop="@+id/createPlayerButton"
         android:layout_alignLeft="@+id/descText"
         android:layout_alignStart="@+id/descText" />
 

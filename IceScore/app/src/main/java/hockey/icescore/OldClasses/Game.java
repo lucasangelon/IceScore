@@ -4,6 +4,8 @@ import android.text.format.Time;
 
 import java.util.ArrayList;
 
+import hockey.icescore.models.Log;
+
 /**
  * Created by 041402465 on 7/04/2015.
  */
@@ -11,13 +13,31 @@ public class Game {
     static public int gameID;
     static public Team homeTeam;
     static public Team awayTeam;
-    static public Time gameTime;
+    static public String gameTime;
     static public String venue;
     static public String division;
     static public ArrayList<Official> officials;
+
+    public static ArrayList<Log> getLogs() {
+        return logs;
+    }
+
+    public static void setLogs(ArrayList<Log> logs) {
+        Game.logs = logs;
+    }
+
+    public static void addToLogs(Log logs) {
+        Game.logs.add(logs);
+    }
+
+    public static void deleteLogs(Log log) {
+        Game.logs.remove(log);
+    }
+
+    static public ArrayList<Log> logs;
     static public String notes;
     //      public Event[] events;
-    static public String currentPeriod;
+    static public int currentPeriod;
     static public String CurrentPeriod;
     static public int periodLength = 20;
 
@@ -33,7 +53,7 @@ public class Game {
         Game.gameID = gameID;
     }
 
-    public static void setGameTime(Time gameTime) {
+    public static void setGameTime(String gameTime) {
         Game.gameTime = gameTime;
     }
 
@@ -53,11 +73,11 @@ public class Game {
         Game.notes = notes;
     }
 
-    public static void setCurrentPeriod(String currentPeriod) {
+    public static void setCurrentPeriod(int currentPeriod) {
         Game.currentPeriod = currentPeriod;
     }
 
-    public Game(int ID,Time time, String venue, String division)
+    public Game(int ID,String time, String venue, String division)
     {
         this.gameID = ID;
         this.gameTime = time;
@@ -65,27 +85,11 @@ public class Game {
         this.division = division;
 
         this.notes = "";
-        this.currentPeriod = "Period 0";
+        this.currentPeriod = 0;
         this.officials = new ArrayList<Official>();
     }
 
-    public void beginGame()
-    {
-        if (currentPeriod == "Period 0")
-            currentPeriod = "Period 1";
 
-
-    }
-
-    public void nextPeriod()
-    {
-        if(currentPeriod == "Period 1")
-            currentPeriod = "Period 2";
-        else if (currentPeriod == "Period 2")
-            currentPeriod = "Period 3";
-
-
-    }
 
     public static  void setHomeTeam(int teamID, String teamName, int managerID, String managerName)
     {

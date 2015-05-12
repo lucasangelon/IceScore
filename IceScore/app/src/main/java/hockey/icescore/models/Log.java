@@ -1,5 +1,8 @@
 package hockey.icescore.models;
 
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
+
 /**
  * Created by Lucas Angelon on 07-Apr-15.
  */
@@ -16,6 +19,15 @@ public class Log
         protected String goalieNumber;
         protected String shotTeam;
         protected String timestamp;
+        protected long periodId;
+
+        public long getPeriodId() {
+            return periodId;
+        }
+
+        public void setPeriodId(long periodId) {
+            this.periodId = periodId;
+        }
 
         // Empty Constructor
         public Save ()
@@ -28,6 +40,7 @@ public class Log
             this.goalieNumber = gn;
             this.shotTeam = st;
             this.timestamp = t;
+            periodId = Game.currentPeriod;
         }
 
         // Method for extracting the content for the game log.
@@ -46,7 +59,7 @@ public class Log
         protected String timestamp;
         protected String assistNumber;
         protected String assistNumber2;
-
+        protected long periodId;
         // Empty Constructor
         public Goal()
         {   }
@@ -60,6 +73,7 @@ public class Log
             this.timestamp = ts;
             this.assistNumber = asn;
             this.assistNumber2 = asn2;
+            periodId = Game.currentPeriod;
         }
 
         // Method for extracting the content for the game log.
@@ -78,6 +92,7 @@ public class Log
         protected String teamName;
         protected String timestamp;
         protected String penaltyName;
+        protected long periodId;
 
         // Empty Constructor
         public Penalty()
@@ -91,6 +106,7 @@ public class Log
             this.teamName = tn;
             this.timestamp = ts;
             this.penaltyName = pn;
+            periodId = Game.currentPeriod;
         }
 
         private String extract()
@@ -108,6 +124,7 @@ public class Log
         protected String teamName;
         protected String timestamp;
         protected String injuryName;
+        protected long periodId;
 
         // Injury Log Constructor
         public Injury(long id, String pNum, String tn, String ts, String in)
@@ -117,6 +134,7 @@ public class Log
             this.teamName = tn;
             this.timestamp = ts;
             this.injuryName = in;
+            periodId = Game.currentPeriod;
         }
 
         private String extract()
@@ -132,6 +150,7 @@ public class Log
         protected long id;
         protected String teamName;
         protected String timestamp;
+        protected long periodId;
 
         // Timeout Log Constructor
         public Timeout(long id, String teamName, String timestamp)
@@ -139,6 +158,7 @@ public class Log
             this.id = id;
             this.teamName = teamName;
             this.timestamp = timestamp;
+            periodId = Game.currentPeriod;
         }
 
         private String extract()
@@ -154,6 +174,7 @@ public class Log
         protected String playerNumber;
         protected String teamName;
         protected String timestamp;
+        protected long periodId;
 
         // Change Goalie Log Constructor.
         public ChangeGoalie(long id, String playerNumber, String teamName, String timestamp)
@@ -162,6 +183,7 @@ public class Log
             this.playerNumber = playerNumber;
             this.teamName = teamName;
             this.timestamp = timestamp;
+            periodId = Game.currentPeriod;
         }
 
         private String extract()

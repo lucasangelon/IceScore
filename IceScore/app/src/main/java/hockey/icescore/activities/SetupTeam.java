@@ -1,24 +1,38 @@
 package hockey.icescore.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
 
 /**
  * Created by Lucas Angelon on 18-Mar-15.
  */
-public class SetupTeam extends ActionBarActivity
+public class SetupTeam extends ActionBarActivity implements View.OnClickListener
 {
+    Button editATeam;
+    Button editBTeam;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_team);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        editATeam =(Button) findViewById(R.id.editTeamABtn);
+        editATeam.setOnClickListener(this);
+
+        editBTeam =(Button) findViewById(R.id.editTeamBBtn);
+        editBTeam.setOnClickListener(this);
     }
 
 
@@ -45,5 +59,27 @@ public class SetupTeam extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId())
+        {
+            case R.id.editTeamABtn:
+                Intent navigation = new Intent(this, AddTeam.class);
+                navigation.putExtra("team", "home");
+                startActivity(navigation);
+                break;
+
+            case R.id.editTeamBBtn:
+                Intent navigation1 = new Intent(this, AddTeam.class);
+                navigation1.putExtra("team", "away");
+                startActivity(navigation1);
+                break;
+        }
+
     }
 }

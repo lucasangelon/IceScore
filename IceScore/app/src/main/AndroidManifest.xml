@@ -50,8 +50,12 @@
             android:name=".activities.GameSelect"
             android:parentActivityName="activities.MenuMain" >
         </activity>
-        <activity android:name=".fragments.PlayerList" >
+        <activity android:name=".activities.AddTeam"
+            android:label="Add Team">
+
         </activity>
+        <fragment android:name=".fragments.PlayerList" >
+        </fragment>
         <activity
             android:name=".activities.Penalty"
             android:label="@string/title_activity_penalty" >

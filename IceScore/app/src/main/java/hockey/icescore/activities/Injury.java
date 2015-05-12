@@ -13,7 +13,12 @@ import android.widget.Toast;
 import hockey.icescore.OldClasses.Player;
 import hockey.icescore.OldClasses.Team;
 import hockey.icescore.R;
+import hockey.icescore.controllers.ActionController;
 import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.models.GamePersonAction;
+import hockey.icescore.models.GamePersonActionExtended;
+import hockey.icescore.models.GamePersonActionGoal;
+import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 import hockey.icescore.OldClasses.Game;
 
@@ -99,6 +104,21 @@ public class Injury extends ActionBarActivity implements Fragment_Listener, View
                 addFragment(Game.awayTeam);
                 currentTeam=Game.awayTeam;
                 break;
+            case R.id.button_confirm:
+                int playernum = Integer.parseInt(playerNum.getText().toString());
+                ActionController actionMan;
+                actionMan = new ActionController(this);
+                GamePersonAction gpa = new GamePersonAction(
+                        hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
+                        Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
+                        Game.currentPeriod, hockey.icescore.OldClasses.Game.gameID, Game.gameTime);
+
+
+
+                GamePersonActionExtended gpae = new GamePersonActionExtended(0,1,"");
+
+
+                actionMan.insertPenaltyInjury(gpa,gpae,playernum,currentTeam.getTeamName(),desc.getText().toString());
         }
     }
 }

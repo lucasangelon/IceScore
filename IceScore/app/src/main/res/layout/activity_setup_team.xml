@@ -40,7 +40,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/currentPlayersList"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
 
@@ -56,16 +56,16 @@
         android:textSize="40dp"
         android:id="@+id/editTeamABtn"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/EditTeamBBtn"
-        android:layout_toStartOf="@+id/EditTeamBBtn" />
+        android:layout_toLeftOf="@+id/editTeamBBtn"
+        android:layout_toStartOf="@+id/editTeamBBtn" />
 
     <Button
         android:layout_width="300dp"
         android:layout_height="80dp"
         android:text="Edit Team B"
         android:textSize="40dp"
-        android:id="@+id/EditTeamBBtn"
-        android:layout_alignBottom="@+id/listView"
+        android:id="@+id/editTeamBBtn"
+        android:layout_alignBottom="@+id/currentPlayersList"
         android:layout_toLeftOf="@+id/team2"
         android:layout_toStartOf="@+id/team2" />
 

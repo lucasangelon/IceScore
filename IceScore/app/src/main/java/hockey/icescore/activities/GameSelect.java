@@ -215,6 +215,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         {
             Intent setupTeamScreen = new Intent(this, SetupTeam.class);
             startActivity(setupTeamScreen);
+            //this.finish();
             return true;
         }
 
@@ -222,7 +223,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        TextView myText = (TextView)view;
+        TextView myText = (TextView) view;
         switch (parent.getId()) {
             case R.id.spinner:
                 Toast.makeText(this, "You Selected " + myText.getText(), Toast.LENGTH_SHORT).show();

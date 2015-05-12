@@ -31,7 +31,7 @@ public class Timer implements Runnable {
     @SuppressWarnings("deprecation")
     public synchronized void terminate(){
 
-        t.stop();
+      running=false;
     }
 
     public synchronized void start(){

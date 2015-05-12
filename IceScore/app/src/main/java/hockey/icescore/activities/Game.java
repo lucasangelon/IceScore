@@ -126,7 +126,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 // to send the data properly to the controller to add the rows into the database
                 // Lucas
 
-                /*
+
                 GamePersonAction gpa = new GamePersonAction(
                         hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
                         Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
@@ -138,7 +138,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 actionController.insertGoal(gpa, gpag, playernum,
                         hockey.icescore.OldClasses.Game.homeTeam.getTeamName(), homeAssist,
                         homeAssist2);
-*/
+
                 Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssist+", "+homeAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 homeasscount=0;
@@ -311,6 +311,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
             }
 
             setText();
+            hockey.icescore.OldClasses.Game.gameTime=txt;
         }
 
         @Override
