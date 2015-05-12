@@ -265,6 +265,8 @@ public class CaptureSignature extends Activity {
                 //Log.v("log_tag","deleted: " + mypath.toString() + deleted);
                 //If you want to convert the image to string use base64 converter
 
+
+                //upload(myPath); To be done when we have a web service
             }
             catch(Exception e)
             {
