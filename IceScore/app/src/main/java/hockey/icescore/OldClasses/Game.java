@@ -4,6 +4,8 @@ import android.text.format.Time;
 
 import java.util.ArrayList;
 
+import hockey.icescore.models.Log;
+
 /**
  * Created by 041402465 on 7/04/2015.
  */
@@ -15,6 +17,24 @@ public class Game {
     static public String venue;
     static public String division;
     static public ArrayList<Official> officials;
+
+    public static ArrayList<Log> getLogs() {
+        return logs;
+    }
+
+    public static void setLogs(ArrayList<Log> logs) {
+        Game.logs = logs;
+    }
+
+    public static void addToLogs(Log logs) {
+        Game.logs.add(logs);
+    }
+
+    public static void deleteLogs(Log log) {
+        Game.logs.remove(log);
+    }
+
+    static public ArrayList<Log> logs;
     static public String notes;
     //      public Event[] events;
     static public int currentPeriod;

@@ -18,7 +18,11 @@ public class Player
     }
 
     
-
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 
     public int getNumber() {
         return number;

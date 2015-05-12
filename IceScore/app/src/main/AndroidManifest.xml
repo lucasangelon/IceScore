@@ -35,14 +35,13 @@
         </activity>
         <activity
             android:name=".activities.MenuOthers"
-            android:parentActivityName=".activities.Game"
-            android:label="@string/app_name">
+            android:parentActivityName=".activities.Game" >
         </activity>
         <activity android:name=".activities.Result" >
         </activity>
-        <activity android:name=".activities.ChangeGoalie">
+        <activity android:name=".activities.ChangeGoalie" >
         </activity>
-        <activity android:name=".activities.GameLog">
+        <activity android:name=".activities.GameLog" >
         </activity>
         <activity android:name=".activities.Injury" >
         </activity>
@@ -50,8 +49,12 @@
             android:name=".activities.GameSelect"
             android:parentActivityName="activities.MenuMain" >
         </activity>
-        <activity android:name=".fragments.PlayerList" >
+        <activity android:name=".activities.AddTeam"
+            android:label="Add Team">
+
         </activity>
+        <fragment android:name=".fragments.PlayerList" >
+        </fragment>
         <activity
             android:name=".activities.Penalty"
             android:label="@string/title_activity_penalty" >

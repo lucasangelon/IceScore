@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.widget.Toast;
 
 import hockey.icescore.OldClasses.Team;
 import hockey.icescore.R;
@@ -57,7 +55,7 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
 
         View rootView = inflater.inflate(R.layout.fragment_player_list_left, container, false);
         b1 = (Button) rootView.findViewById(R.id.b1);
-        b2 = (Button) rootView.findViewById(R.id.b2);
+        b2 = (Button) rootView.findViewById(R.id.button_confirm);
         b3 = (Button) rootView.findViewById(R.id.b3);
         b4 = (Button) rootView.findViewById(R.id.b4);
         b5 = (Button) rootView.findViewById(R.id.b5);
@@ -136,8 +134,8 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
                 g.buttonClicked(getNum(R.id.b1));
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
-            case R.id.b2:
-                g.buttonClicked(getNum(R.id.b2));
+            case R.id.button_confirm:
+                g.buttonClicked(getNum(R.id.button_confirm));
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
             case R.id.b3:

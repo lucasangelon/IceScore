@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
 
 /**
@@ -16,22 +18,21 @@ import hockey.icescore.R;
  */
 public class SetupTeam extends ActionBarActivity implements View.OnClickListener
 {
-
-
     Button editATeam;
     Button editBTeam;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_team);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         editATeam =(Button) findViewById(R.id.editTeamABtn);
-        editBTeam =(Button) findViewById(R.id.editTeamBtn);
         editATeam.setOnClickListener(this);
+
+        editBTeam =(Button) findViewById(R.id.editTeamBBtn);
         editBTeam.setOnClickListener(this);
-
-
     }
 
 
@@ -69,12 +70,13 @@ public class SetupTeam extends ActionBarActivity implements View.OnClickListener
         {
             case R.id.editTeamABtn:
                 Intent navigation = new Intent(this, AddTeam.class);
-                //navigation.
+                navigation.putExtra("team", "home");
                 startActivity(navigation);
                 break;
 
-            case R.id.editTeamBtn:
+            case R.id.editTeamBBtn:
                 Intent navigation1 = new Intent(this, AddTeam.class);
+                navigation1.putExtra("team", "away");
                 startActivity(navigation1);
                 break;
         }

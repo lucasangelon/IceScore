@@ -43,9 +43,21 @@
         android:layout_gravity="right"
         android:layout_marginRight="172dp"
         android:layout_marginEnd="172dp"
+        android:layout_below="@+id/txtTitle"
         android:layout_alignRight="@+id/ListView01"
         android:layout_alignEnd="@+id/ListView01"
         android:layout_marginTop="60dp" />
+
+    <TextView
+        android:text="Select Game"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="40dp"
+        android:id="@+id/txtTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="1200dp"

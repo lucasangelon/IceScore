@@ -14,6 +14,22 @@ public class Penalty extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penalty);
+
+        /*
+                        ActionController actionMan;
+                actionMan = new ActionController(this);
+                GamePersonAction gpa = new GamePersonAction(
+                        hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
+                        Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
+                        Game.currentPeriod, hockey.icescore.OldClasses.Game.gameID, Game.gameTime);
+
+
+
+                GamePersonActionExtended gpae = new GamePersonActionExtended(0,1,"");
+
+
+                actionMan.insertPenaltyInjury(gpa,gpae,playernum,currentTeam.getTeamName(),desc.getText().toString());
+         */
     }
 
 

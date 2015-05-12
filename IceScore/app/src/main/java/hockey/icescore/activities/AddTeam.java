@@ -1,11 +1,15 @@
 package hockey.icescore.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
 import hockey.icescore.util.Fragment_Listener;
 
@@ -17,9 +21,40 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_team);
+        setContentView(R.layout.activity_edit_team);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("team");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("team");
+        }
+        ListView current =(ListView) findViewById(R.id.currentPlayersList);
+
+        switch(newString){
+            case "home":
+                ArrayAdapter<Player> arrayAdapter = new ArrayAdapter<Player>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        Game.homeTeam.players );
+                current.setAdapter(arrayAdapter);
+            break;
+            case "away":
+                ArrayAdapter<Player> arrayAdapter1 = new ArrayAdapter<Player>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        Game.awayTeam.players );
+                current.setAdapter(arrayAdapter1);
+                break;
+
+        }
+
     }
 
 
@@ -36,14 +71,7 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        switch (id)
-        {
-            case android.R.id.home:
-                this.finish();
-                return true;
 
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -51,5 +79,4 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener
     public void buttonClicked(String val) {
 
     }
-
 }
