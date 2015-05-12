@@ -258,7 +258,7 @@ public class Constants
         public static final String CREATE_TABLE_SIGN_OFF = "CREATE TABLE " + TABLE_SIGN_OFF +
                 "("
                     + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + FIELD_SIGNATURE + " TEXT NOT NULL, "
+                    + FIELD_SIGNATURE + " BLOB NOT NULL, "
                     + FK_GAME_ID + " INTEGER NOT NULL, "
                     + FK_PERSON_ID + " INTEGER NOT NULL, "
                         + "FOREIGN KEY (" + FK_GAME_ID + ") "

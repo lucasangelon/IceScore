@@ -1,18 +1,6 @@
 package hockey.icescore.activities;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import hockey.icescore.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Calendar;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -38,6 +26,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Calendar;
+
+import hockey.icescore.R;
+
 /**
  * Created by Josh on 6/05/2015.
  * Code mostly take from:
@@ -47,16 +41,24 @@ import android.widget.Toast;
 public class CaptureSignature extends Activity {
 
     LinearLayout mContent;
+
     signature mSignature;
+
     Button mClear, mGetSign, mCancel;
+
     public static String tempDir;
-    public int count = 1;
     public String current = null;
-    private Bitmap mBitmap;
-    View mView;
-    File mypath;
     String ziggy ="GetSignature";
     private String uniqueId;
+
+    public int count = 1;
+
+    private Bitmap mBitmap;
+
+    View mView;
+
+    File mypath;
+
     private EditText yourName;
 
     @Override
@@ -267,6 +269,8 @@ public class CaptureSignature extends Activity {
 
 
                 //upload(myPath); To be done when we have a web service
+
+
             }
             catch(Exception e)
             {
