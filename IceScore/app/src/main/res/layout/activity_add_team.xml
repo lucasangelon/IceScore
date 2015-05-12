@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Player search"
-        android:id="@+id/textView2"
+        android:id="@+id/signBelowText"
         android:layout_alignBottom="@+id/editText2"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
@@ -102,10 +102,10 @@
         android:ems="10"
         android:id="@+id/editText3"
         android:layout_alignTop="@+id/listView"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignLeft="@+id/signBelowText"
+        android:layout_alignStart="@+id/signBelowText"
+        android:layout_alignRight="@+id/signBelowText"
+        android:layout_alignEnd="@+id/signBelowText"
         android:textColor="#ffffffff" />
 
     <ListView
