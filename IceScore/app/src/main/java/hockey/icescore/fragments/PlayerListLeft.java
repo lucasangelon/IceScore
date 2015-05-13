@@ -54,8 +54,8 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_player_list_left, container, false);
-        b1 = (Button) rootView.findViewById(R.id.b1);
-        b2 = (Button) rootView.findViewById(R.id.button_confirm);
+        b1 = (Button) rootView.findViewById(R.id.conf);
+        b2 = (Button) rootView.findViewById(R.id.cancel);
         b3 = (Button) rootView.findViewById(R.id.b3);
         b4 = (Button) rootView.findViewById(R.id.b4);
         b5 = (Button) rootView.findViewById(R.id.b5);
@@ -130,12 +130,12 @@ public class PlayerListLeft extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.b1:
-                g.buttonClicked(getNum(R.id.b1));
+            case R.id.conf:
+                g.buttonClicked(getNum(R.id.conf));
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
-            case R.id.button_confirm:
-                g.buttonClicked(getNum(R.id.button_confirm));
+            case R.id.cancel:
+                g.buttonClicked(getNum(R.id.cancel));
                 getActivity().getFragmentManager().beginTransaction().remove(this).commit();
                 break;
             case R.id.b3:

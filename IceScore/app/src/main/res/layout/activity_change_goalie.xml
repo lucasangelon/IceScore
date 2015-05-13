@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="AWAY"
-        android:id="@+id/signBelowText"
+        android:id="@+id/textView2"
         android:textSize="40dp"
         android:layout_marginLeft="77dp"
         android:layout_marginStart="78dp"

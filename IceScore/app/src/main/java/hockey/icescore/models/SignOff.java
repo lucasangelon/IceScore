@@ -1,7 +1,5 @@
 package hockey.icescore.models;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by Josh on 21/04/2015.
  */
@@ -10,14 +8,14 @@ public class SignOff {
     protected long id;
     protected long gameId;
     protected long personId;
-    protected Bitmap signature;
+    protected String signature;
 
     public SignOff()
     {
 
     }
 
-    public SignOff(long gId, long pId, Bitmap signature)
+    public SignOff(long gId, long pId, String signature)
     {
         this.gameId = gId;
         this.personId = pId;
@@ -36,7 +34,7 @@ public class SignOff {
 
     public void setPersonId(long personId) { this.personId = personId; }
 
-    public Bitmap getSignature() { return signature; }
+    public String getSignature() { return signature; }
 
-    public void setSignature(Bitmap signature) { this.signature = signature; }
+    public void setSignature(String signature) { this.signature = signature; }
 }

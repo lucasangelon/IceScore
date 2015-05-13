@@ -83,7 +83,7 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:text="Confirm"
-        android:id="@+id/button_confirm"
+        android:id="@+id/cancel"
         android:layout_alignTop="@+id/createPlayerButton"
         android:layout_alignLeft="@+id/descText"
         android:layout_alignStart="@+id/descText" />
