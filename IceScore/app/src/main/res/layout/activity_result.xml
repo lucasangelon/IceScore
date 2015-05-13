@@ -50,27 +50,13 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="500dp"
-        android:layout_height="100dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Referee Sign Off"
-        android:id="@+id/textView2"
-        android:textColor="#ffffffff"
-        android:textSize="60dp"
-        android:layout_below="@+id/gameResultsListView"
-        android:layout_marginTop="52dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="15dp" />
-
     <SurfaceView
         android:layout_width="600dp"
         android:layout_height="100dp"
         android:id="@+id/surfaceView"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2" />
+        android:layout_below="@+id/gameResultsListView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="150dp"
@@ -82,5 +68,17 @@
         android:layout_toRightOf="@+id/overtimeBtn"
         android:layout_toLeftOf="@+id/surfaceView"
         android:layout_toStartOf="@+id/surfaceView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Referee"
+        android:id="@+id/refSignButton"
+        android:layout_alignTop="@+id/surfaceView"
+        android:layout_toLeftOf="@+id/shootoutBtn"
+        android:layout_alignBottom="@+id/surfaceView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="40dp" />
 
 </RelativeLayout>

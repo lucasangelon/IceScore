@@ -12,7 +12,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
 
-        android:id="@+id/conf"
+        android:id="@+id/b1"
         android:layout_marginLeft="97dp"
         android:layout_marginStart="97dp"
         android:layout_marginTop="126dp"
@@ -24,46 +24,46 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
 
-        android:id="@+id/cancel"
-        android:layout_alignTop="@+id/conf"
-        android:layout_toRightOf="@+id/conf"
-        android:layout_toEndOf="@+id/conf" />
+        android:id="@+id/button_confirm"
+        android:layout_alignTop="@+id/b1"
+        android:layout_toRightOf="@+id/b1"
+        android:layout_toEndOf="@+id/b1" />
 
     <Button
         android:layout_width="90dp"
         android:layout_height="90dp"
 
         android:id="@+id/b3"
-        android:layout_alignTop="@+id/cancel"
-        android:layout_toRightOf="@+id/cancel"
-        android:layout_toEndOf="@+id/cancel" />
+        android:layout_alignTop="@+id/button_confirm"
+        android:layout_toRightOf="@+id/button_confirm"
+        android:layout_toEndOf="@+id/button_confirm" />
 
     <Button
         android:layout_width="90dp"
         android:layout_height="90dp"
 
         android:id="@+id/b4"
-        android:layout_below="@+id/conf"
-        android:layout_alignLeft="@+id/conf"
-        android:layout_alignStart="@+id/conf" />
+        android:layout_below="@+id/b1"
+        android:layout_alignLeft="@+id/b1"
+        android:layout_alignStart="@+id/b1" />
 
     <Button
         android:layout_width="90dp"
         android:layout_height="90dp"
 
         android:id="@+id/b5"
-        android:layout_below="@+id/conf"
-        android:layout_toRightOf="@+id/conf"
-        android:layout_toEndOf="@+id/conf" />
+        android:layout_below="@+id/b1"
+        android:layout_toRightOf="@+id/b1"
+        android:layout_toEndOf="@+id/b1" />
 
     <Button
         android:layout_width="90dp"
         android:layout_height="90dp"
 
         android:id="@+id/b6"
-        android:layout_below="@+id/cancel"
-        android:layout_toRightOf="@+id/cancel"
-        android:layout_toEndOf="@+id/cancel" />
+        android:layout_below="@+id/button_confirm"
+        android:layout_toRightOf="@+id/button_confirm"
+        android:layout_toEndOf="@+id/button_confirm" />
 
     <Button
         android:layout_width="90dp"
@@ -153,8 +153,8 @@
         android:text="Player Number"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/conf"
-        android:layout_alignStart="@+id/conf"
+        android:layout_alignLeft="@+id/b1"
+        android:layout_alignStart="@+id/b1"
         android:layout_alignRight="@+id/b3"
         android:layout_alignEnd="@+id/b3"
         android:textColor="#FFFFFF"

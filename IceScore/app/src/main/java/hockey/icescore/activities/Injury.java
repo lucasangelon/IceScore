@@ -17,6 +17,7 @@ import hockey.icescore.controllers.ActionController;
 import hockey.icescore.fragments.PlayerListRight;
 import hockey.icescore.models.GamePersonAction;
 import hockey.icescore.models.GamePersonActionExtended;
+import hockey.icescore.models.GamePersonActionGoal;
 import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 import hockey.icescore.OldClasses.Game;
@@ -103,7 +104,7 @@ public class Injury extends ActionBarActivity implements Fragment_Listener, View
                 addFragment(Game.awayTeam);
                 currentTeam=Game.awayTeam;
                 break;
-            case R.id.cancel:
+            case R.id.button_confirm:
                 int playernum = Integer.parseInt(playerNum.getText().toString());
                 ActionController actionMan;
                 actionMan = new ActionController(this);

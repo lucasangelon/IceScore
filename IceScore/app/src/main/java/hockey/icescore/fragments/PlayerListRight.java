@@ -52,8 +52,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_player_list_right, container, false);
-        b1 = (Button) rootView.findViewById(R.id.conf);
-        b2 = (Button) rootView.findViewById(R.id.cancel);
+        b1 = (Button) rootView.findViewById(R.id.b1);
+        b2 = (Button) rootView.findViewById(R.id.button_confirm);
         b3 = (Button) rootView.findViewById(R.id.b3);
         b4 = (Button) rootView.findViewById(R.id.b4);
         b5 = (Button) rootView.findViewById(R.id.b5);
@@ -130,12 +130,12 @@ private String getNum(int id){
 @Override
 public void onClick(View v) {
         switch(v.getId()){
-        case R.id.conf:
-        g.buttonClicked(getNum(R.id.conf));
+        case R.id.b1:
+        g.buttonClicked(getNum(R.id.b1));
         getActivity().getFragmentManager().beginTransaction().remove(this).commit();
         break;
-        case R.id.cancel:
-        g.buttonClicked(getNum(R.id.cancel));
+        case R.id.button_confirm:
+        g.buttonClicked(getNum(R.id.button_confirm));
         getActivity().getFragmentManager().beginTransaction().remove(this).commit();
         break;
         case R.id.b3:
