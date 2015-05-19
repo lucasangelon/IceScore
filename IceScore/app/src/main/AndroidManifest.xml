@@ -64,6 +64,10 @@
             android:name=".activities.CaptureSignature"
             android:label="@string/title_activity_capture_signature" >
         </activity>
+        <activity
+            android:name=".activities.About"
+            android:label="@string/title_about" >
+        </activity>
     </application>
 
 </manifest>

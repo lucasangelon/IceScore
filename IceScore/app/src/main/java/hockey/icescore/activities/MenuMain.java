@@ -32,5 +32,18 @@ public class MenuMain extends Activity
                 startActivity(setupTeamScreen);
             }
         });
+
+        // Add the Game Dev Button Navigation -- Josh
+        Button btnDevTeam = (Button) findViewById(R.id.btnDevelopmentTeam);
+        btnDevTeam.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View v)
+            {
+                // Create an intent to send the user to the confirmation view.
+                Intent setupTeamScreen = new Intent(MenuMain.this, About.class);
+                startActivity(setupTeamScreen);
+            }
+        });
     }
 }
