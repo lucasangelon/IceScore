@@ -17,6 +17,17 @@ public class Game {
     static public String venue;
     static public String division;
     static public ArrayList<Official> officials;
+    public static int gameTimeInt = 0;
+    public static int homeass = 0;
+    public static int awayass = 0;
+
+    public static int getGameTimeInt() {
+        return gameTimeInt;
+    }
+
+    public static void setGameTimeInt(int gameTimeInt) {
+        Game.gameTimeInt = gameTimeInt;
+    }
 
     public static ArrayList<Log> getLogs() {
         return logs;

@@ -9,44 +9,24 @@
     <Button
         android:layout_width="250dp"
         android:layout_height="75dp"
-        android:text="Edit Team"
-        android:id="@+id/editTeamBtn"
-        android:layout_marginLeft="255dp"
-        android:layout_marginStart="255dp"
-        android:textSize="25dp"
-        android:layout_above="@+id/editOfficialsClockBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="75dp"
         android:text="Edit Game Log"
         android:id="@+id/editGameLogBtn"
-        android:layout_above="@+id/changeGoalieBtn"
-        android:layout_alignLeft="@+id/changeGoalieBtn"
-        android:layout_alignStart="@+id/changeGoalieBtn"
-        android:textSize="25dp" />
-
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:text="Edit Officials / Clock"
-        android:id="@+id/editOfficialsClockBtn"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/editTeamBtn"
-        android:layout_alignStart="@+id/editTeamBtn"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:layout_below="@+id/otherSettingsLbl"
+        android:layout_alignLeft="@+id/otherSettingsLbl"
+        android:layout_alignStart="@+id/otherSettingsLbl"
+        android:layout_marginLeft="159dp"
+        android:layout_marginStart="159dp" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:text="Change Goalie"
         android:id="@+id/changeGoalieBtn"
-        android:layout_above="@+id/injuriesBtn"
-        android:layout_alignLeft="@+id/injuriesBtn"
-        android:layout_alignStart="@+id/injuriesBtn"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:layout_below="@+id/otherSettingsLbl"
+        android:layout_toLeftOf="@+id/cancelGameBtn"
+        android:layout_toStartOf="@+id/cancelGameBtn" />
 
     <Button
         android:layout_width="250dp"
@@ -54,22 +34,20 @@
         android:text="Cancel Game"
         android:id="@+id/cancelGameBtn"
         android:textColor="#ffff0020"
-        android:layout_below="@+id/editOfficialsClockBtn"
-        android:layout_alignLeft="@+id/editOfficialsClockBtn"
-        android:layout_alignStart="@+id/editOfficialsClockBtn"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/injuriesBtn"
+        android:layout_alignLeft="@+id/editGameLogBtn"
+        android:layout_alignStart="@+id/editGameLogBtn" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:text="Injuries"
         android:id="@+id/injuriesBtn"
-        android:layout_marginLeft="115dp"
-        android:layout_marginStart="115dp"
-        android:layout_below="@+id/editOfficialsClockBtn"
-        android:layout_toRightOf="@+id/editOfficialsClockBtn"
-        android:layout_toEndOf="@+id/editOfficialsClockBtn"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/cancelGameBtn"
+        android:layout_toStartOf="@+id/cancelGameBtn" />
 
     <TextView
         android:layout_width="300dp"
@@ -77,14 +55,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Other Settings"
         android:id="@+id/otherSettingsLbl"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="47dp"
         android:textSize="@dimen/abc_text_size_display_4_material"
         android:textColor="#ffffffff"
-        android:layout_alignLeft="@+id/editTeamBtn"
-        android:layout_alignStart="@+id/editTeamBtn"
-        android:layout_above="@+id/editTeamBtn"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

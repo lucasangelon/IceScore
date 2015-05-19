@@ -24,6 +24,10 @@ public class Timer implements Runnable {
         ticks = 0;
     }
 
+    public synchronized void setTime(int time){
+        ticks = time;
+    }
+
     public synchronized void stop(){
         allowed = false;
     }

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import hockey.icescore.OldClasses.Player;
 import hockey.icescore.OldClasses.Team;
 import hockey.icescore.R;
@@ -39,7 +41,6 @@ public class Injury extends ActionBarActivity implements Fragment_Listener, View
         playerNum = (TextView) findViewById(R.id.PlayerNum);
         playerName = (TextView) findViewById(R.id.Player_name);
         desc = (EditText) findViewById(R.id.descText);
-
         Button teamA = (Button) findViewById(R.id.teamA);
         teamA.setOnClickListener(this);
 

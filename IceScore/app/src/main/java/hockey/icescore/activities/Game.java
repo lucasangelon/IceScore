@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
+import static hockey.icescore.OldClasses.Game.*;
 import hockey.icescore.OldClasses.*;
 import hockey.icescore.R;
 import hockey.icescore.controllers.ActionController;
@@ -61,8 +62,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     private int playernum=0;
     int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
     int period = 1;
-    int awayasscount=0;
-    int homeasscount=0;
+    int time = 0;
+    int awayasscount=awayass;
+    int homeasscount=homeass;
     int goalPlayerNum=0;
     int gameId = 1;
     int homeGoalieId = 0;
@@ -168,7 +170,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     if(awayasscount<2) {
                         PlayerListRight p1 = new PlayerListRight();
                         p1.setListener(this);
-                        p1.setTeam(hockey.icescore.OldClasses.Game.awayTeam);
+                        p1.setTeam(awayTeam);
 
                         android.app.FragmentManager manager1 = getFragmentManager();
                         android.app.FragmentTransaction transaction1 = manager1.beginTransaction();
@@ -283,7 +285,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         workAround worker;
         runOnUiThread(worker = new workAround());
         t= new Timer(worker);
-
+        t.setTime(hockey.icescore.OldClasses.Game.gameTimeInt);
     }
 
     @Override
@@ -295,7 +297,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     private class workAround implements PropertyChangeListener, Runnable { //Jack
         public void propertyChange(PropertyChangeEvent e) {
             int timerTime = matchTime- t.time();
-
+            time=t.time();
+            setGameTimeInt(t.time());
 
             int hours = timerTime / 3600, remainder = timerTime % 3600, minutes = remainder / 60, seconds = remainder % 60;
 
@@ -321,7 +324,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
             }
 
             setText();
-            //hockey.icescore.OldClasses.Game.gameTime = txt;
+            gameTime = txt;
         }
 
         @Override
@@ -351,12 +354,13 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
                 // Increment the shot counter.
                 homeshot++;
+                homeass++;
 
                 // Insert a save into the database and create a log object for it if a change is
                 // ever needed.
                 insertShot(awayGoalieId, hockey.icescore.OldClasses.Game.awayTeam.getTeamID(), period,
                         gameId, txtTime.getText().toString(), awayGoalieNumber,
-                        hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
+                        awayTeam.getTeamName());
 
                 // Update the text field with the new number.
                 hometxt.setText("" + homeshot);
@@ -368,13 +372,13 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
                 // Increment the shot counter.
                 awayshot++;
-                awaytxt.setText(""+awayshot);
+                awayass++;
 
                 // Insert a save into the database and create a log object for it if a change is
                 // ever needed.
                 insertShot(homeGoalieId, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(), period,
                         gameId, txtTime.getText().toString(), homeGoalieNumber,
-                        hockey.icescore.OldClasses.Game.homeTeam.getTeamName());
+                        homeTeam.getTeamName());
 
                 // Update the text field with the new number.
                 awaytxt.setText("" + awayshot);
@@ -433,7 +437,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     // Insert a timeout into the database.
                     insertTimeout(hockey.icescore.OldClasses.Game.homeTeam.getTeamID(), gameId,
                             txtTime.getText().toString(),
-                            hockey.icescore.OldClasses.Game.homeTeam.getTeamName());
+                            homeTeam.getTeamName());
                 }
 
                 break;
@@ -462,7 +466,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     // Insert a timeout into the database.
                     insertTimeout(hockey.icescore.OldClasses.Game.awayTeam.getTeamID(), gameId,
                             txtTime.getText().toString(),
-                            hockey.icescore.OldClasses.Game.awayTeam.getTeamName());
+                            awayTeam.getTeamName());
                 }
 
                 break;

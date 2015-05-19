@@ -23,11 +23,7 @@ public class MenuOthers extends ActionBarActivity implements View.OnClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button btnChangeGoalie =  (Button) findViewById(R.id.changeGoalieBtn);
-        btnChangeGoalie.setOnClickListener(this);
-        Button btnEditOfficials = (Button) findViewById(R.id.editOfficialsClockBtn);
-        btnEditOfficials.setOnClickListener(this);
-        Button btnEditTeams = (Button) findViewById(R.id.editTeamBtn);
-        btnEditTeams.setOnClickListener(this);
+        btnChangeGoalie.setOnClickListener(this);;
         Button btnEditLog = (Button) findViewById(R.id.editGameLogBtn);
         btnEditLog.setOnClickListener(this);
         Button btnInjury =  (Button) findViewById(R.id.injuriesBtn);
@@ -60,16 +56,6 @@ public class MenuOthers extends ActionBarActivity implements View.OnClickListene
             case R.id.changeGoalieBtn:
             {
                 startIntent(ChangeGoalie.class);
-                break;
-            }
-            case R.id.editOfficialsClockBtn:
-            {
-                startIntent(Confirmation.class);
-                break;
-            }
-            case R.id.editTeamBtn:
-            {
-                startIntent(SetupTeam.class);
                 break;
             }
             case R.id.editGameLogBtn:
