@@ -220,7 +220,11 @@ public class AddTeam extends ActionBarActivity implements Fragment_Listener, Vie
             spares.remove(spares.get(searchSelected));
         }
     }
-
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
     @Override
     public void onClick(View v) {
 
