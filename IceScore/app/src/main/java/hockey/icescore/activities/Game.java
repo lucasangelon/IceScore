@@ -197,7 +197,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 } if(awayasscount==3){
                 Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
                 //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
-                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+awayAssists.replaceAll("-1",""), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+awayAssist+", "+awayAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 awayasscount=0;
                 awayAssists="";
@@ -241,6 +241,12 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
 
         Button btnTimeoutB = (Button) findViewById(R.id.btnTimeoutB);
         btnTimeoutB.setOnClickListener(this);
+
+        Button penaltyA = (Button) findViewById(R.id.btnPenaltyA);
+        penaltyA.setOnClickListener(this);
+
+        Button penaltyB = (Button) findViewById(R.id.btnPenaltyB);
+        penaltyB.setOnClickListener(this);
 
         awaytxt = (TextView)findViewById(R.id.txtShotB);
         hometxt = (TextView)findViewById(R.id.txtShotA);
@@ -341,9 +347,19 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     {
         switch (v.getId()) //Jack
         {
-            // When the button others is clicked, send the user to the others menu activity.
-            case R.id.btnOthers:
 
+            case R.id.btnPenaltyA: //Josh
+                Intent penaltyA = new Intent(Game.this, Penalty.class);
+                startActivity(penaltyA);
+                break;
+
+            case R.id.btnPenaltyB: //Josh
+                Intent penaltyB = new Intent(Game.this, Penalty.class);
+                startActivity(penaltyB);
+                break;
+
+        // When the button others is clicked, send the user to the others menu activity.
+            case R.id.btnOthers:
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
