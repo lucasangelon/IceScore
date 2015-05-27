@@ -12,9 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
 import hockey.icescore.fragments.PlayerListRight;
 import hockey.icescore.util.Fragment_Listener;
@@ -43,12 +47,30 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
 
     }
     EditText edit;
+    private String format(int tt){
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(tt);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penalty);
 
+        Spinner occuredAt = (Spinner) findViewById(R.id.spinnerPenaltyOccurred);
+        ArrayList<String> oc = new ArrayList<String>();
+        int timerTime = Game.gameTimeInt;
+
+        for(int i = -30;i<=30;i++)
+        {
+            int hours = (timerTime+i) / 3600, remainder = (timerTime+i) % 3600, minutes = remainder / 60, seconds = remainder % 60;
+            oc.add(format(minutes) + ":" + format(seconds));
+        }
+        ArrayAdapter<String> spinAd = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                oc );
+        occuredAt.setAdapter(spinAd);
         Button teamA = (Button) findViewById(R.id.btnTeamA);
         teamA.setOnClickListener(this);
 
