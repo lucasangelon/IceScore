@@ -29,11 +29,17 @@ import static hockey.icescore.OldClasses.Game.homeTeam;
 public class Penalty extends ActionBarActivity implements Fragment_Listener, View.OnClickListener,AdapterView.OnItemClickListener{
     ListView penType2;
     int selected = 0;
+    String pen = "Fix this later";
     public static ArrayList<String> spares = new ArrayList<String>();
     public static ArrayList<ArrayList<String>> penals = new ArrayList<ArrayList<String>>();
+    public static ArrayList<String> penaltyLog = new ArrayList<String>();
     ArrayList<String> temp = new ArrayList<String>();
     Penalty p = this;
-
+    String playernum = "";
+    Team selectedTeam = Game.homeTeam;
+    Spinner occuredAt;
+    Spinner penaltyTime;
+    ListView loglog;
     public void addFragment(Team team){
         PlayerListRight p1 = new PlayerListRight();
         p1.setListener(this);
@@ -57,10 +63,11 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penalty);
 
-        Spinner occuredAt = (Spinner) findViewById(R.id.spinnerPenaltyOccurred);
+        occuredAt = (Spinner) findViewById(R.id.spinnerPenaltyOccurred);
+        penaltyTime = (Spinner) findViewById(R.id.spinnerTimePenalised);
         ArrayList<String> oc = new ArrayList<String>();
-        int timerTime = Game.gameTimeInt;
-
+        int timerTime = (Game.periodLength*60)-Game.gameTimeInt;
+        loglog = (ListView)findViewById(R.id.listViewPenaltyLog);
         for(int i = -30;i<=30;i++)
         {
             int hours = (timerTime+i) / 3600, remainder = (timerTime+i) % 3600, minutes = remainder / 60, seconds = remainder % 60;
@@ -76,6 +83,13 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
 
         Button teamB = (Button) findViewById(R.id.btnTeamB);
         teamB.setOnClickListener(this);
+
+        Button addPenalty = (Button) findViewById(R.id.btnAddPenalty);
+        addPenalty.setOnClickListener(this);
+
+        Button clearPenalty = (Button) findViewById(R.id.btnClearSelectedPenalties);
+        clearPenalty.setOnClickListener(this);
+
 
         edit = (EditText) findViewById(R.id.editTextPenaltySearch);
         edit.addTextChangedListener(new TextWatcher() {
@@ -124,8 +138,16 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
             }
         });
 
-        penType2 = (ListView) findViewById(R.id.listViewPenalty);
 
+
+        penType2 = (ListView) findViewById(R.id.listViewPenalty);
+        penType2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                pen = penType2.getAdapter().getItem(position).toString();
+                setCurrent();
+            }
+        });
 
 
        /*                 ActionController actionMan;
@@ -191,11 +213,11 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
 
         //temp Array categories (0-4)
 
-        spares.add("Minor Penalties");
-        spares.add("Major Penalties");
-        spares.add("Misconduct");
-        spares.add("Game Misconduct");
-        spares.add("Match Penalty");
+        spares.add("Minor Penalties >");
+        spares.add("Major Penalties >");
+        spares.add("Misconduct >");
+        spares.add("Game Misconduct >");
+        spares.add("Match Penalty >");
 
         //populates ListViewCategory
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -246,17 +268,40 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
         switch(v.getId()) {
             case R.id.btnTeamA:
                 addFragment(hockey.icescore.OldClasses.Game.homeTeam);
-
+                selectedTeam=Game.homeTeam;
                 break;
             case R.id.btnTeamB:
                 addFragment(hockey.icescore.OldClasses.Game.awayTeam);
+                selectedTeam=Game.awayTeam;
+                break;
+
+            case R.id.btnAddPenalty:
+                String t = selectedTeam.getPlayerByNumber(Integer.parseInt(playernum))+
+                        " at: "+occuredAt.getSelectedItem().toString()+
+                        " for "+pen+
+                        " penalty timeout : "+penaltyTime.getSelectedItem().toString();
+                penaltyLog.add(t);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        penaltyLog );
+                loglog.setAdapter(arrayAdapter);
+                break;
+
+            case R.id.btnClearSelectedPenalties:
+                penaltyLog = new ArrayList<String>();
+                ArrayAdapter<String> aa = new ArrayAdapter<String>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        penaltyLog );
+                loglog.setAdapter(aa);
                 break;
         }
     }
 
     @Override
     public void buttonClicked(String val) {
-
+        playernum=val;
     }
 
     @Override
