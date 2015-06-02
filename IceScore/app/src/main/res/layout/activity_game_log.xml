@@ -7,8 +7,19 @@
         android:layout_width="1000dp"
         android:layout_height="match_parent"
         android:id="@+id/logList"
-        android:entries="@array/list"
+
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/deleteLogButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/logList"
+        android:layout_alignStart="@+id/logList" />
 
 </RelativeLayout>

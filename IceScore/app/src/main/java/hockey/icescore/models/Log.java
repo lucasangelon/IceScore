@@ -8,10 +8,14 @@ import hockey.icescore.OldClasses.Game;
  */
 public class Log
 {
+    public static boolean loadDummyData = true;
     // Empty constructor.
     public Log()
     {    }
 
+    public long getPeriodId(){
+        return 0;
+    };
     // Log object for saves.
     public class Save extends Log
     {
@@ -20,14 +24,6 @@ public class Log
         protected String shotTeam;
         protected String timestamp;
         protected long periodId;
-
-        public long getPeriodId() {
-            return periodId;
-        }
-
-        public void setPeriodId(long periodId) {
-            this.periodId = periodId;
-        }
 
         // Empty Constructor
         public Save ()
@@ -42,11 +38,24 @@ public class Log
             this.timestamp = t;
             periodId = Game.currentPeriod;
         }
+        @Override
+        public long getPeriodId() {
+            return periodId;
+        }
+
+        public void setPeriodId(long periodId) {
+            this.periodId = periodId;
+        }
 
         // Method for extracting the content for the game log.
-        private String extract()
+        public String extract()
         {
             return timestamp + " Shot by team: " + shotTeam + ", Saved by goalie: " + goalieNumber + ".";
+        }
+        @Override
+        public String toString()
+        {
+            return timestamp + " Shot by team: " + shotTeam + ", Saved by goalie: " + goalieNumber + "Period Id:" + periodId;
         }
     }
 
@@ -62,7 +71,8 @@ public class Log
         protected long periodId;
         // Empty Constructor
         public Goal()
-        {   }
+        {
+        }
 
         // Goal Log Constructor
         public Goal(long id, String pNum, String tn, String ts, String asn, String asn2)
@@ -77,11 +87,25 @@ public class Log
         }
 
         // Method for extracting the content for the game log.
-        private String extract()
+        public String extract()
         {
             return timestamp + " Goal, Team: " + teamName + ", Player: " + playerNumber + ", " +
-                "Assists: " + assistNumber + ", " + assistNumber2 + ".";
+                    "Assists: " + assistNumber + ", " + assistNumber2 + ".";
         }
+
+        @Override
+        public String toString()
+        {
+            return timestamp + " Goal, Team: " + teamName + ", Player: " + playerNumber + ", " +
+                    "Assists: " + assistNumber + ", " + assistNumber2 + "Period Id:" + periodId;
+        }
+        @Override
+        public long getPeriodId()
+        {
+            return periodId;
+        }
+
+
     }
 
     // Log object for penalties.
@@ -108,11 +132,21 @@ public class Log
             this.penaltyName = pn;
             periodId = Game.currentPeriod;
         }
+        @Override
+        public long getPeriodId()
+        {
+            return periodId;
+        }
 
-        private String extract()
+        public String extract()
         {
             return timestamp + " Penalty, Team: " + teamName + ", Player: " + playerNumber + ", " +
                     "Penalty Name: " + penaltyName + ".";
+        }
+        public String toString()
+        {
+            return timestamp + " Penalty, Team: " + teamName + ", Player: " + playerNumber + ", " +
+                    "Penalty Name: " + penaltyName + "Period Id:" + periodId;
         }
     }
 
@@ -136,11 +170,22 @@ public class Log
             this.injuryName = in;
             periodId = Game.currentPeriod;
         }
+        @Override
+        public long getPeriodId()
+        {
+            return periodId;
+        }
 
-        private String extract()
+        public String extract()
         {
             return timestamp + " Injury, Team: " + teamName + ", Player: " + playerNumber + ", " +
                     "Injury Name: " + injuryName + ".";
+        }
+        @Override
+        public String toString()
+        {
+            return timestamp + " Injury, Team: " + teamName + ", Player: " + playerNumber + ", " +
+                    "Injury Name: " + injuryName + "Period Id:" + periodId;
         }
     }
 
@@ -160,10 +205,20 @@ public class Log
             this.timestamp = timestamp;
             periodId = Game.currentPeriod;
         }
+        @Override
+        public long getPeriodId()
+        {
+            return periodId;
+        }
 
-        private String extract()
+        public String extract()
         {
             return timestamp + " Timeout requested by: " + teamName + ".";
+        }
+        @Override
+        public String toString()
+        {
+            return timestamp + " Timeout requested by: " + teamName + "Period Id:" + periodId;
         }
     }
 
@@ -185,11 +240,22 @@ public class Log
             this.timestamp = timestamp;
             periodId = Game.currentPeriod;
         }
+        @Override
+        public long getPeriodId()
+        {
+            return periodId;
+        }
 
-        private String extract()
+        public String extract()
         {
             return timestamp + " Goalie changed for team: " + teamName + ", Player: " +
                     playerNumber + ".";
+        }
+        @Override
+        public String toString()
+        {
+            return timestamp + " Goalie changed for team: " + teamName + ", Player: " +
+                    playerNumber + "Period Id:" + periodId;
         }
     }
 
@@ -204,10 +270,23 @@ public class Log
             this.id = id;
         }
 
+
         private long extract()
         {
             return id;
         }
+        @Override
+        public String toString()
+        {
+            return "ID:" + id ;
+        }
+        @Override
+        public long getPeriodId()
+        {
+            return 0;
+        }
+
+
     }
 
     // Log object for game notes.
@@ -223,9 +302,15 @@ public class Log
             this.notes = notes;
         }
 
-        private String extract()
+        @Override
+        public String toString()
         {
-            return notes;
+            return "Notes:" + notes;
+        }
+        @Override
+        public long getPeriodId()
+        {
+            return 0;
         }
     }
 }

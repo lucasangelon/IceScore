@@ -7,8 +7,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
+
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
 
 /**
@@ -16,7 +22,9 @@ import hockey.icescore.R;
  */
 public class ChangeGoalie extends ActionBarActivity
 {
-
+    public static ListView listView1,listView2;
+    public static ArrayAdapter<String> adapter;
+    public static int teamAGoalieSelected=0,teamBGoalieSelected=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,39 @@ public class ChangeGoalie extends ActionBarActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Screen handling show Actionbar title.
         getSupportActionBar().setTitle("Change Goalie");
+
+        listView1= (ListView) findViewById(R.id.listView);
+        //listView1.setItemChecked(teamBGoalieSelected).;
+        //listView1.setItemChecked(0, true);
+        //listView2.setSelection(0);
+        //setListViewChecked(true);
+        //listView1.setItemChecked(0, true);
+
+        //listView1.setC
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                teamBGoalieSelected=position;
+                String[] teamB_array = getResources().getStringArray(R.array.teamB);
+                String name = teamB_array[teamBGoalieSelected];
+                Game.awayTeam.addGoalie(1, name,10);
+                //makeText(rootView.getContext(),"Selected Log" + logSelected+ "ArrayIndex" + GameLog.displayListElementIndex.get(logSelected), Toast.LENGTH_SHORT).show();
+            }
+        });
+        listView2= (ListView) findViewById(R.id.listView2);
+        //listView2.setSelection(teamAGoalieSelected);
+        listView2.setItemChecked( teamAGoalieSelected, true );
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                teamAGoalieSelected=position;
+                String[] teamA_array = getResources().getStringArray(R.array.teamA);
+                String name = teamA_array[teamAGoalieSelected];
+                Game.homeTeam.addGoalie(1, name,10);
+                //makeText(rootView.getContext(),"Selected Log" + logSelected+ "ArrayIndex" + GameLog.displayListElementIndex.get(logSelected), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -49,6 +90,15 @@ public class ChangeGoalie extends ActionBarActivity
         finish();
         return true;
     }
+    //@Override
+//    public void setListViewChecked(boolean checked) {
+//        if (checked) {
+//            listView1.setBackgroundColor(Color.RED);
+//        } else {
+//            listView1.setBackgroundColor(Color.BLACK);
+//        }
+//    }
+
 
 
 }
