@@ -355,13 +355,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     ticking = false;
                     txtTime.setTextColor(Color.parseColor("#FF0000"));
                 }
-                else
-                {
-                    t.start();
-                    ticking = true;
-                    txtTime.setTextColor(Color.parseColor("#00FF00"));
-                    setPeriod();
-                }
+         
                 Intent penaltyA = new Intent(Game.this, Penalty.class);
                 startActivity(penaltyA);
                 break;
@@ -373,13 +367,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     ticking = false;
                     txtTime.setTextColor(Color.parseColor("#FF0000"));
                 }
-                else
-                {
-                    t.start();
-                    ticking = true;
-                    txtTime.setTextColor(Color.parseColor("#00FF00"));
-                    setPeriod();
-                }
+
                 Intent penaltyB = new Intent(Game.this, Penalty.class);
                 startActivity(penaltyB);
                 break;
@@ -392,13 +380,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     ticking = false;
                     txtTime.setTextColor(Color.parseColor("#FF0000"));
                 }
-                else
-                {
-                    t.start();
-                    ticking = true;
-                    txtTime.setTextColor(Color.parseColor("#00FF00"));
-                    setPeriod();
-                }
+
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
