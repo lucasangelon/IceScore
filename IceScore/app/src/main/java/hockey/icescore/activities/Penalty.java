@@ -14,13 +14,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import hockey.icescore.OldClasses.*;
 import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
+import hockey.icescore.controllers.ActionController;
 import hockey.icescore.fragments.PlayerListRight;
+import hockey.icescore.models.GamePersonAction;
+import hockey.icescore.models.GamePersonActionExtended;
+import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
 
 import static hockey.icescore.OldClasses.Game.homeTeam;
@@ -40,6 +45,7 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
     Spinner occuredAt;
     Spinner penaltyTime;
     ListView loglog;
+    ArrayList<tempPenalty> tba = new ArrayList<tempPenalty>();
     public void addFragment(Team team){
         PlayerListRight p1 = new PlayerListRight();
         p1.setListener(this);
@@ -78,6 +84,9 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
                 android.R.layout.simple_spinner_item,
                 oc );
         occuredAt.setAdapter(spinAd);
+        occuredAt.setSelection(30);
+
+        //Attaches buttons to onClick listeners
         Button teamA = (Button) findViewById(R.id.btnTeamA);
         teamA.setOnClickListener(this);
 
@@ -89,6 +98,10 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
 
         Button clearPenalty = (Button) findViewById(R.id.btnClearSelectedPenalties);
         clearPenalty.setOnClickListener(this);
+
+        Button confirmPenalty = (Button) findViewById(R.id.btnConfirmPenalties);
+        confirmPenalty.setOnClickListener(this);
+
 
 
         edit = (EditText) findViewById(R.id.editTextPenaltySearch);
@@ -266,36 +279,79 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            // displays team a fragment
             case R.id.btnTeamA:
                 addFragment(hockey.icescore.OldClasses.Game.homeTeam);
                 selectedTeam=Game.homeTeam;
                 break;
+            // displays team b fragment
             case R.id.btnTeamB:
                 addFragment(hockey.icescore.OldClasses.Game.awayTeam);
                 selectedTeam=Game.awayTeam;
                 break;
 
+            // adds penalty (only with correct parameters) to the list
             case R.id.btnAddPenalty:
-                String t = selectedTeam.getPlayerByNumber(Integer.parseInt(playernum))+
-                        " at: "+occuredAt.getSelectedItem().toString()+
-                        " for "+pen+
-                        " penalty timeout : "+penaltyTime.getSelectedItem().toString();
-                penaltyLog.add(t);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                        this,
-                        android.R.layout.simple_list_item_1,
-                        penaltyLog );
-                loglog.setAdapter(arrayAdapter);
-                break;
+                try {
+                    String t = selectedTeam.getPlayerByNumber(Integer.parseInt(playernum)) +
+                            " at: " + occuredAt.getSelectedItem().toString() +
+                            " for " + pen +
+                            " | penalty time out : " + penaltyTime.getSelectedItem().toString();
+                    penaltyLog.add(t);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                            this,
+                            android.R.layout.simple_list_item_1,
+                            penaltyLog);
+                    loglog.setAdapter(arrayAdapter);
+                    GamePersonAction gpat = new GamePersonAction(
+                            hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(Integer.parseInt(playernum)).getID(),
+                            Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
+                            Game.currentPeriod, hockey.icescore.OldClasses.Game.gameID, Game.gameTime);
 
+                    GamePersonActionExtended gpaet = new GamePersonActionExtended(1, 0, "");
+                    tempPenalty temp = new tempPenalty(gpat, gpaet, Integer.parseInt(playernum), selectedTeam.getTeamName(), t);
+                    tba.add(temp);
+                    break;
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    displayExceptionMessage(e.getMessage());
+                }
+
+                //clear selected penalties from list
             case R.id.btnClearSelectedPenalties:
-                penaltyLog = new ArrayList<String>();
-                ArrayAdapter<String> aa = new ArrayAdapter<String>(
+                try {
+
+                    penaltyLog = new ArrayList<String>();
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(
                         this,
                         android.R.layout.simple_list_item_1,
-                        penaltyLog );
-                loglog.setAdapter(aa);
-                break;
+                        penaltyLog);
+                    loglog.setAdapter(aa);
+                    tba = new ArrayList<>();
+                    break;
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    displayExceptionMessage(e.getMessage());
+                }
+
+                //insert penalties into game log
+            case R.id.btnConfirmPenalties:
+                try {
+                    ActionController actionMan;
+                    actionMan = new ActionController(this);
+                    for (tempPenalty te : tba) {
+                        actionMan.insertPenaltyInjury(te.gpa, te.gpae, te.playerNum, te.teamName, te.desc);
+                    }
+
+                    break;
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    displayExceptionMessage(e.getMessage());
+                }
+
         }
     }
 
@@ -308,4 +364,38 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+
+
+
+    // Storing penalties temporarily until confirm button is clicked
+    private class tempPenalty
+    {
+        GamePersonAction gpa;
+        GamePersonActionExtended gpae;
+        int playerNum;
+        String teamName;
+        String desc;
+        tempPenalty(GamePersonAction gpa,GamePersonActionExtended gpae,int playerNum,String teamName,String desc)
+        {
+            this.gpa = gpa;
+            this.gpae = gpae;
+            this.playerNum=playerNum;
+            this.teamName=teamName;
+            this.desc=desc;
+
+        }
+
+
+    }
+
+    // Displays error message for the common errors on this page
+
+    public void displayExceptionMessage(String msg) //Josh
+    {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+
+
 }

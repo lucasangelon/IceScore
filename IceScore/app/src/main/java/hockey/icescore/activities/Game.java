@@ -349,17 +349,56 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
         {
 
             case R.id.btnPenaltyA: //Josh
+                if(ticking)
+                {
+                    t.stop();
+                    ticking = false;
+                    txtTime.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else
+                {
+                    t.start();
+                    ticking = true;
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    setPeriod();
+                }
                 Intent penaltyA = new Intent(Game.this, Penalty.class);
                 startActivity(penaltyA);
                 break;
 
             case R.id.btnPenaltyB: //Josh
+                if(ticking)
+                {
+                    t.stop();
+                    ticking = false;
+                    txtTime.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else
+                {
+                    t.start();
+                    ticking = true;
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    setPeriod();
+                }
                 Intent penaltyB = new Intent(Game.this, Penalty.class);
                 startActivity(penaltyB);
                 break;
 
         // When the button others is clicked, send the user to the others menu activity.
             case R.id.btnOthers:
+                if(ticking)
+                {
+                    t.stop();
+                    ticking = false;
+                    txtTime.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else
+                {
+                    t.start();
+                    ticking = true;
+                    txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    setPeriod();
+                }
                 Intent menuOthers = new Intent(Game.this, MenuOthers.class);
                 startActivity(menuOthers);
                 break;
