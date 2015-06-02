@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.helper.DatabaseManager;
 import hockey.icescore.models.*;
 import hockey.icescore.util.Constants;
@@ -67,7 +69,7 @@ public class ActionController
 
         // Generate a Log containing the information about the action for the game log.
         Log.Save l = new Log(). new Save(returnId, playerNumber, shotTeam, gpa.getTimestamp());
-
+        Game.addToLogs(l);
         // Return the Save Log object.
         return l;
     }
@@ -136,12 +138,14 @@ public class ActionController
         {
             Log.Penalty lp = new Log(). new Penalty(returnId, Integer.toString(playerNumber), teamName,
                     gpa.getTimestamp(), specificName);
+            hockey.icescore.OldClasses.Game.addToLogs(lp);
             return lp;
         }
         else
         {
             Log.Injury li = new Log(). new Injury(returnId, Integer.toString(playerNumber), teamName,
                     gpa.getTimestamp(), specificName);
+            Game.addToLogs(li);
             return li;
         }
     }
@@ -201,7 +205,7 @@ public class ActionController
         // Create a penalty/injury log object for the game log.
         Log.Goal l = new Log(). new Goal(returnId, Integer.toString(playerNumber), teamName, gpa.getTimestamp(),
                 assistNumber, assist2Number);
-
+        Game.addToLogs(l);
         return l;
     }
 }

@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.support.v4.app.Fragment;
+
+import hockey.icescore.OldClasses.Game;
 import hockey.icescore.activities.GameLog;
 import hockey.icescore.helper.LogTabListener;
 import hockey.icescore.R;
@@ -73,7 +75,7 @@ public class GameLogFragment extends Fragment implements View.OnClickListener {
             // get the list index in the currentGameLog for displayList
             // displayList stores the elements filter
             int index = GameLog.displayListElementIndex.get(logSelected);
-            GameLog.currentGameLog.remove(index);
+            Game.logs.remove(index);
             GameLog.displayList.remove(logSelected);
             GameLog.filterLogsByPeriodID(LogTabListener.selectedTab);
             listView.setAdapter(adapter);

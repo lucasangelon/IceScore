@@ -23,7 +23,7 @@ import hockey.icescore.OldClasses.Game;
 public class GameLog extends ActionBarActivity {
 
     private static final String TAG ="GameLog" ;
-    public static ArrayList<Log> currentGameLog = new ArrayList<Log>();
+    //public static ArrayList<Log> currentGameLog = new ArrayList<Log>();
     public static ArrayList<String> displayList = new ArrayList<String>();
     public static ArrayList<Integer> displayListElementIndex = new ArrayList<Integer>();
     public static int selectedTab;
@@ -142,65 +142,69 @@ public class GameLog extends ActionBarActivity {
 
     public static void addLogs(){
 
-
+        int temp = Game.currentPeriod;
         Game.setCurrentPeriod(1);
         long id = 101;
-        //Add some logs to this arraylist of all the types
-        currentGameLog.add(new Log().new Goal(101, "12","Home", "10:31AM", "30", ""));//Goal
-        currentGameLog.add(new Log().new Save(101,"10","Home","10:32 AM"));//SAve
-        currentGameLog.add(new Log().new Penalty(101,"10","Home","10:33 AM","Time penalty"));//Added a penalty
-        currentGameLog.add(new Log().new Injury(101,"10","Home","10:34 AM","Hit enjury"));//Added a injury
-        currentGameLog.add(new Log().new Timeout(101,"Home","10:35 AM"));//Added a timeout
-        currentGameLog.add(new Log().new ChangeGoalie(101,"10","Home","10:36 AM"));//Added a Change Goalie
-        currentGameLog.add(new Log().new GamePeriod(101));//Added a game period
+//        //Add some logs to this arraylist of all the types
+//        Game.logs.add(new Log().new Goal(101, "12","Home", "10:31AM", "30", ""));//Goal
+//        Game.logs.add(new Log().new Save(101,"10","Home","10:32 AM"));//SAve
+//        Game.logs.add(new Log().new Penalty(101,"10","Home","10:33 AM","Time penalty"));//Added a penalty
+//        Game.logs.add(new Log().new Injury(101,"10","Home","10:34 AM","Hit enjury"));//Added a injury
+//        Game.logs.add(new Log().new Timeout(101,"Home","10:35 AM"));//Added a timeout
+//        Game.logs.add(new Log().new ChangeGoalie(101,"10","Home","10:36 AM"));//Added a Change Goalie
+//        Game.logs.add(new Log().new GamePeriod(101));//Added a game period
         Game.setCurrentPeriod(2);
         //Add some logs to this arraylist of all the types
         id = 102;
-        currentGameLog.add(new Log().new Goal(id, "12","Home", "10:37AM", "30", ""));//Goal
-        currentGameLog.add(new Log().new Save(id,"10","Home","10:38 AM"));//SAve
-        currentGameLog.add(new Log().new Penalty(id,"10","Home","10:39 AM","Time penalty"));//Added a penalty
-        currentGameLog.add(new Log().new Injury(id,"10","Home","10:40 AM","Bit enjury"));//Added a injury
-        currentGameLog.add(new Log().new Timeout(id,"Home","10:42 AM"));//Added a timeout
-        currentGameLog.add(new Log().new ChangeGoalie(id,"10","Home","10:43 AM"));//Added a Change Goalie
-        currentGameLog.add(new Log().new GamePeriod(id));//Added a game period
+        Game.logs.add(new Log().new Goal(id, "12","Home", "00:37AM", "30", ""));//Goal
+        Game.logs.add(new Log().new Save(id,"10","Home","00:38 AM"));//SAve
+        Game.logs.add(new Log().new Penalty(id,"10","Home","00:39 AM","Time penalty"));//Added a penalty
+        Game.logs.add(new Log().new Injury(id,"10","Home","00:40 AM","Bit enjury"));//Added a injury
+        Game.logs.add(new Log().new Timeout(id,"Home","00:42 AM"));//Added a timeout
+        Game.logs.add(new Log().new ChangeGoalie(id,"10","Home","00:43 AM"));//Added a Change Goalie
+        Game.logs.add(new Log().new GamePeriod(id));//Added a game period
         Game.setCurrentPeriod(3);
         id = 103;
-        currentGameLog.add(new Log().new Goal(id, "12","Home", "10:44 AM", "30", ""));//Goal
-        currentGameLog.add(new Log().new Save(id,"10","Home","10:45 AM"));//SAve
-        currentGameLog.add(new Log().new Penalty(id,"10","Home","10:46 AM","Time penalty"));//Added a penalty
-        currentGameLog.add(new Log().new Injury(id,"10","Home","10:47 AM","Bit enjury"));//Added a injury
-        currentGameLog.add(new Log().new Timeout(id,"Home","10:48 AM"));//Added a timeout
-        currentGameLog.add(new Log().new ChangeGoalie(id,"10","Home","10:49 AM"));//Added a Change Goalie
-        currentGameLog.add(new Log().new GamePeriod(id));//Added a game period
+        Game.logs.add(new Log().new Goal(id, "12","Home", "00:44 AM", "30", ""));//Goal
+        Game.logs.add(new Log().new Save(id,"10","Home","00:45 AM"));//SAve
+        Game.logs.add(new Log().new Penalty(id,"10","Home","00:46 AM","Time penalty"));//Added a penalty
+        Game.logs.add(new Log().new Injury(id,"10","Home","00:47 AM","Bit enjury"));//Added a injury
+        Game.logs.add(new Log().new Timeout(id,"Home","00:48 AM"));//Added a timeout
+        Game.logs.add(new Log().new ChangeGoalie(id,"10","Home","00:49 AM"));//Added a Change Goalie
+        Game.logs.add(new Log().new GamePeriod(id));//Added a game period
         Game.setCurrentPeriod(4);
         id = 104;
-        currentGameLog.add(new Log().new Goal(id, "12","Home", "10:50 AM", "30", ""));//Goal
-        currentGameLog.add(new Log().new Save(id,"10","Home","10:51 AM"));//SAve
-        currentGameLog.add(new Log().new Penalty(id,"10","Home","10:52 AM","Time penalty"));//Added a penalty
-        currentGameLog.add(new Log().new Injury(id,"10","Home","10:53 AM","Bit enjury"));//Added a injury
-        currentGameLog.add(new Log().new Timeout(id,"Home","10:54 AM"));//Added a timeout
-        currentGameLog.add(new Log().new ChangeGoalie(id,"10","Home","10:55 AM"));//Added a Change Goalie
-        currentGameLog.add(new Log().new GamePeriod(id));//Added a game period
+        Game.logs.add(new Log().new Goal(id, "12","Home", "00:50 AM", "30", ""));//Goal
+        Game.logs.add(new Log().new Save(id,"10","Home","00:51 AM"));//SAve
+        Game.logs.add(new Log().new Penalty(id,"10","Home","00:52 AM","Time penalty"));//Added a penalty
+        Game.logs.add(new Log().new Injury(id,"10","Home","00:53 AM","Bit enjury"));//Added a injury
+        Game.logs.add(new Log().new Timeout(id,"Home","00:54 AM"));//Added a timeout
+        Game.logs.add(new Log().new ChangeGoalie(id,"10","Home","00:55 AM"));//Added a Change Goalie
+        Game.logs.add(new Log().new GamePeriod(id));//Added a game period
         Game.setCurrentPeriod(5);
         id = 105;
-        currentGameLog.add(new Log().new Goal(id, "12","Home", "10:56AM", "30", ""));//Goal
-        currentGameLog.add(new Log().new Save(id,"10","Home","10:57 AM"));//SAve
-        currentGameLog.add(new Log().new Penalty(id,"10","Home","10:58 AM","Time penalty"));//Added a penalty
-        currentGameLog.add(new Log().new Injury(id,"10","Home","10:59 AM","Bit enjury"));//Added a injury
-        currentGameLog.add(new Log().new Timeout(id,"Home","11:00 AM"));//Added a timeout
-        currentGameLog.add(new Log().new ChangeGoalie(id,"10","Home","11:01 AM"));//Added a Change Goalie
-        currentGameLog.add(new Log().new GamePeriod(id));//Added a game period
+        Game.logs.add(new Log().new Goal(id, "12","Home", "00:50AM", "30", ""));//Goal
+        Game.logs.add(new Log().new Save(id,"10","Home","00:51 AM"));//SAve
+        Game.logs.add(new Log().new Penalty(id,"10","Home","00:52 AM","Time penalty"));//Added a penalty
+        Game.logs.add(new Log().new Injury(id,"10","Home","00:53 AM","Bit enjury"));//Added a injury
+        Game.logs.add(new Log().new Timeout(id,"Home","00:53 AM"));//Added a timeout
+        Game.logs.add(new Log().new ChangeGoalie(id,"10","Home","00:54 AM"));//Added a Change Goalie
+        Game.logs.add(new Log().new GamePeriod(id));//Added a game period
+
+        //Game.currentPeriod = ;
+        Game.setCurrentPeriod(temp);
+
     }
 
     public static ArrayList<String> filterLogsByPeriodID(long periodId){
         //ArrayList<String> displayList = new ArrayList<String>();
         displayList.clear();
         displayListElementIndex.clear();
-        for(int i = 0; i < currentGameLog.size(); i++){
-            Log log =  currentGameLog.get(i);
+        for(int i = 0; i < Game.logs.size(); i++){
+            Log log =  Game.logs.get(i);
 
             if (log.getPeriodId() == periodId){
-                displayList.add(log.toString());
+                displayList.add(log.extract());
                 displayListElementIndex.add(i);
             }
         }

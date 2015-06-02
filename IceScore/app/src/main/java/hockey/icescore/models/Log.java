@@ -16,6 +16,7 @@ public class Log
     public long getPeriodId(){
         return 0;
     };
+    public String extract(){ return ""; };
     // Log object for saves.
     public class Save extends Log
     {
@@ -43,19 +44,12 @@ public class Log
             return periodId;
         }
 
-        public void setPeriodId(long periodId) {
-            this.periodId = periodId;
-        }
 
         // Method for extracting the content for the game log.
+        @Override
         public String extract()
         {
             return timestamp + " Shot by team: " + shotTeam + ", Saved by goalie: " + goalieNumber + ".";
-        }
-        @Override
-        public String toString()
-        {
-            return timestamp + " Shot by team: " + shotTeam + ", Saved by goalie: " + goalieNumber + "Period Id:" + periodId;
         }
     }
 
@@ -87,18 +81,13 @@ public class Log
         }
 
         // Method for extracting the content for the game log.
+        @Override
         public String extract()
         {
             return timestamp + " Goal, Team: " + teamName + ", Player: " + playerNumber + ", " +
                     "Assists: " + assistNumber + ", " + assistNumber2 + ".";
         }
 
-        @Override
-        public String toString()
-        {
-            return timestamp + " Goal, Team: " + teamName + ", Player: " + playerNumber + ", " +
-                    "Assists: " + assistNumber + ", " + assistNumber2 + "Period Id:" + periodId;
-        }
         @Override
         public long getPeriodId()
         {
@@ -138,16 +127,13 @@ public class Log
             return periodId;
         }
 
+        @Override
         public String extract()
         {
             return timestamp + " Penalty, Team: " + teamName + ", Player: " + playerNumber + ", " +
                     "Penalty Name: " + penaltyName + ".";
         }
-        public String toString()
-        {
-            return timestamp + " Penalty, Team: " + teamName + ", Player: " + playerNumber + ", " +
-                    "Penalty Name: " + penaltyName + "Period Id:" + periodId;
-        }
+
     }
 
     // Log object for injuries.
@@ -176,16 +162,11 @@ public class Log
             return periodId;
         }
 
+        @Override
         public String extract()
         {
             return timestamp + " Injury, Team: " + teamName + ", Player: " + playerNumber + ", " +
                     "Injury Name: " + injuryName + ".";
-        }
-        @Override
-        public String toString()
-        {
-            return timestamp + " Injury, Team: " + teamName + ", Player: " + playerNumber + ", " +
-                    "Injury Name: " + injuryName + "Period Id:" + periodId;
         }
     }
 
@@ -210,16 +191,12 @@ public class Log
         {
             return periodId;
         }
-
+        @Override
         public String extract()
         {
             return timestamp + " Timeout requested by: " + teamName + ".";
         }
-        @Override
-        public String toString()
-        {
-            return timestamp + " Timeout requested by: " + teamName + "Period Id:" + periodId;
-        }
+
     }
 
     // Log object for change of goalies in-game.
@@ -246,17 +223,13 @@ public class Log
             return periodId;
         }
 
+        @Override
         public String extract()
         {
             return timestamp + " Goalie changed for team: " + teamName + ", Player: " +
                     playerNumber + ".";
         }
-        @Override
-        public String toString()
-        {
-            return timestamp + " Goalie changed for team: " + teamName + ", Player: " +
-                    playerNumber + "Period Id:" + periodId;
-        }
+
     }
 
     // Log object for game periods.
@@ -270,16 +243,12 @@ public class Log
             this.id = id;
         }
 
-
-        private long extract()
-        {
-            return id;
-        }
         @Override
-        public String toString()
+        public String extract()
         {
-            return "ID:" + id ;
+            return "ID:" + id;
         }
+
         @Override
         public long getPeriodId()
         {
@@ -303,7 +272,7 @@ public class Log
         }
 
         @Override
-        public String toString()
+        public String extract()
         {
             return "Notes:" + notes;
         }

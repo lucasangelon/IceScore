@@ -10,7 +10,7 @@ import hockey.icescore.models.Log;
  * Created by 041402465 on 7/04/2015.
  */
 public class Game {
-    static public int gameID;
+    static public int gameID =1;
     static public Team homeTeam;
     static public Team awayTeam;
     static public String gameTime;
@@ -45,11 +45,11 @@ public class Game {
         Game.logs.remove(log);
     }
 
-    static public ArrayList<Log> logs;
+    static public ArrayList<Log> logs = new ArrayList<Log>();
     static public String notes;
     //      public Event[] events;
-    static public int currentPeriod;
-    static public String CurrentPeriod;
+    static public int currentPeriod = 1;
+    static public String CurrentPeriod ="1";
     static public int periodLength = 20;
 
 
@@ -96,7 +96,7 @@ public class Game {
         this.division = division;
 
         this.notes = "";
-        this.currentPeriod = 0;
+        this.currentPeriod = 1;
         this.officials = new ArrayList<Official>();
     }
 
