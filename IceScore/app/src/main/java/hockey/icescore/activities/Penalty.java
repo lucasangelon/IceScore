@@ -66,6 +66,9 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        spares = new ArrayList<>();
+        penals = new ArrayList<ArrayList<String>>();
+        temp = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penalty);
 

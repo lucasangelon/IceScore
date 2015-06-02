@@ -355,7 +355,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     ticking = false;
                     txtTime.setTextColor(Color.parseColor("#FF0000"));
                 }
-         
+
                 Intent penaltyA = new Intent(Game.this, Penalty.class);
                 startActivity(penaltyA);
                 break;
