@@ -70,6 +70,7 @@ public class ActionController
         // Generate a Log containing the information about the action for the game log.
         Log.Save l = new Log(). new Save(returnId, playerNumber, shotTeam, gpa.getTimestamp());
         Game.addToLogs(l);
+
         // Return the Save Log object.
         return l;
     }
@@ -206,6 +207,7 @@ public class ActionController
         Log.Goal l = new Log(). new Goal(returnId, Integer.toString(playerNumber), teamName, gpa.getTimestamp(),
                 assistNumber, assist2Number);
         Game.addToLogs(l);
+
         return l;
     }
 }

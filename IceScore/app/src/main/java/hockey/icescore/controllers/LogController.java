@@ -1,6 +1,7 @@
 package hockey.icescore.controllers;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import hockey.icescore.helper.DatabaseManager;
 

@@ -1,5 +1,10 @@
 package hockey.icescore.models;
 
+import java.text.DecimalFormat;
+
+import hockey.icescore.OldClasses.*;
+import hockey.icescore.OldClasses.Game;
+
 /**
  * Created by Lucas Angelon on 01-Apr-15.
  */
@@ -18,14 +23,21 @@ public class GamePersonAction
     }
 
     public GamePersonAction(long pId, long aId, long tId,
-                            long periodId, long gId, String timestamp)
+                            long periodId, long gId)
     {
         this.personId = pId;
         this.actionId = aId;
         this.teamId = tId;
         this.periodId = periodId;
         this.gameId = gId;
-        this.timestamp = timestamp;
+        int timerTime =Game.gameTimeInt;
+        int hours = timerTime / 3600, remainder = timerTime % 3600, minutes = remainder / 60, seconds = remainder % 60;
+        this.timestamp  = format(minutes) + ":" + format(seconds);;
+    }
+
+    private String format(int tt){
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(tt);
     }
 
     public long getId() {

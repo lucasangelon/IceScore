@@ -309,7 +309,7 @@ public class Penalty extends ActionBarActivity implements Fragment_Listener, Vie
                     GamePersonAction gpat = new GamePersonAction(
                             hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(Integer.parseInt(playernum)).getID(),
                             Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
-                            Game.currentPeriod, hockey.icescore.OldClasses.Game.gameID, Game.gameTime);
+                            Game.currentPeriod, hockey.icescore.OldClasses.Game.gameID);
 
                     GamePersonActionExtended gpaet = new GamePersonActionExtended(1, 0, "");
                     tempPenalty temp = new tempPenalty(gpat, gpaet, Integer.parseInt(playernum), selectedTeam.getTeamName(), t);

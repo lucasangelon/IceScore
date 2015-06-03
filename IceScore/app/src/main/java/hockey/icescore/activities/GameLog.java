@@ -204,7 +204,7 @@ public class GameLog extends ActionBarActivity {
             Log log =  Game.logs.get(i);
 
             if (log.getPeriodId() == periodId){
-                displayList.add(log.extract());
+                displayList.add(log.toString());
                 displayListElementIndex.add(i);
             }
         }

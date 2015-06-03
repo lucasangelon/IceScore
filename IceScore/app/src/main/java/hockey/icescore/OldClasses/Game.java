@@ -5,12 +5,13 @@ import android.text.format.Time;
 import java.util.ArrayList;
 
 import hockey.icescore.models.Log;
+import hockey.icescore.util.GameLogListener;
 
 /**
  * Created by 041402465 on 7/04/2015.
  */
 public class Game {
-    static public int gameID =1;
+    static public int gameID;
     static public Team homeTeam;
     static public Team awayTeam;
     static public String gameTime;
@@ -20,6 +21,11 @@ public class Game {
     public static int gameTimeInt = 0;
     public static int homeass = 0;
     public static int awayass = 0;
+    public static GameLogListener listener;
+
+    public static void setGameLogListener(GameLogListener listen){
+        listener = listen;
+    }
 
     public static int getGameTimeInt() {
         return gameTimeInt;
@@ -38,7 +44,7 @@ public class Game {
     }
 
     public static void addToLogs(Log logs) {
-        Game.logs.add(logs);
+        Game.logs.add(logs); listener.GameLogUpdated();
     }
 
     public static void deleteLogs(Log log) {
@@ -48,8 +54,8 @@ public class Game {
     static public ArrayList<Log> logs = new ArrayList<Log>();
     static public String notes;
     //      public Event[] events;
-    static public int currentPeriod = 1;
-    static public String CurrentPeriod ="1";
+    static public int currentPeriod =1;
+    static public String CurrentPeriod="1";
     static public int periodLength = 20;
 
 
@@ -96,7 +102,7 @@ public class Game {
         this.division = division;
 
         this.notes = "";
-        this.currentPeriod = 1;
+        this.currentPeriod = 0;
         this.officials = new ArrayList<Official>();
     }
 

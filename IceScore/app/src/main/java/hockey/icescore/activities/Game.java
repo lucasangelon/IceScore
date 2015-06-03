@@ -10,13 +10,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import static hockey.icescore.OldClasses.Game.*;
 import hockey.icescore.OldClasses.*;
 import hockey.icescore.R;
@@ -26,13 +30,15 @@ import hockey.icescore.fragments.PlayerListLeft;
 import hockey.icescore.fragments.PlayerListRight;
 import hockey.icescore.models.GamePersonAction;
 import hockey.icescore.models.GamePersonActionGoal;
+import hockey.icescore.models.Log;
 import hockey.icescore.models.Timeout;
 import hockey.icescore.util.Constants;
 import hockey.icescore.util.Fragment_Listener;
+import hockey.icescore.util.GameLogListener;
 
 // everything done by jack
 //dont edit
-public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener
+public class Game extends ActionBarActivity implements View.OnClickListener , Fragment_Listener, GameLogListener
 {
     Context gameContext = this;
     ActionController actionController;
@@ -52,6 +58,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     boolean ticking = false;
     boolean homeTicking = false;
     boolean awayTicking = false;
+
+ListView gameLog;
 
     TextView txtTime;
     TextView txtPeriod;
@@ -73,6 +81,26 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     int homeAssistId2 = 0;
     int awayAssistId = 0;
     int awayAssistId2 = 0;
+    @Override
+    public void GameLogUpdated() {
+            ArrayList<Log> displayed = new ArrayList<Log>();
+        int size = hockey.icescore.OldClasses.Game.logs.size();
+        if(size>3)
+        {
+            displayed.add(hockey.icescore.OldClasses.Game.logs.get(size-1));
+            displayed.add(hockey.icescore.OldClasses.Game.logs.get(size-2));
+            displayed.add(hockey.icescore.OldClasses.Game.logs.get(size-3));
+        }
+        else
+        {
+            displayed = hockey.icescore.OldClasses.Game.logs;
+        }
+        ArrayAdapter<Log> arrayAdapter2 = new ArrayAdapter<Log>(
+                gameContext,
+                android.R.layout.simple_list_item_1,
+                displayed);
+        gameLog.setAdapter(arrayAdapter2);
+    }
 
     private enum Selected  {HOME,AWAY};
     Selected selected = Selected.HOME;
@@ -133,17 +161,17 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                 // to send the data properly to the controller to add the rows into the database
                 // Lucas
 
-                /*
+
                 GamePersonAction gpa = new GamePersonAction(
                         hockey.icescore.OldClasses.Game.homeTeam.getPlayerByNumber(playernum).getID(),
                         Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.homeTeam.getTeamID(),
-                        period, hockey.icescore.OldClasses.Game.gameID, txtTime.getText().toString());
+                        period, hockey.icescore.OldClasses.Game.gameID);
                 GamePersonActionGoal gpag = new GamePersonActionGoal(awayGoalieId, homeAssistId,
                         homeAssistId2);
                 actionController.insertGoal(gpa, gpag, playernum,
                         hockey.icescore.OldClasses.Game.homeTeam.getTeamName(), homeAssist,
                         homeAssist2);
-*/
+
                 Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+homeAssist+", "+homeAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 homeasscount=0;
@@ -196,7 +224,15 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     awayasscount++;
                 } if(awayasscount==3){
                 Goal goal = new Goal(0, period + "", playernum, -1, -1, false);
-                //dataBase.InsertGoal(goal.goalID,goal.playerID,t.time(),goal.assist1Player,goal.assist2Player,goal.penaltyShootout);
+                GamePersonAction gpa = new GamePersonAction(
+                        hockey.icescore.OldClasses.Game.awayTeam.getPlayerByNumber(playernum).getID(),
+                        Constants.ACTION_GOAL_ID, hockey.icescore.OldClasses.Game.awayTeam.getTeamID(),
+                        period, hockey.icescore.OldClasses.Game.gameID);
+                GamePersonActionGoal gpag = new GamePersonActionGoal(homeGoalieId, awayAssistId,
+                        awayAssistId2);
+                actionController.insertGoal(gpa, gpag, playernum,
+                        hockey.icescore.OldClasses.Game.awayTeam.getTeamName(), awayAssist,
+                        awayAssist2);
                 Toast toast = Toast.makeText(this, goalPlayerNum+", Period: "+goal.period+", assisted by "+awayAssist+", "+awayAssist2, Toast.LENGTH_SHORT);
                 toast.show();
                 awayasscount=0;
@@ -214,13 +250,15 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+ hockey.icescore.OldClasses.Game.setGameLogListener(this);
+        hockey.icescore.OldClasses.Game.setCurrentPeriod(period);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        gameLog = (ListView) findViewById(R.id.lstGameLog);
         // Initializing the controller for the database interaction.
         actionController = new ActionController(gameContext);
         timerController = new TimerController(gameContext);
-
+        gameLog.setScrollContainer(false);
         Button btnMenuOthers = (Button) findViewById(R.id.btnOthers);
         btnMenuOthers.setOnClickListener(this);
 
@@ -281,6 +319,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                     t.start();
                     ticking = true;
                     txtTime.setTextColor(Color.parseColor("#00FF00"));
+                    hockey.icescore.OldClasses.Game.setCurrentPeriod(period);
                     setPeriod();
                 }
 
@@ -582,7 +621,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener , Fr
                            String timestamp, String goalieNumber, String shotTeam)
     {
         GamePersonAction gpa = new GamePersonAction(goalieId, Constants.ACTION_SHOTSAVE_ID,
-                defenseTeamId, periodId, gameId, timestamp);
+                defenseTeamId, periodId, gameId);
 
         actionController.insertShotSave(gpa, goalieNumber, shotTeam);
     }
