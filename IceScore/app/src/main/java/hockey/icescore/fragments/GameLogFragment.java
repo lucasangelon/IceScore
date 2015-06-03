@@ -12,8 +12,12 @@ import android.support.v4.app.Fragment;
 
 import hockey.icescore.OldClasses.Game;
 import hockey.icescore.activities.GameLog;
+import hockey.icescore.controllers.LogController;
 import hockey.icescore.helper.LogTabListener;
 import hockey.icescore.R;
+import hockey.icescore.models.Log;
+import hockey.icescore.util.Constants;
+
 import static hockey.icescore.activities.GameLog.displayList;
 import static hockey.icescore.activities.GameLog.filterLogsByPeriodID;
 
@@ -74,9 +78,33 @@ public class GameLogFragment extends Fragment implements View.OnClickListener {
             // The filter list index is different from original arraylist index
             // get the list index in the currentGameLog for displayList
             // displayList stores the elements filter
+            LogController actionLog = new LogController(getActivity().getBaseContext());
             int index = GameLog.displayListElementIndex.get(logSelected);
+            int actionType=0;
+            long id;
+
+            //Get the type of log element
+            Log log = Game.logs.get(index);
+            if( log.getClass() == Log.Goal.class){
+                actionType = Constants.ACTION_GOAL_ID;
+            }
+            else if( log.getClass() == Log.Penalty.class){
+                actionType = Constants.ACTION_PENALTY_ID;
+            }
+            else if( log.getClass() == Log.Injury.class ){
+                actionType = Constants.ACTION_INJURY_ID;
+            }
+            else if( log.getClass() == Log.Save.class ){
+                actionType = Constants.ACTION_SHOTSAVE_ID;
+            }
+
+            //get the Id of the element
+            id = log.getId();
+            actionLog.deleteAction(id,actionType);
+
             Game.logs.remove(index);
             GameLog.displayList.remove(logSelected);
+
             GameLog.filterLogsByPeriodID(LogTabListener.selectedTab);
             listView.setAdapter(adapter);
         }

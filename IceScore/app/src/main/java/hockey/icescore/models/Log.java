@@ -16,6 +16,8 @@ public class Log
     public long getPeriodId(){
         return 0;
     };
+    public long getId() { return 0;};
+
     // Log object for saves.
     public class Save extends Log
     {
@@ -24,6 +26,10 @@ public class Log
         protected String shotTeam;
         protected String timestamp;
         protected long periodId;
+
+        public long getId() {
+            return id;
+        }
 
         // Empty Constructor
         public Save ()
@@ -62,6 +68,10 @@ public class Log
     // Log object for goals.
     public class Goal extends Log
     {
+        public long getId() {
+            return id;
+        }
+
         protected long id;
         protected String playerNumber;
         protected String teamName;
@@ -121,7 +131,9 @@ public class Log
         // Empty Constructor
         public Penalty()
         {   }
-
+        public long getId() {
+            return id;
+        }
         // Penalty Log Constructor
         public Penalty(long id, String pNum, String tn, String ts, String pn)
         {
@@ -170,6 +182,9 @@ public class Log
             this.injuryName = in;
             periodId = Game.currentPeriod;
         }
+        public long getId() {
+            return id;
+        }
         @Override
         public long getPeriodId()
         {
@@ -205,6 +220,9 @@ public class Log
             this.timestamp = timestamp;
             periodId = Game.currentPeriod;
         }
+        public long getId() {
+            return id;
+        }
         @Override
         public long getPeriodId()
         {
@@ -239,6 +257,9 @@ public class Log
             this.teamName = teamName;
             this.timestamp = timestamp;
             periodId = Game.currentPeriod;
+        }
+        public long getId() {
+            return id;
         }
         @Override
         public long getPeriodId()
@@ -310,7 +331,7 @@ public class Log
         @Override
         public long getPeriodId()
         {
-            return 0;
+            return 6;
         }
     }
 }
