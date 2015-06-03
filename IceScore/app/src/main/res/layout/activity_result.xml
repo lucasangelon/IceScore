@@ -17,30 +17,6 @@
         android:textColor="#ffffffff"
         android:id="@+id/textView" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:text="Overtime"
-        android:textSize="40dp"
-        android:id="@+id/overtimeBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:text="End Game"
-        android:textSize="40dp"
-        android:id="@+id/endGameBtn"
-        android:layout_alignTop="@+id/overtimeBtn"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
-
     <ListView
         android:layout_width="750dp"
         android:layout_height="300dp"
@@ -50,35 +26,44 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
-    <SurfaceView
-        android:layout_width="600dp"
+    <Button
+        android:layout_width="300dp"
         android:layout_height="100dp"
-        android:id="@+id/surfaceView"
-        android:layout_below="@+id/gameResultsListView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:text="Shootout"
-        android:textSize="40dp"
-        android:id="@+id/shootoutBtn"
-        android:layout_alignTop="@+id/overtimeBtn"
-        android:layout_toRightOf="@+id/overtimeBtn"
-        android:layout_toLeftOf="@+id/surfaceView"
-        android:layout_toStartOf="@+id/surfaceView" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Referee"
         android:id="@+id/refSignButton"
-        android:layout_alignTop="@+id/surfaceView"
-        android:layout_toLeftOf="@+id/shootoutBtn"
-        android:layout_alignBottom="@+id/surfaceView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="40dp" />
+        android:textSize="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btnTeamASign"
+        android:layout_toStartOf="@+id/btnTeamASign" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="Team A Sign"
+        android:id="@+id/btnTeamASign"
+        android:textSize="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="Team B Sign"
+        android:id="@+id/btnTeamBSign"
+        android:textSize="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="End Game"
+        android:id="@+id/endGameBtn"
+        android:textSize="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnTeamBSign"
+        android:layout_toEndOf="@+id/btnTeamBSign" />
 
 </RelativeLayout>

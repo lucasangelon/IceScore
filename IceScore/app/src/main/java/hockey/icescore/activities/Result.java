@@ -23,6 +23,9 @@ public class Result extends Activity
             public void onClick(View view) {
                 Intent intent = new Intent(Result.this, CaptureSignature.class);
                 startActivityForResult(intent, 1);
+
+                findViewById(R.id.btnTeamASign).setOnClickListener(this);
+                findViewById(R.id.btnTeamB).setOnClickListener(this);
             }
         });
     }
