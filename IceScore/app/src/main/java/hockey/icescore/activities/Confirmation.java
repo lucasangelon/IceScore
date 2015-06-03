@@ -55,12 +55,9 @@ public class Confirmation extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    // Navigates to capture signature class - Josh
     @Override
     public void onClick(View v) {
-        Toast.makeText(this,"Check it",Toast.LENGTH_SHORT);
-        Intent intent = new Intent(this, CaptureSignature.class);
-        startActivityForResult(intent, 1);
+
 
     }
 }
