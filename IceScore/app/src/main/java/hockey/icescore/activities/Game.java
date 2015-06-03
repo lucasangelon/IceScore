@@ -69,7 +69,7 @@ ListView gameLog;
     private int homeshot,awayshot = 0;
     private int playernum=0;
     int matchTime = hockey.icescore.OldClasses.Game.periodLength*60;
-    int period = 1;
+    int period = hockey.icescore.OldClasses.Game.currentPeriod;
     int time = 0;
     int awayasscount=awayass;
     int homeasscount=homeass;
