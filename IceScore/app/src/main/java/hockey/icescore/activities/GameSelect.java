@@ -1,6 +1,7 @@
 package hockey.icescore.activities;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import hockey.icescore.OldClasses.Game;
+import hockey.icescore.controllers.ReviewController;
+import hockey.icescore.helper.ConfigContent;
 import hockey.icescore.helper.MyCustomBaseAdapter;
 import hockey.icescore.R;
 import hockey.icescore.helper.SearchResults;
+import hockey.icescore.helper.WebConnector;
 
 /**
  * Created by Suruchi 28-Mar-15.
@@ -37,7 +41,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         // Screen handling show Actionbar title.
         getSupportActionBar().setTitle("Select Game");
 
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd ").format(new Date());
         Calendar cal = Calendar.getInstance();
         int year=cal.get(Calendar.YEAR);
         int month=cal.get(Calendar.MONTH);
@@ -108,6 +112,11 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         ArrayList<SearchResults> results = new ArrayList<SearchResults>();
 
         SearchResults sr1 = new SearchResults();
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         sr1.setName("HOME");
         sr1.setCityState("AWAY");
         sr1.setPhone("VENUE");
@@ -115,6 +124,21 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         sr1.setTime("TIME");
         results.add(sr1);
 
+        ConfigContent content = WebConnector.tryGet("getGames");
+        String display ="";
+        ReviewController rvc = new ReviewController(getApplicationContext());
+        for(String s:content.getSections()) {
+            content.setSectionView(s);
+            sr1 = new SearchResults();
+            sr1.setName(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("HOME_TEAM_ID"))));
+            sr1.setCityState(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("AWAY_TEAM_ID"))));
+            sr1.setPhone(rvc.getVenueName(Long.parseLong(content.getValueFromSectionView("VENUE_ID"))));
+            String date = content.getValueFromSectionView("DATE");
+            sr1.setDate(date.split(" ")[0]);
+            sr1.setTime(date.split(" ")[1]+date.split(" ")[2]);
+            results.add(sr1);
+        }
+        /*
         sr1 = new SearchResults();
         sr1.setName("Jane Doe");
         sr1.setCityState("Atlanta, GA");
@@ -194,7 +218,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         sr1.setDate("12/2/2014");
         sr1.setTime("10:20 AM");
         results.add(sr1);
-
+        */
         return results;
     }
 

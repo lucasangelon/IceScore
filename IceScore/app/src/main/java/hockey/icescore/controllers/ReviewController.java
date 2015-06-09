@@ -29,20 +29,22 @@ public class ReviewController
     {
         this.context = context;
         dbManager = DatabaseManager.getInstance(context);
+        sqlDb = dbManager.getReadableDatabase();
     }
 
     public List<String> getArrayAdapter()
     {
         List<String> games = new ArrayList<String>();
 
-        sqlDb = dbManager.getReadableDatabase();
+
         Cursor cursor = sqlDb.rawQuery("SELECT * FROM " + Constants.TABLE_GAME, null);
 
         if (cursor.moveToFirst())
         {
             do
             {
-                Game currentGame = new Game(Long.parseLong(cursor.getString(2)),
+                Game currentGame = new Game(Long.parseLong(cursor.getString(1)),
+                        Long.parseLong(cursor.getString(2)),
                         Long.parseLong(cursor.getString(3)),
                         Long.parseLong(cursor.getString(4)),
                         Long.parseLong(cursor.getString(5)),
@@ -50,10 +52,9 @@ public class ReviewController
                         Long.parseLong(cursor.getString(7)),
                         Long.parseLong(cursor.getString(8)),
                         Long.parseLong(cursor.getString(9)),
-                        Long.parseLong(cursor.getString(10)),
-                        cursor.getString(11));
+                        cursor.getString(10));
 
-                currentGame.setId(Long.parseLong(cursor.getString(1)));
+                currentGame.setId(Long.parseLong(cursor.getString(0)));
 
                 String venue = "", homeTeam = "", awayTeam = "";
 
@@ -62,8 +63,9 @@ public class ReviewController
                 getTeamName(currentGame.getAwayTeamId());
 
                 games.add(currentGame.getId() + " Venue: " + venue + ", Home Team: " + homeTeam + ", Away Team: " + awayTeam + ", Date: " + currentGame.getDate());
+                cursor.moveToNext();
             }
-            while (cursor.moveToNext());
+            while (!cursor.isLast());
         }
 
         return games;
@@ -72,12 +74,11 @@ public class ReviewController
     public String getVenueName(long id)
     {
         String venueName = "";
-
-        Cursor cursor = sqlDb.rawQuery("SELECT name FROM " + Constants.TABLE_VENUE + " WHERE id = " + id, null);
+        Cursor cursor = sqlDb.rawQuery("SELECT name FROM "+Constants.TABLE_VENUE+" WHERE id = ?",new String[]{""+id});
 
         if (cursor.moveToFirst())
         {
-            venueName = cursor.getString(1);
+            venueName = cursor.getString(0);
         }
 
         return venueName;
@@ -87,11 +88,11 @@ public class ReviewController
     {
         String teamName = "";
 
-        Cursor cursor = sqlDb.rawQuery("SELECT name FROM " + Constants.TABLE_TEAM + " WHERE id = " + id, null);
+        Cursor cursor = sqlDb.rawQuery("SELECT NAME FROM " + Constants.TABLE_TEAM + " WHERE id = " + id, null);
 
         if (cursor.moveToFirst())
         {
-            teamName = cursor.getString(1);
+            teamName = cursor.getString(0);
         }
 
         return teamName;

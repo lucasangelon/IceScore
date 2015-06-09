@@ -26,6 +26,27 @@ public class DatabaseSeeder
         this.context = context;
     }
 
+    public void seedAll()
+    {
+        seedAction();
+        seedCategory();
+        seedDivision();
+        seedGame();
+        seedGamePeriod();
+        seedGameTeamGoalie();
+        seedIdentifier();
+        seedInjury();
+        seedPenalty();
+        seedPeriod();
+        seedPerson();
+        seedRoleIdentifier();
+        seedRoles();
+        seedTeam();
+        seedTeamPersonNumber();
+        seedGameTeamGoalie();
+        seedVenue();
+    }
+
     public String seedRoles()
     {
         List<Role> roles = new ArrayList<>();
@@ -37,7 +58,6 @@ public class DatabaseSeeder
         roles.add(new Role("Scorekeeper"));
 
         SQLiteDatabase writeDb = dbManager.getWritableDatabase();
-
         writeDb.beginTransaction();
 
         try
@@ -360,7 +380,7 @@ public class DatabaseSeeder
         List<Team> teams = new ArrayList<>();
 
         teams.add(new Team("Redhawks", "", 6));
-        teams.add(new Team("Redhawks", "", 3));
+        teams.add(new Team("Central Blitzrieg", "", 3));
         teams.add(new Team("Blackhawks", "", 6));
         teams.add(new Team("Blackhawks", "", 5));
         teams.add(new Team("Panthers", "", 3));

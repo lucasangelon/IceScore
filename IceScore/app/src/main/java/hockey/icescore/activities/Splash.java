@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import hockey.icescore.R;
 import hockey.icescore.helper.DatabaseManager;
+import hockey.icescore.helper.DatabaseSeeder;
 import hockey.icescore.util.Constants;
 
 import hockey.icescore.R;
@@ -61,6 +64,9 @@ public class Splash extends Activity
         @Override
         public void run() {
             DatabaseManager db = new DatabaseManager(co);
+            DatabaseSeeder seedy = new DatabaseSeeder(co);
+            seedy.seedAll();
+            Log.d("db","seeded");
         }
     }
 }
