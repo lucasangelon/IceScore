@@ -28,7 +28,7 @@
         android:layout_below="@+id/btnTeamA"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/listView6"
+        android:id="@+id/listViewHomeTeam"
         android:paddingBottom="10dp" />
 
     <ListView

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Spinner
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:id="@+id/spinnerGame"
+        android:spinnerMode="dialog"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:fillViewport="false"
+        android:layout_below="@+id/spinnerGame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewDescription"
+            android:text="dfgdgfd"
+            android:layout_below="@+id/spinnerGame"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="43dp" />
+    </ScrollView>
+
+</RelativeLayout>

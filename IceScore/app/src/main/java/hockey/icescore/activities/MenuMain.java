@@ -45,5 +45,17 @@ public class MenuMain extends Activity
                 startActivity(setupTeamScreen);
             }
         });
+
+        Button btnReviewGame = (Button) findViewById(R.id.btnReviewGame);
+        btnReviewGame.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View v)
+            {
+                // Create an intent to send the user to the confirmation view.
+                Intent setupTeamScreen = new Intent(MenuMain.this, GameReview.class);
+                startActivity(setupTeamScreen);
+            }
+        });
     }
 }

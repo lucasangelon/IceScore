@@ -68,6 +68,11 @@
             android:name=".activities.About"
             android:label="k" >
         </activity>
+        <activity
+            android:name=".activities.GameReview"
+            android:label="Review Game" >
+
+        </activity>
     </application>
 
 </manifest>
