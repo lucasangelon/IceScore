@@ -97,4 +97,18 @@ public class ReviewController
 
         return teamName;
     }
+
+    public int getDivision(long id)
+    {
+        int division = 0;
+
+        Cursor cursor = sqlDb.rawQuery("SELECT name FROM " + Constants.TABLE_DIVISION + " WHERE id = " + id, null);
+
+        if (cursor.moveToFirst())
+        {
+            division = Integer.parseInt(cursor.getString(0));
+        }
+
+        return division;
+    }
 }
