@@ -42,9 +42,9 @@ public class GameSelectListViewAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.row_view_game_select, null);
             holder = new ViewHolder();
-            holder.txtName = (TextView) convertView.findViewById(R.id.name);
-            holder.txtCityState = (TextView) convertView.findViewById(R.id.cityState);
-            holder.txtPhone = (TextView) convertView.findViewById(R.id.phone);
+            holder.txtHomeTeamName = (TextView) convertView.findViewById(R.id.name);
+            holder.txtAwayTeamName = (TextView) convertView.findViewById(R.id.cityState);
+            holder.txtVenue = (TextView) convertView.findViewById(R.id.phone);
             holder.txtDate = (TextView) convertView.findViewById(R.id.date);
             holder.txtTime = (TextView) convertView.findViewById(R.id.time);
 
@@ -54,9 +54,9 @@ public class GameSelectListViewAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtName.setText(searchArrayList.get(position).getName());
-        holder.txtCityState.setText(searchArrayList.get(position).getCityState());
-        holder.txtPhone.setText(searchArrayList.get(position).getPhone());
+        holder.txtHomeTeamName.setText(searchArrayList.get(position).getHomeTeamName());
+        holder.txtAwayTeamName.setText(searchArrayList.get(position).getAwayTeamName());
+        holder.txtVenue.setText(searchArrayList.get(position).getVenue());
         holder.txtDate.setText(searchArrayList.get(position).getDate());
         holder.txtTime.setText(searchArrayList.get(position).getTime());
 
@@ -64,9 +64,9 @@ public class GameSelectListViewAdapter extends BaseAdapter{
     }
 
     static class ViewHolder {
-        TextView txtName;
-        TextView txtCityState;
-        TextView txtPhone;
+        TextView txtHomeTeamName;
+        TextView txtAwayTeamName;
+        TextView txtVenue;
         TextView txtDate;
         TextView txtTime;
 
