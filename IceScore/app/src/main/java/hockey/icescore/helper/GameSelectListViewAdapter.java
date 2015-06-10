@@ -15,12 +15,12 @@ import hockey.icescore.R;
 /**
  * Created by Suchi on 7/04/15.
  */
-public class MyCustomBaseAdapter extends BaseAdapter{
+public class GameSelectListViewAdapter extends BaseAdapter{
     private static ArrayList<SearchResults> searchArrayList;
 
     private LayoutInflater mInflater;
 
-    public MyCustomBaseAdapter(Context context, ArrayList<SearchResults> results) {
+    public GameSelectListViewAdapter(Context context, ArrayList<SearchResults> results) {
         searchArrayList = results;
         mInflater = LayoutInflater.from(context);
     }

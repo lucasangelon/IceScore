@@ -1,7 +1,6 @@
 package hockey.icescore.activities;
 
-import android.app.Activity;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -9,64 +8,73 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-
-import java.lang.reflect.Array;
-
 import hockey.icescore.OldClasses.*;
 import hockey.icescore.OldClasses.Game;
 import hockey.icescore.R;
+import hockey.icescore.controllers.GoalieController;
+import hockey.icescore.models.GoalieChange;
 
 /**
  * Created by Suruchi 22-Mar-15.
  */
-public class ChangeGoalie extends ActionBarActivity
+
+public class ChangeGoalie extends ActionBarActivity implements View.OnClickListener
 {
     public static ListView listView1,listView2;
     public static ArrayAdapter<String> adapter;
-    public static int teamAGoalieSelected=0,teamBGoalieSelected=0;
+    public static int homeTeamGoalieSelected=0,awayTeamGoalieSelected=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_goalie);
 
-
+        //Home button is activated
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Screen handling show Actionbar title.
         getSupportActionBar().setTitle("Change Goalie");
 
-        listView1= (ListView) findViewById(R.id.listView);
-        //listView1.setItemChecked(teamBGoalieSelected).;
-        //listView1.setItemChecked(0, true);
-        //listView2.setSelection(0);
-        //setListViewChecked(true);
-        //listView1.setItemChecked(0, true);
+        //
+        Button changeHomeTeamGoalie = (Button) findViewById(R.id.button2);
+        changeHomeTeamGoalie.setOnClickListener(this);
 
-        //listView1.setC
+        Button changeAwayTeamGoalie = (Button) findViewById(R.id.button3);
+        changeAwayTeamGoalie.setOnClickListener(this);
+        //Home Team Change Goalie
+
+        listView1= (ListView) findViewById(R.id.listView);
+
+        ArrayAdapter<Player> homeTeamAdapter = new ArrayAdapter<Player>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Game.homeTeam.players );
+
+
+        listView1.setAdapter(homeTeamAdapter);
+
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                teamBGoalieSelected=position;
-                String[] teamB_array = getResources().getStringArray(R.array.teamB);
-                String name = teamB_array[teamBGoalieSelected];
-                Game.awayTeam.addGoalie(1, name,10);
-                //makeText(rootView.getContext(),"Selected Log" + logSelected+ "ArrayIndex" + GameLog.displayListElementIndex.get(logSelected), Toast.LENGTH_SHORT).show();
-            }
-        });
-        listView2= (ListView) findViewById(R.id.listView2);
-        //listView2.setSelection(teamAGoalieSelected);
-        listView2.setItemChecked( teamAGoalieSelected, true );
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                teamAGoalieSelected=position;
-                String[] teamA_array = getResources().getStringArray(R.array.teamA);
-                String name = teamA_array[teamAGoalieSelected];
-                Game.homeTeam.addGoalie(1, name,10);
-                //makeText(rootView.getContext(),"Selected Log" + logSelected+ "ArrayIndex" + GameLog.displayListElementIndex.get(logSelected), Toast.LENGTH_SHORT).show();
+               homeTeamGoalieSelected = position;
             }
         });
 
+        //Away Team Golie Change
+        listView2= (ListView) findViewById(R.id.listView2);
+        ArrayAdapter<Player> awayTeamAdapter = new ArrayAdapter<Player>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Game.awayTeam.players );
+        listView2.setAdapter(awayTeamAdapter);
+        listView2.smoothScrollToPosition(awayTeamGoalieSelected);
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                awayTeamGoalieSelected = position;
+            }
+        });
     }
 
     @Override
@@ -90,15 +98,33 @@ public class ChangeGoalie extends ActionBarActivity
         finish();
         return true;
     }
-    //@Override
-//    public void setListViewChecked(boolean checked) {
-//        if (checked) {
-//            listView1.setBackgroundColor(Color.RED);
-//        } else {
-//            listView1.setBackgroundColor(Color.BLACK);
-//        }
-//    }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.button2://Home Team Change
+                Player goalie = Game.homeTeam.getPlayer(homeTeamGoalieSelected);
+                //Setting the team goalie
+                Game.homeTeam.addGoalie(goalie.getID(), goalie.name, goalie.getNumber());
 
+                //Adding to the database
+                GoalieController gc = new GoalieController(getBaseContext());
+                GoalieChange ObjGC = new GoalieChange(goalie.playerID,Game.gameID,Game.homeTeam.getTeamID(),Game.gameTime);
+                gc.changeGoalie(ObjGC,goalie.name,Game.homeTeam.getName(),goalie.getNumber());
+                break;
+
+            case R.id.button3://Away Team Change
+                goalie = Game.homeTeam.getPlayer(awayTeamGoalieSelected);
+                //Setting the team goalie
+                Game.awayTeam.addGoalie(goalie.getID(), goalie.name, goalie.getNumber());
+
+                //Adding to the database
+                gc = new GoalieController(getBaseContext());
+                ObjGC = new GoalieChange(goalie.playerID,Game.gameID,Game.awayTeam.getTeamID(),Game.gameTime);
+                gc.changeGoalie(ObjGC,goalie.name,Game.awayTeam.getName(),goalie.getNumber());
+                break;
+        }
+
+    }
 
 }
