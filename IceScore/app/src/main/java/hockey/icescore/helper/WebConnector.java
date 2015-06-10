@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import hockey.icescore.helper.ConfigContent;
+
 /**
  * Created by 041402465 on 9/06/2015.
  */
@@ -58,15 +60,16 @@ public class WebConnector {
                 JSONObject jobj = employee.getJSONObject(method+"Result");
                 JSONArray jarr = jobj.getJSONArray("content");
                 String temp[] = new String[jarr.length()];
-                Log.d("content", employee.getJSONObject(method + "Result").getJSONArray("content").length() + "");
+                Log.d("content", employee.getJSONObject(method+"Result").getJSONArray("content").length() + "");
                 for (int count = 0; count < jarr.length() - 1; count++) {
 
                     String ts = jarr.getString(count);
                     temp[count] = ts;
                 }
                 //set the text of text view
-                temp[jarr.length() - 1] = "[END]";
+                //temp[jarr.length() - 1] = "[END]";
                 ConfigContent content = ConfigLoader.returnConfigContentFromStrings(temp);
+
                 return content;
             }
 
