@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -129,7 +128,6 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         String display ="";
         ReviewController rvc = new ReviewController(getApplicationContext());
         for(String s:content.getSections()) {
-            Log.d("loading","s");
             content.setSectionView(s);
             sr1 = new SearchResults();
             sr1.setName(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("HOME_TEAM_ID"))));

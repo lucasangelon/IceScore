@@ -1,10 +1,6 @@
 package hockey.icescore.helper;
 
-import android.util.Log;
-
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
 
 public class ConfigContent {
 	
@@ -43,7 +39,6 @@ public class ConfigContent {
 	public String[] getKeysFromSectionView(){
 		
 		Object[] contentArray = contentGlobal.get(sectionView).keySet().toArray();
-
 		String[] keys = new String[contentArray.length];
 		int count = 0;
 		for(Object str : contentArray)
@@ -73,9 +68,8 @@ public class ConfigContent {
 
     public String[] getSections()
     {
-        Set<String> contentArray = contentGlobal.keySet();
-        Log.d("numsec", contentArray.size()+"");
-        String[] keys = new String[contentArray.size()];
+        Object[] contentArray = contentGlobal.keySet().toArray();
+        String[] keys = new String[contentArray.length];
         int count = 0;
         for(Object str : contentArray)
         {

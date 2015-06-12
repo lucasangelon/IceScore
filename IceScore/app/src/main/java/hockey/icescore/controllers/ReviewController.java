@@ -98,8 +98,6 @@ public class ReviewController
         return teamName;
     }
 
-    
-
     public int getDivision(long id)
     {
         int division = 0;

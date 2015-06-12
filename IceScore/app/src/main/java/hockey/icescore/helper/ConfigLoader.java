@@ -9,8 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class ConfigLoader {
-
-
 	
 	private static LinkedHashMap<String,String> tempHash = new LinkedHashMap<String,String>();
 	private static LinkedHashMap<String, LinkedHashMap<String,String>> content;
@@ -55,8 +53,8 @@ public class ConfigLoader {
 
         for(String line:lines)
         {
-
-                if (line.isEmpty()||line.contains("#221155#"))
+            Log.d("content", line.replace("#221155#", " "));
+                if (line.isEmpty()||line.equals("")||line.equals("#221155#"))
                     add(tempSection);
                 if (line.contains(";"))
                     line = line.subSequence(0, line.indexOf(";")).toString();
@@ -69,7 +67,7 @@ public class ConfigLoader {
 
     }
 	
-	public static  LinkedHashMap<String, LinkedHashMap<String,String>> returnLinkedHashMap(File file) throws FileNotFoundException
+	public static LinkedHashMap<String, LinkedHashMap<String,String>> returnLinkedHashMap(File file) throws FileNotFoundException
 	{
 		read(file);
 		return content;
@@ -82,7 +80,7 @@ public class ConfigLoader {
 		return cfgContent;
 	}
 
-    public static  LinkedHashMap<String, LinkedHashMap<String,String>> returnLinkedHashMapFromStrings(String[] s) throws FileNotFoundException
+    public static LinkedHashMap<String, LinkedHashMap<String,String>> returnLinkedHashMapFromStrings(String[] s) throws FileNotFoundException
     {
 
         readStrings(s);
@@ -120,7 +118,6 @@ public class ConfigLoader {
 	
 	private static void add(String section)
 	{
-        Log.d("adding",section);
 		content.put(section.replace("[","").replace("]", "").trim(),tempHash);
 		tempHash = new LinkedHashMap<String,String>();
 	}
