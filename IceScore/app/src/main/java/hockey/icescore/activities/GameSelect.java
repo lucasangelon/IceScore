@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.util.Date;
 import hockey.icescore.OldClasses.Game;
 import hockey.icescore.controllers.ReviewController;
 import hockey.icescore.helper.ConfigContent;
-import hockey.icescore.helper.GameSelectListViewAdapter;
+import hockey.icescore.helper.MyCustomBaseAdapter;
 import hockey.icescore.R;
 import hockey.icescore.helper.SearchResults;
 import hockey.icescore.helper.WebConnector;
@@ -96,14 +97,14 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         //List view adapter form loding the games
         ArrayList<SearchResults> searchResults = GetSearchResults();
         final ListView lv1 = (ListView) findViewById(R.id.ListView01);
-        lv1.setAdapter(new GameSelectListViewAdapter(this, searchResults));
+        lv1.setAdapter(new MyCustomBaseAdapter(this, searchResults));
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = lv1.getItemAtPosition(position);
                 SearchResults fullObject = (SearchResults)o;
-                //Toast.makeText(GameSelect.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameSelect.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -117,9 +118,9 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        sr1.setHomeTeamName("HOME");
-        sr1.setAwayTeamName("AWAY");
-        sr1.setVenue("VENUE");
+        sr1.setName("HOME");
+        sr1.setCityState("AWAY");
+        sr1.setPhone("VENUE");
         sr1.setDate("DATE");
         sr1.setTime("TIME");
         results.add(sr1);
@@ -128,17 +129,98 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         String display ="";
         ReviewController rvc = new ReviewController(getApplicationContext());
         for(String s:content.getSections()) {
+            Log.d("loading","s");
             content.setSectionView(s);
             sr1 = new SearchResults();
-            sr1.setHomeTeamName(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("HOME_TEAM_ID"))));
-            sr1.setAwayTeamName(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("AWAY_TEAM_ID"))));
-            sr1.setVenue(rvc.getVenueName(Long.parseLong(content.getValueFromSectionView("VENUE_ID"))));
+            sr1.setName(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("HOME_TEAM_ID"))));
+            sr1.setCityState(rvc.getTeamName(Long.parseLong(content.getValueFromSectionView("AWAY_TEAM_ID"))));
+            sr1.setPhone(rvc.getVenueName(Long.parseLong(content.getValueFromSectionView("VENUE_ID"))));
             String date = content.getValueFromSectionView("DATE");
             sr1.setDate(date.split(" ")[0]);
             sr1.setTime(date.split(" ")[1]+date.split(" ")[2]);
             results.add(sr1);
         }
+        /*
+        sr1 = new SearchResults();
+        sr1.setName("Jane Doe");
+        sr1.setCityState("Atlanta, GA");
+        sr1.setPhone("469-555-2587");
+        sr1.setDate("4/6/2014");
+        sr1.setTime("11:20 AM");
+        results.add(sr1);
 
+        sr1 = new SearchResults();
+        sr1.setName("Steve Young");
+        sr1.setCityState("Miami, FL");
+        sr1.setPhone("305-555-7895");
+        sr1.setDate("26/2/2015");
+        sr1.setTime("02:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Fred Jones");
+        sr1.setCityState("Las Vegas, NV");
+        sr1.setPhone("612-555-1234");
+        sr1.setDate("19/3/2015");
+        sr1.setTime("01:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Bob Marsh");
+        sr1.setCityState("New York, NY");
+        sr1.setPhone("612-555-5678");
+        sr1.setDate("19/3/2015");
+        sr1.setTime("01:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Harold Funk");
+        sr1.setCityState("Chicago, IL");
+        sr1.setPhone("612-555-8765");
+        sr1.setDate("10/4/2015");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Scott Dorf");
+        sr1.setCityState("Winslow, AZ");
+        sr1.setPhone("612-555-5432");
+        sr1.setDate("12/2/2014");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Mike Hail");
+        sr1.setCityState("Seattle, WA");
+        sr1.setPhone("612-555-0961");
+        sr1.setDate("12/2/2014");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Suruchi");
+        sr1.setCityState("Seattle, WA");
+        sr1.setPhone("612-555-0961");
+        sr1.setDate("12/2/2014");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Chinmay");
+        sr1.setCityState("Seattle, WA");
+        sr1.setPhone("612-555-0961");
+        sr1.setDate("12/2/2014");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+
+        sr1 = new SearchResults();
+        sr1.setName("Mandar");
+        sr1.setCityState("Seattle, WA");
+        sr1.setPhone("612-555-0961");
+        sr1.setDate("12/2/2014");
+        sr1.setTime("10:20 AM");
+        results.add(sr1);
+        */
         return results;
     }
 
@@ -176,7 +258,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
         TextView myText = (TextView) view;
         switch (parent.getId()) {
             case R.id.spinner:
-                //Toast.makeText(this, "You Selected " + myText.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You Selected " + myText.getText(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.spinner2:
@@ -186,7 +268,7 @@ public class GameSelect extends ActionBarActivity implements AdapterView.OnItemS
                 str = "You Selected " + spinner2.getSelectedItem().toString()+" "
                                       + spinner3.getSelectedItem().toString()+" "
                                       + spinner4.getSelectedItem().toString();//myText.getText();
-                //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
                 // do stuffs with you spinner 2
                 break;
             default:

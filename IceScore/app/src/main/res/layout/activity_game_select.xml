@@ -53,9 +53,7 @@
         android:id="@+id/ListView01"
         android:layout_below="@+id/spinner2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:choiceMode="singleChoice"
-        android:listSelector="#666666"/>
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"

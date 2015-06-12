@@ -5,36 +5,36 @@ package hockey.icescore.helper;
  */
 public class SearchResults {
 
-        private String homeTeamName = "";
-        private String awayTeamName = "";
-        private String venue = "";
+        private String name = "";
+        private String cityState = "";
+        private String phone = "";
         private String date="";
         private String time ="";
 
 
 
-        public void setHomeTeamName(String name) {
-            this.homeTeamName = name;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public String getHomeTeamName() {
-            return homeTeamName;
+        public String getName() {
+            return name;
         }
 
-        public void setAwayTeamName(String awayTeamName) {
-            this.awayTeamName = awayTeamName;
+        public void setCityState(String cityState) {
+            this.cityState = cityState;
         }
 
-        public String getAwayTeamName() {
-            return awayTeamName;
+        public String getCityState() {
+            return cityState;
         }
 
-        public void setVenue(String venue) {
-            this.venue = venue;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
-        public String getVenue() {
-            return venue;
+        public String getPhone() {
+            return phone;
         }
 
         public void setDate(String date){
